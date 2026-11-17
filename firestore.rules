@@ -63,7 +63,7 @@ service cloud.firestore {
       allow update: if admin() || (signed()
         && (resource.data.get('userId', null) == uid()
           || (resource.data.get('userId', null) == null && resource.data.get('creadoPor', '') == uid()))
-        && cambia().hasOnly(['apodo','numero','instagram','pie','foto','historial','trayPend','clubPend'])
+        && cambia().hasOnly(['apodo','numero','instagram','pie','foto','historial','trayPend','clubPend','pos2'])
         && (!('clubPend' in cambia()) || nuevo().clubPend == null || (nuevo().clubPend is string && nuevo().clubPend.size() < 60))
         && nuevo().get('trayPend', false) in [true, false]
         && (!('historial' in cambia()) || nuevo().trayPend == true))
