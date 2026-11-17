@@ -102,7 +102,7 @@ service cloud.firestore {
         && nuevo().estado == 'pendiente');
       allow update: if admin() || (signed()
         && resource.data.managerId == uid()
-        && cambia().hasOnly(['nombre','logo','instagram','descripcion','temporada','tabla','goleadores','asistencias','actualizado']));
+        && cambia().hasOnly(['nombre','logo','instagram','descripcion','temporada','tabla','goleadores','asistencias','jug','actualizado']));
       allow delete: if admin();
     }
 
