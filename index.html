@@ -537,7 +537,7 @@ function queEsView(){const R=[['✍️','Crea tu cuenta','Te registras con tus d
    <div class="note"><b>📋 Partidos · hasta +${TOPE_P}</b><br>Lo que juegas aquí: partidos, goles, vallas, MVP. Un año jugando seguido suele dar entre +4 y +7.</div>
    <div class="note warn"><b>🏆 Logros · hasta +${TOPE_L}</b><br>Títulos, MVP de torneos, goleador, convocatorias o llamado profesional, con prueba.</div></div>
    <table style="margin-top:12px"><tr><th>Nivel más alto que jugaste</th><th class="num">Media con trayectoria larga</th></tr>${NIVELES.map(n=>`<tr><td>${n}</td><td class="num">hasta ${TRAY_TOP[n]}</td></tr>`).join('')}</table>
-   <div class="tiny muted" style="margin-top:8px">Unos 5 años en ese nivel te dejan cerca del máximo; 1 año, a mitad de camino. Otros niveles suman solo un poquito extra. La mayoría de la gente queda entre 60 y 75; de 80 para arriba es para quien estuvo cerca del profesional. La organización confirma tu trayectoria.</div></div>
+   <div class="tiny muted" style="margin-top:8px">Solo cuenta tu nivel más alto: poner más equipos no suma más. Unos 6 años en ese nivel te dejan cerca del máximo. El colegio casi no cuenta. La mayoría de la gente queda entre 55 y 68; de 75 para arriba es solo para quien jugó semiprofesional o profesional. La organización confirma tu trayectoria.</div></div>
   <div class="card sec"><h3>🏅 Niveles</h3>${tiersHTML()}</div><div class="sec row wrapf"><a class="btn gold" href="#registro">✍️ Crear mi cuenta</a></div>`}
 
 /* ----- Registro ----- */
@@ -563,7 +563,7 @@ function registroView(){const c=cfg();const mine=S.players.filter(p=>p.userId&&p
    <div class="fld"><label>Equipo actual</label><select name="clubId"><option value="">🆓 Agente libre (sin equipo)</option>${activeClubs().map(x=>`<option value="${esc(x.id)}">${esc(x.nombre)}</option>`).join('')}</select><div class="tiny muted" style="margin-top:4px">¿Tu equipo no aparece? Que el delegado lo registre en la otra pestaña.</div></div></div>
    <div class="tiny muted">🔒 Tu teléfono solo lo ve la organización, nunca aparece en tu perfil.</div>
    <h3 style="margin-top:22px">2 · Tu historial de fútbol <span class="badge ghost" style="font-size:11px;vertical-align:middle">Opcional</span></h3>
-   <div class="note warn" style="margin:10px 0 12px">📈 <b>¿Quieres arrancar con más media y más valor?</b> Todos arrancan en <b>50</b> y <b>la trayectoria es lo que más te sube</b>: no es lo mismo haber jugado en el colegio (hasta 64) que semiprofesional (hasta 76) o profesional (hasta 80). Cuéntanos dónde has jugado y <b>adjunta evidencia de tus logros</b> (fotos de medallas, trofeos, convocatorias o publicaciones del torneo). La organización revisa cada prueba y, si la aprueba, tu media sube. Y después de crear tu cuenta, cada partido, amistoso, birria o entrenamiento que registres con foto también te suma.</div>
+   <div class="note warn" style="margin:10px 0 12px">📈 <b>¿Quieres arrancar con más media y más valor?</b> Todos arrancan en <b>50</b> y <b>la trayectoria es lo que más te sube</b>: solo cuenta tu nivel más alto: el colegio casi no suma (hasta 54), amateur hasta 60, semiprofesional hasta 72 y profesional hasta 78. Poner más equipos no te sube más. Cuéntanos dónde has jugado y <b>adjunta evidencia de tus logros</b> (fotos de medallas, trofeos, convocatorias o publicaciones del torneo). La organización revisa cada prueba y, si la aprueba, tu media sube. Y después de crear tu cuenta, cada partido, amistoso, birria o entrenamiento que registres con foto también te suma.</div>
    <label style="color:var(--text);margin-bottom:12px"><input type="checkbox" name="sinHist" id="sinHist"> Prefiero no poner mi historial por ahora</label>
    <div id="histBox">${histEditor([])}
     <div class="sec-h" style="margin-top:16px;margin-bottom:6px"><b>🏅 Logros con evidencia</b><button type="button" class="btn sm gold" data-act="addLog">+ Agregar logro</button></div><div id="logRows"></div><div class="tiny muted">📎 La foto ayuda a que te lo aprueben más rápido. Si no tienes, envíalo igual: la organización lo puede confirmar contigo por privado.</div></div>
@@ -571,12 +571,12 @@ function registroView(){const c=cfg();const mine=S.players.filter(p=>p.userId&&p
    <div class="fld" style="margin-top:8px"><label style="color:var(--text)"><input type="checkbox" name="acepto" required> Confirmo que mis datos son reales y acepto el reglamento.</label></div>
    ${noW&&wa?`<button type="button" class="btn gold" data-act="waReg">📲 Enviar por WhatsApp</button>`:`<button class="btn gold" ${noW?'disabled':''}>Crear mi cuenta</button><div class="tiny muted" style="margin-top:8px">Arrancas con media 50 más lo que te dé tu trayectoria. La organización revisa tu cuenta antes de activarla.</div>`}</form></div>`}
 const NIVELES=['Amateur','Liga distrital / provincial','Colegial / universitario','Juvenil de club profesional','Semiprofesional','Profesional','Selección juvenil','Selección mayor'];
-const TRAY_TOP={'Colegial / universitario':64,'Amateur':66,'Liga distrital / provincial':68,'Juvenil de club profesional':72,'Selección juvenil':74,'Semiprofesional':76,'Profesional':80,'Selección mayor':84,'Selección':84};
+const TRAY_TOP={'Colegial / universitario':54,'Amateur':60,'Liga distrital / provincial':62,'Juvenil de club profesional':66,'Selección juvenil':68,'Semiprofesional':72,'Profesional':78,'Selección mayor':82,'Selección':82};
 const NIV=Object.fromEntries(Object.entries(TRAY_TOP).map(([k,v])=>[k,['am',v]]));
 function trayDe(hist){const Y=new Date().getFullYear();const yrs={};
   for(const x of (hist||[])){const d=num(x.desde);let a=x.actual?Y:(num(x.hasta)||Y);if(!d||d<1970||d>Y)continue;a=Math.min(Math.max(a,d),Y);const n=TRAY_TOP[x.nivel]?(x.nivel==='Selección'?'Selección mayor':x.nivel):'Amateur';yrs[n]=yrs[n]||new Set();for(let y=d;y<=a;y++)yrs[n].add(y)}
-  const vals=Object.entries(yrs).map(([n,set])=>(TRAY_TOP[n]-MEDIA0)*(1-Math.exp(-set.size/2.5))).sort((a,b)=>b-a);
-  return Math.round(((vals[0]||0)+0.15*(vals[1]||0)+0.05*(vals[2]||0))*100)/100}
+  const vals=Object.entries(yrs).map(([n,set])=>(TRAY_TOP[n]-MEDIA0)*(1-Math.exp(-set.size/3))).sort((a,b)=>b-a);
+  return Math.round((vals[0]||0)*100)/100}
 function baseSugerida(hist){return {am:trayDe(hist),el:0}}
 const trayPts=p=>p.escala===2?num(p.baseAm)+num(p.baseEl):trayDe(p.historial);
 function baseEst(){const root=document.querySelector('#histRows');const out=document.querySelector('#baseEst');if(!root||!out)return;const b=baseSugerida(readHist(root.closest('form')||document));out.innerHTML=`📊 Con esta trayectoria arrancarías con media <b>${Math.floor(mediaDe(b.am,b.el))}</b>. La organización lo confirma.`}
