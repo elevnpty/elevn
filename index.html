@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ELEVN · Crea tu jugador</title>
+<meta name="description" content="Crea tu jugador, suma tus partidos y logros, y gánate tu media. La plataforma del fútbol amateur en Panamá.">
+<meta property="og:title" content="ELEVN · Crea tu jugador. Gánate tu media.">
+<meta property="og:description" content="Todos arrancan en 70. Lo que haces en la cancha queda en tu perfil.">
+<meta name="theme-color" content="#0A1224">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230A1224'/%3E%3Ctext x='50' y='72' font-size='62' font-family='Arial Black,Arial' font-weight='900' text-anchor='middle' fill='%23F5C542'%3EN%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A1224;--bg2:#0F1A33;--panel:#121F3B;--panel2:#172748;--line:#22345C;--text:#EEF3FF;--muted:#8E9FC4;--lime:#C6FF3D;--cyan:#2FD3FF;--gold:#FFC83D;--red:#FF5A6E;--green:#3DFFA2;--r:16px}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;font-size:15px}
+body{background:radial-gradient(1200px 500px at 80% -100px,rgba(47,211,255,.12),transparent 60%),radial-gradient(900px 400px at -10% 0,rgba(255,200,61,.07),transparent 60%),var(--bg);min-height:100vh}
+body.liga{background:radial-gradient(1200px 500px at 80% -100px,rgba(198,255,61,.12),transparent 60%),var(--bg)}
+a{color:var(--cyan);text-decoration:none}
+h1,h2,h3,.disp{font-family:'Bebas Neue',Impact,sans-serif;letter-spacing:.5px;font-weight:400;margin:0}
+h2{font-size:32px}h3{font-size:22px}
+.muted{color:var(--muted)}.small{font-size:12.5px}.tiny{font-size:11px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+header{position:sticky;top:0;z-index:20;background:rgba(10,18,36,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;gap:14px;padding:12px 0 10px}
+.brand{font-family:Anton,Impact,sans-serif;font-size:32px;letter-spacing:3px;color:var(--text);line-height:1}
+.brand i{font-style:normal;color:var(--gold)}
+.sw{display:flex;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:3px}
+.sw a{padding:7px 14px;border-radius:9px;font-weight:800;font-size:13px;color:var(--muted);letter-spacing:.5px;white-space:nowrap}
+.sw a.on.red{background:var(--gold);color:#0A1224}.sw a.on.lg{background:var(--lime);color:#0A1224}
+.sp{flex:1}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid var(--line);background:var(--panel);white-space:nowrap}
+.badge.open{color:#0A1224;background:var(--lime);border-color:var(--lime)}
+.badge.closed{color:var(--red);border-color:rgba(255,90,110,.4)}
+.badge.gold{color:#0A1224;background:var(--gold);border-color:var(--gold)}
+.badge.cyan{color:#0A1224;background:var(--cyan);border-color:var(--cyan)}
+.badge.ghost{background:transparent}
+.dot{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+.open .dot{animation:pulse 1.4s infinite}@keyframes pulse{50%{opacity:.3}}
+nav{display:flex;gap:4px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}nav::-webkit-scrollbar{display:none}
+nav a{padding:8px 14px;border-radius:10px;color:var(--muted);font-weight:600;white-space:nowrap;font-size:14px}
+nav a:hover{color:var(--text);background:var(--panel)}
+nav a.on{color:#0A1224;background:var(--text)}
+nav a.cta{color:#0A1224;background:var(--gold)}
+body.liga nav a.cta{background:var(--lime)}
+select,input,textarea{font:inherit;color:var(--text);background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:9px 11px;width:100%;outline:none}
+select:focus,input:focus,textarea:focus{border-color:var(--cyan)}
+input[type=checkbox],input[type=radio]{width:auto;accent-color:var(--lime)}
+label{display:block;font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:700;font-size:14px;border-radius:11px;padding:10px 16px;cursor:pointer;background:var(--panel2);color:var(--text);border:1px solid var(--line);white-space:nowrap}
+.btn:hover{filter:brightness(1.15)}
+.btn.lime{background:var(--lime);color:#0A1224;border-color:var(--lime)}
+.btn.cyan{background:var(--cyan);color:#0A1224;border-color:var(--cyan)}
+.btn.gold{background:var(--gold);color:#0A1224;border-color:var(--gold)}
+.btn.red{background:transparent;color:var(--red);border-color:rgba(255,90,110,.45)}
+.btn.sm{padding:6px 10px;font-size:12.5px;border-radius:9px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.row{display:flex;align-items:center;gap:10px}.between{justify-content:space-between}.wrapf{flex-wrap:wrap}
+main{padding:22px 0 60px}
+.hero{position:relative;overflow:hidden;border-radius:24px;padding:38px 30px;background:linear-gradient(120deg,#13254A 0%,#0F1A33 55%,#2A2310 100%);border:1px solid var(--line)}
+body.liga .hero{background:linear-gradient(120deg,#13254A 0%,#0F1A33 55%,#0E2A3A 100%)}
+.hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 60px,rgba(255,255,255,.025) 60px 120px)}
+.hero>*{position:relative;z-index:1}
+.hero h1{font-size:clamp(44px,7vw,78px);line-height:.92}
+.hero h1 em{font-style:normal;color:var(--gold)}
+body.liga .hero h1 em{color:var(--lime)}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.stat{background:rgba(10,18,36,.55);border:1px solid var(--line);border-radius:14px;padding:12px 16px;min-width:120px}
+.stat b{display:block;font-family:'Bebas Neue';font-size:32px;line-height:1}
+.stat span{font-size:12px;color:var(--muted);font-weight:600}
+table{width:100%;border-collapse:collapse}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);font-weight:700}
+td{padding:10px 8px;border-bottom:1px solid rgba(34,52,92,.55);vertical-align:middle}
+tr.click{cursor:pointer}tr.click:hover td{background:rgba(47,211,255,.05)}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.val{font-weight:800;color:var(--lime);white-space:nowrap}
+.tw{overflow-x:auto}
+.pos{display:inline-block;font-size:10.5px;font-weight:800;padding:3px 6px;border-radius:6px;letter-spacing:.4px}
+.pos.POR{background:#FFC83D22;color:var(--gold)}.pos.DFC,.pos.LAT{background:#2FD3FF22;color:var(--cyan)}.pos.MC,.pos.MCO{background:#3DFFA222;color:var(--green)}.pos.EXT,.pos.DC{background:#FF5A6E22;color:#FF8797}
+.av{width:38px;height:38px;border-radius:50%;object-fit:cover;background:var(--panel2);display:inline-grid;place-items:center;font-weight:800;font-size:13px;flex:none;border:2px solid var(--line)}
+.ovrchip{display:inline-grid;place-items:center;min-width:38px;height:30px;border-radius:8px;font-family:Anton;font-size:18px;padding:0 6px}
+.pname{font-weight:700;color:var(--text)}
+.empty{text-align:center;padding:34px 16px;color:var(--muted)}.empty .ic{font-size:40px;margin-bottom:8px}
+.sec{margin-top:26px}
+.sec-h{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.clubcard{display:block;color:var(--text);position:relative;overflow:hidden}.clubcard .stripe{position:absolute;left:0;top:0;bottom:0;width:5px}.clubcard:hover{border-color:var(--cyan)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.kpi{background:rgba(10,18,36,.45);border-radius:10px;padding:8px 10px}.kpi b{display:block;font-size:15px}.kpi span{font-size:11px;color:var(--muted)}
+.statbox{background:rgba(10,18,36,.5);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+.statbox b{display:block;font-family:'Bebas Neue';font-size:38px;line-height:1}.statbox span{font-size:12px;color:var(--muted);font-weight:600}
+.banner{border-radius:16px;padding:16px 18px;display:flex;gap:14px;align-items:center;border:1px solid var(--line)}
+.banner.open{background:linear-gradient(90deg,rgba(198,255,61,.18),rgba(198,255,61,.03));border-color:rgba(198,255,61,.4)}
+.banner.closed{background:linear-gradient(90deg,rgba(255,90,110,.14),rgba(255,90,110,.02));border-color:rgba(255,90,110,.35)}
+.banner .ic{font-size:30px}
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tab{padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-weight:700;cursor:pointer;font-size:13.5px}
+.tab.on{background:var(--cyan);color:#0A1224;border-color:var(--cyan)}
+.offer{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(10,18,36,.4);margin-bottom:10px}
+.arrow{color:var(--muted);font-weight:800}
+.rule{display:flex;gap:14px}.rule .n{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:var(--panel2);border:1px solid var(--line)}.rule p{margin:4px 0 0;color:#C9D4EE;line-height:1.5}
+.spons{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.spon{height:74px;border-radius:14px;border:1px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-weight:700;text-align:center;padding:8px}
+.spon.real{border-style:solid;color:var(--text);font-family:'Bebas Neue';font-size:24px;background:var(--panel)}
+.f2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+.fld{margin-bottom:12px}
+.note{background:rgba(47,211,255,.08);border:1px solid rgba(47,211,255,.3);border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.45}
+.note.warn{background:rgba(255,200,61,.08);border-color:rgba(255,200,61,.35)}.note.bad{background:rgba(255,90,110,.08);border-color:rgba(255,90,110,.35)}.note.ok{background:rgba(61,255,162,.08);border-color:rgba(61,255,162,.35)}
+.modal{position:fixed;inset:0;z-index:50;background:rgba(3,7,16,.75);display:flex;align-items:flex-start;justify-content:center;padding:40px 14px;overflow:auto}
+.modal.hidden{display:none}
+.mbox{width:100%;max-width:560px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.5)}.mbox.wide{max-width:900px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:60;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+.t{background:var(--text);color:#0A1224;padding:11px 16px;border-radius:12px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.4);font-size:14px}.t.bad{background:var(--red);color:#fff}
+.jor{font-family:'Bebas Neue';font-size:20px;color:var(--cyan);margin:14px 0 6px}
+.match{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:rgba(10,18,36,.4);border:1px solid var(--line);margin-bottom:8px}
+.match .r{font-family:'Bebas Neue';font-size:24px;min-width:70px;text-align:center}
+.mini-in{width:56px;text-align:center;padding:6px}
+.foot{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:12.5px}
+.chart{width:100%;height:180px}.medal{font-size:16px}
+/* Cartas */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.pcard{display:flex;flex-direction:column;position:relative;background:var(--cbg);color:var(--cfg);border:3px solid var(--cbd);border-radius:22px;padding:14px 14px 16px;transition:transform .15s;overflow:hidden}
+.pcard:hover{transform:translateY(-4px)}
+.pcard:before{content:"";position:absolute;inset:6px;border:1px solid var(--cbd);border-radius:16px;opacity:.35;pointer-events:none}
+.pcard:after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;border:16px solid var(--cbd);opacity:.14}
+.pcard .tp{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:center;position:relative;z-index:1}
+.pcard .lc{display:flex;flex-direction:column;align-items:center;padding:4px 0 0 4px;min-width:46px}
+.pcard .ovr{font-family:Anton;font-size:44px;line-height:.9}
+.pcard .ps{font-family:'Space Grotesk';font-weight:700;font-size:14px;letter-spacing:2px;margin-top:2px}
+.pcard .ln{width:28px;height:1px;background:var(--cfg);opacity:.4;margin:7px 0}
+.pcard .ph{width:100%;aspect-ratio:1;max-width:120px;justify-self:end;border-radius:50%;object-fit:cover;border:3px solid var(--cbd);background:rgba(0,0,0,.1);display:grid;place-items:center;font-family:Anton;font-size:32px}
+.pcard .nm{position:relative;z-index:1;font-family:Anton;text-align:center;margin-top:8px;padding:7px 0 6px;letter-spacing:.5px;line-height:1.05;text-transform:uppercase;border-top:1px solid color-mix(in srgb,var(--cfg) 35%,transparent);border-bottom:1px solid color-mix(in srgb,var(--cfg) 35%,transparent)}
+.pcard .at{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1px 1fr;gap:0 10px;font-family:'Space Grotesk';font-size:13.5px;margin-top:8px}
+.pcard .at .col{display:grid;grid-template-columns:auto auto;column-gap:7px;row-gap:3px;justify-content:center;align-content:start}.pcard .at .sep{background:var(--cfg);opacity:.35}
+.pcard .at b{font-weight:700;text-align:right;font-variant-numeric:tabular-nums}.pcard .at span{text-align:left}
+.pcard.big{max-width:300px;padding:20px 20px 22px}.pcard.big .ovr{font-size:68px}.pcard.big .ps{font-size:18px}.pcard.big .lc{min-width:66px}.pcard.big .ph{max-width:180px}.pcard.big .at{font-size:17px}.pcard.big .ln{width:40px}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.tier{border-radius:12px;padding:10px;text-align:center;border:2px solid}
+.tier b{display:block;font-family:Anton;font-size:24px}
+.lgph{width:100%;height:150px;object-fit:cover;border-radius:12px;cursor:zoom-in;border:1px solid var(--line)}
+@media(max-width:640px){.hero{padding:28px 20px}.hide-m{display:none}.brand{font-size:26px}.sw a{padding:6px 9px;font-size:12px}.cards{grid-template-columns:repeat(2,1fr);gap:10px}.pcard .ph{width:64px;height:64px}.pcard .ovr{font-size:36px}}
+#ovl{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
+#ovl .ovb{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;width:min(460px,100%);max-height:90vh;overflow:auto}
+#ovl .ovx{position:absolute;top:10px;right:12px;background:none;border:0;color:var(--text);font-size:18px;cursor:pointer}
+#ovl textarea,#ovl input[type=email],#ovl input[type=password]{background:var(--bg2);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px}
+@media(max-width:640px){
+body{font-size:14px}
+.hero{padding:20px 16px!important;border-radius:18px}.hero h1{font-size:34px!important}.hero p{font-size:14px!important;margin-top:8px!important}
+.hero .btn{font-size:13px;padding:8px 12px}.hero .row{margin-top:14px!important;gap:8px}
+h1{font-size:34px}h2{font-size:23px}h3{font-size:19px}
+.stats{display:grid!important;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px}
+.stat{min-width:0;padding:8px 6px;border-radius:10px;text-align:center}.stat b{font-size:22px}.stat span{font-size:10px;line-height:1.15;display:block}
+#nav a{font-size:13px;padding:6px 10px}
+.cards{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+.cards .pcard{padding:6px 5px 7px;border-width:2px;border-radius:12px}
+.cards .pcard .tp{gap:3px}.cards .pcard .lc{min-width:0;padding:2px 0 0 1px}
+.cards .pcard .ovr{font-size:22px}.cards .pcard .ps{font-size:8.5px;letter-spacing:1px;margin-top:1px}
+.cards .pcard .ln{width:14px;margin:3px 0}.cards .pcard .lc img,.cards .pcard .lc svg{width:15px!important;height:17px!important}
+.cards .pcard .ph{width:100%;height:auto;max-width:52px;border-width:2px;font-size:14px}
+.cards .pcard .nm{font-size:9.5px!important;margin-top:4px;padding:3px 0;letter-spacing:0;line-height:1.15;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.6em;align-content:center}
+.cards .pcard .at{font-size:8.5px;gap:0 3px;margin-top:4px}.cards .pcard .at .col{column-gap:3px;row-gap:1px}
+}
+@media(max-width:640px){#pgrid{grid-template-columns:1fr!important}}
+@media(max-width:640px){
+#pgrid>div:first-child{max-width:240px;width:100%;margin:0 auto}
+#pgrid .pname{font-size:36px!important;line-height:1}
+#pgrid .pinfo{gap:6px 14px!important;font-size:13px}#pgrid .pinfo>*{white-space:nowrap}
+.g4{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px}
+.g2{grid-template-columns:minmax(0,1fr)!important}
+.pval{grid-template-columns:repeat(3,minmax(0,1fr))!important}.pval .statbox:nth-child(4){grid-column:1/-1}
+.statbox{padding:10px 6px;border-radius:12px;min-width:0}.statbox b{font-size:28px}.pval .statbox b{font-size:20px!important}.statbox span{font-size:11px}
+.card{padding:14px!important}.card h3{font-size:18px}
+.acttb,.acttb tbody{display:block;width:100%}.acttb tr:first-child{display:none}
+.acttb tr{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"c p" "d d" "r r";gap:4px 10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.acttb td{padding:0!important;border:0!important;min-width:0}
+.acttb td:nth-child(1){grid-area:d;font-size:12px}.acttb td:nth-child(2){grid-area:c}.acttb td:nth-child(3){grid-area:r}.acttb td:nth-child(4){grid-area:p;align-self:start}
+}
+
+@media(max-width:520px){header .top{gap:8px}.brand{font-size:21px!important}#sw a{padding:6px 8px!important;font-size:10.5px!important}#hdrRight .btn{padding:6px 9px!important;font-size:12px!important}#sw .dk{display:none}#visBtn{font-size:12px;padding:8px 14px;bottom:12px}}
+@media(max-width:360px){header .top{gap:6px}.brand{font-size:17px!important}#sw a{padding:5px 6px!important;font-size:10px!important}#hdrRight .btn{padding:5px 7px!important;font-size:11px!important}}
+#visBtn{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:999;border:1px solid rgba(255,255,255,.25);background:rgba(10,18,40,.92);color:#fff;font:600 13px 'Space Grotesk',sans-serif;padding:10px 18px;border-radius:99px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.4);backdrop-filter:blur(8px)}
+#visBtn.on{background:#f5c542;color:#111;border-color:#f5c542}#visBtn u{margin-left:4px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="top"><a class="brand" href="#inicio">ELEV<i>N</i></a>
+    <div class="sw" id="sw"></div><div class="sp"></div><div id="hdrRight" class="row"></div></div>
+  <nav id="nav"></nav>
+</div></header>
+<main><div class="wrap" id="app"></div></main>
+<div class="foot"><div class="wrap" id="foot"></div></div>
+<div id="modal" class="modal hidden"></div>
+<div id="toast"></div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* ===== Conexión Firebase (reemplaza a Claude) ===== */
+(function(){
+const ADMINS=['elevnpty@gmail.com'];
+firebase.initializeApp({apiKey:"AIzaSyBt8I7iw66GibGknlRnx1GjVADffibwvT8",authDomain:"elevnpty.firebaseapp.com",projectId:"elevnpty",storageBucket:"elevnpty.firebasestorage.app",messagingSenderId:"922439483048",appId:"1:922439483048:web:5e03fce6fbcc258d6f4c9d"});
+const fs=firebase.firestore();try{fs.settings({ignoreUndefinedProperties:true,merge:true})}catch(e){}
+const auth=firebase.auth();
+const ready=new Promise(res=>{let first=true;auth.onAuthStateChanged(u=>{if(first){first=false;window.__fbUser=u;res(u)}else if(!!u!==!!window.__fbUser||(u&&window.__fbUser&&u.uid!==window.__fbUser.uid)){location.reload()}})});
+auth.getRedirectResult().catch(()=>{});
+const isAdmin=u=>!!u&&ADMINS.includes(String(u.email||'').toLowerCase())&&u.emailVerified!==false;
+const user={
+  id:async()=>{const u=await ready;return u?u.uid:null},
+  canEdit:async()=>isAdmin(await ready),
+  can:async()=>!!(await ready),
+  profiles:async ids=>{const out={};await Promise.all(ids.map(async id=>{try{const s=await fs.doc('usuarios/'+id).get();out[id]={name:s.exists?(s.data().nombre||''):''}}catch(e){out[id]={name:''}}}));return out},
+  search:async q=>{q=String(q||'').toLowerCase();const s=await fs.collection('usuarios').get();return s.docs.map(d=>({id:d.id,name:d.data().nombre||''})).filter(x=>!q||x.name.toLowerCase().includes(q)).slice(0,20)}
+};
+ready.then(u=>{if(u)fs.doc('usuarios/'+u.uid).set({nombre:u.displayName||String(u.email||'').split('@')[0],visto:Date.now()},{merge:true}).catch(()=>{})});
+window.claude={use:async n=>{if(n==='db'){await ready;return fs}if(n==='user'){await ready;return user}return null}};
+const errEs=e=>({'auth/invalid-email':'El correo no es válido.','auth/user-not-found':'No existe una cuenta con ese correo.','auth/wrong-password':'Contraseña incorrecta.','auth/invalid-credential':'Correo o contraseña incorrectos.','auth/email-already-in-use':'Ya existe una cuenta con ese correo. Toca "Entrar".','auth/weak-password':'La contraseña debe tener al menos 6 caracteres.','auth/popup-closed-by-user':'Cerraste la ventana antes de terminar.','auth/too-many-requests':'Demasiados intentos. Espera un momento.'}[e&&e.code]||('Error: '+(e&&e.message||e)));
+window.elevnLogin=()=>{let o=document.getElementById('ovl');if(o)o.remove();o=document.createElement('div');o.id='ovl';
+  o.innerHTML=`<div class="ovb" style="text-align:center"><button class="ovx" onclick="document.getElementById('ovl').remove()">✕</button>
+   <div style="font:700 26px 'Space Grotesk',sans-serif;letter-spacing:.06em">ELEV<span style="color:var(--gold)">N</span></div>
+   <p class="muted" style="margin:6px 0 18px">Entra o crea tu cuenta para registrar tu jugador.</p>
+   <button class="btn gold" id="lgG" style="width:100%;justify-content:center">🇬 Continuar con Google</button>
+   <div class="muted small" style="margin:14px 0">— o con tu correo —</div>
+   <input type="email" id="lgE" placeholder="Correo" style="width:100%;margin-bottom:8px"><input type="password" id="lgP" placeholder="Contraseña (mín. 6)" style="width:100%">
+   <div class="row" style="gap:8px;margin-top:10px"><button class="btn" id="lgIn" style="flex:1;justify-content:center">Entrar</button><button class="btn" id="lgUp" style="flex:1;justify-content:center">Crear cuenta</button></div>
+   <a href="#" id="lgR" class="small muted" style="display:inline-block;margin-top:10px">Olvidé mi contraseña</a><div id="lgM" class="small" style="margin-top:10px;color:#ff8a8a"></div></div>`;
+  o.onclick=e=>{if(e.target===o)o.remove()};document.body.appendChild(o);const m=t=>o.querySelector('#lgM').textContent=t;const E=()=>o.querySelector('#lgE').value.trim(),P=()=>o.querySelector('#lgP').value;
+  o.querySelector('#lgG').onclick=async()=>{const pr=new firebase.auth.GoogleAuthProvider();try{await auth.signInWithPopup(pr)}catch(e){if(['auth/popup-blocked','auth/operation-not-supported-in-this-environment','auth/cancelled-popup-request'].includes(e.code))auth.signInWithRedirect(pr);else m(errEs(e))}};
+  o.querySelector('#lgIn').onclick=async()=>{try{await auth.signInWithEmailAndPassword(E(),P())}catch(e){m(errEs(e))}};
+  o.querySelector('#lgUp').onclick=async()=>{try{await auth.createUserWithEmailAndPassword(E(),P())}catch(e){m(errEs(e))}};
+  o.querySelector('#lgR').onclick=async ev=>{ev.preventDefault();if(!E())return m('Escribe tu correo arriba.');try{await auth.sendPasswordResetEmail(E());o.querySelector('#lgM').style.color='#9be59b';m('Te enviamos un correo para cambiar la contraseña.')}catch(e){m(errEs(e))}}};
+window.elevnLogout=()=>auth.signOut();
+window.__fbAuth=auth;
+})();
+</script>
+<script>
+/* ===== Estado ===== */
+const S={logoClean:{},peq:[],acts:[],contacts:{},cfg:null,clubs:[],players:[],offers:[],transfers:[],matches:[],logros:[],me:null,isAdmin:false,canWrite:null,names:{},acting:null,dbOk:null,loaded:false,slow:false,calc:null,tabMercado:'responder',tabReg:'jugador',tabAdmin:'actividad'};
+let db=null,user=null;
+const DEF={nombre:'ELEVN League',temporada:'Temporada 1',moneda:'$',presupuestoInicial:10000000,valorBase:500000,crecimiento:12,multClausula:3,
+  premioVictoria:300000,premioEmpate:100000,ventanaAbierta:false,ventanaNombre:'Ventana 1',cuotaTemporada:'Por definir',
+  patrocinadores:[],minPlantilla:18,maxPlantilla:25,maxClubes:10,mercadoActivo:true,reglaExPro:true,whatsapp:'',limiteFichajes:5,ventanaInicio:0};
+const cfg=()=>({...DEF,...(S.cfg||{})});const MK=()=>cfg().mercadoActivo!==false;
+const POS=[['POR','Portero'],['DFC','Defensa central'],['LAT','Lateral'],['MC','Mediocampista'],['MCO','Mediapunta'],['EXT','Extremo'],['DC','Delantero']];
+const posName=c=>(POS.find(p=>p[0]===c)||[c,c])[1];
+const ATTR={POR:[['DIV',2],['MAN',1],['SAQ',-4],['REF',3],['VEL',-6],['POS',1]],DFC:[['RIT',-3],['TIR',-15],['PAS',-6],['REG',-8],['DEF',4],['FIS',3]],LAT:[['RIT',3],['TIR',-10],['PAS',-2],['REG',-3],['DEF',1],['FIS',0]],
+ MC:[['RIT',-2],['TIR',-3],['PAS',3],['REG',1],['DEF',-4],['FIS',0]],MCO:[['RIT',1],['TIR',1],['PAS',3],['REG',4],['DEF',-18],['FIS',-6]],EXT:[['RIT',5],['TIR',-1],['PAS',-1],['REG',4],['DEF',-20],['FIS',-6]],DC:[['RIT',2],['TIR',4],['PAS',-6],['REG',1],['DEF',-25],['FIS',2]]};
+const LOGROS={campeon:['🏆','Campeón de torneo',1.5,'am'],subcampeon:['🥈','Subcampeón de torneo',0.5,'am'],mvpTorneo:['⭐','MVP de torneo',1.5,'am'],goleador:['⚽','Goleador de torneo',1,'am'],portero:['🧤','Mejor portero de torneo',1,'am'],ideal:['📋','Equipo ideal de torneo',0.5,'am'],seleccion:['🇵🇦','Convocado a selección',2,'el'],titulo:['🌟','Título importante (nacional o internacional)',2,'el'],profesional:['🚀','Llamado a club profesional',3,'el'],otro:['🎖️','Otro logro',0.5,'am']};
+const TIERS=[[90,'Leyenda','#26215C','#FAC775','#FAC775'],[85,'Élite','#CECBF6','#26215C','#534AB7'],[80,'Oro raro','#EF9F27','#412402','#633806'],[75,'Oro','#FAC775','#412402','#BA7517'],[0,'Plata','#D3D1C7','#2C2C2A','#888780']];
+const tier=o=>{const t=TIERS.find(x=>o>=x[0]);return{name:t[1],bg:t[2],fg:t[3],bd:t[4]}};
+const isOpen=o=>['pendiente','contraoferta','jugador'].includes(o.estado);
+const LIGA_ROUTES=['liga','tabla','liga-clubes','mercado','reglamento'];
+
+/* ===== Utilidades ===== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/\s*[´`‘’]\s*/g,"'").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=v=>{const n=Number(v);return isFinite(n)?n:0};
+function money(n){n=Math.round(num(n));const m='$';const a=Math.abs(n);if(a>=1e6)return m+(n/1e6).toLocaleString('es-PA',{maximumFractionDigits:2})+' M';if(a>=1e3)return m+Math.round(n/1e3).toLocaleString('es-PA')+' mil';return m+n}
+const okColor=c=>/^#[0-9a-f]{6}$/i.test(c||'')?c:'#2FD3FF';
+function contrast(hex){hex=okColor(hex);const r=parseInt(hex.substr(1,2),16),g=parseInt(hex.substr(3,2),16),b=parseInt(hex.substr(5,2),16);return (r*299+g*587+b*114)/1000>150?'#0A1224':'#FFFFFF'}
+const initials=s=>String(s||'?').trim().split(/\s+/).map(w=>w[0]).join('').slice(0,3).toUpperCase();
+const clubById=id=>S.clubs.find(c=>c.id===id);const playerById=id=>S.players.find(p=>p.id===id);
+const fdate=t=>t?new Date(t).toLocaleDateString('es-PA',{day:'numeric',month:'short',year:'numeric'}):'';
+const activeClubs=()=>S.clubs.filter(c=>c.estado!=='pendiente');
+const leagueClubs=()=>activeClubs().filter(c=>c.enLiga);
+const okImg=f=>typeof f==='string'&&/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(f);
+function crest(club,size=40){const lg=club&&(S.logoClean[club.id]||club.logo);if(okImg(lg))return `<img src="${lg}" alt="" style="width:${size}px;height:${Math.round(size*1.15)}px;object-fit:contain;flex:none">`;const col=okColor(club?.color);const ini=esc((club?.sigla||initials(club?.nombre)).slice(0,3));return `<svg width="${size}" height="${Math.round(size*1.15)}" viewBox="0 0 40 46" style="flex:none"><path d="M20 1 L38 7 V22 C38 34 30 41 20 45 C10 41 2 34 2 22 V7 Z" fill="${col}" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/><text x="20" y="28" text-anchor="middle" font-family="Bebas Neue,Impact" font-size="${ini.length>2?13:17}" fill="${contrast(col)}">${ini}</text></svg>`}
+function avatar(p,cls='av'){return okImg(p?.foto)?`<img class="${cls}" src="${p.foto}" alt="">`:`<div class="${cls}">${esc(initials(p?.nombre))}</div>`}
+const clubTag=id=>{const c=clubById(id);return c?`<span class="row" style="gap:7px">${crest(c,20)}<span>${esc(c.nombre)}</span></span>`:'<span class="muted">Sin equipo</span>'};
+function toast(msg,bad){const t=document.createElement('div');t.className='t'+(bad?' bad':'');t.textContent=msg;$('#toast').appendChild(t);setTimeout(()=>t.remove(),3800)}
+function errMsg(e){const c=e&&e.code;if(c==='invalid_argument')return 'No se pudo guardar: no tienes permiso de edición (pide acceso de Colaborador) o un dato no es válido.';if(c==='quota_exceeded')return 'La base de datos está llena.';if(c==='resource_exhausted')return 'Demasiadas acciones seguidas, espera un momento.';if(typeof e==='string')return e;return 'Algo falló, intenta de nuevo.'}
+async function W(fn){try{await fn();return true}catch(e){console.error(e);toast(errMsg(e),true);return false}}
+function elegib(p){const pro=(p.historial||[]).filter(x=>x.nivel==='Profesional');if(pro.length){const y=Math.max(...pro.map(x=>num(x.hasta)||new Date().getFullYear()));const lim=new Date(y+1,11,31);return{ok:Date.now()>lim.getTime(),desde:lim,anioPro:y}}if(!p.exPro)return{ok:true};const d=new Date(p.ultimoPro);if(isNaN(d))return{ok:false,desde:null};const lim=new Date(d);lim.setFullYear(lim.getFullYear()+1);return{ok:Date.now()>=lim.getTime(),desde:lim}}
+const telLink=t=>t?`<a href="https://wa.me/${esc(String(t).replace(/\D/g,''))}" target="_blank" rel="noopener">📞 ${esc(t)}</a>`:'<span class="muted">—</span>';
+const emptyBox=(ic,t)=>`<div class="empty"><div class="ic">${ic}</div>${t}</div>`;
+const ovrChip=o=>{const t=tier(o);return `<span class="ovrchip" style="background:${t.bg};color:${t.fg};border:1px solid ${t.bd}">${o}</span>`};
+const puedeEditarJ=p=>!!p&&(S.isAdmin||(p.userId&&p.userId===S.me));
+
+/* ===== Media (OVR) y valor ===== */
+const ACTV={liga:['🏆','Partido de liga o torneo',0.10,1],amistoso:['🤝','Amistoso o birria',0.05,0.5],tarjetas:['🟨','Tarjetas acumuladas',0,0]};
+const PW={gol:0.25,asist:0.15,valla:0.15,vallaPor:0.30,ataj:0.05,penal:0.30,mvp:0.5,amarilla:-0.10,roja:-0.50,tope:1};
+const CURVA={am:[14,6],el:[15,8]};
+const fAm=a=>Math.max(-2,CURVA.am[0]*(1-Math.exp(-a/CURVA.am[1])));
+const fEl=e=>Math.max(0,CURVA.el[0]*(1-Math.exp(-e/CURVA.el[1])));
+const mediaDe=(a,e,aj=0)=>Math.min(99.99,70+fAm(a)+fEl(e)+num(aj));
+const DEFENSORES=['POR','DFC','LAT'];
+function actPts(tipo,s,pos){const t=ACTV[tipo]||ACTV.liga;const m=t[3];const b={asis:t[2],gol:num(s.g)*PW.gol*m,asist:num(s.a)*PW.asist*m,valla:(s.vi&&DEFENSORES.includes(pos)?(pos==='POR'?PW.vallaPor:PW.valla)*m:0),ataj:(pos==='POR'?(Math.min(30,num(s.at))*PW.ataj+num(s.pa)*PW.penal)*m:0),mvp:(s.mvp?PW.mvp*m:0),tarj:tipo==='tarjetas'?0:num(s.ta)*PW.amarilla+num(s.tr)*PW.roja};
+  const pos_=b.asis+b.gol+b.asist+b.valla+b.ataj+b.mvp;const f=pos_>PW.tope?PW.tope/pos_:1;['asis','gol','asist','valla','ataj','mvp'].forEach(k=>b[k]*=f);b.total=b.asis+b.gol+b.asist+b.valla+b.ataj+b.mvp+b.tarj;return b}
+const poolLogro=l=>'el';
+function peqPlayer(pe,pid){const s=pe.stats&&pe.stats[pid];if(!s||!s.j)return null;return {id:'pe_'+pe.id,peId:pe.id,tipo:pe.tipo||'liga',fecha:pe.fecha,detalle:(pe.competicion||'')+(pe.rival?' vs '+pe.rival:''),g:num(s.g),a:num(s.a),ta:num(s.ta),tr:num(s.tr),at:num(s.at),pa:num(s.pa),vi:num(pe.golesContra)===0,mvp:pe.mvp===pid,estado:pe.estado,foto:pe.foto,equipo:pe.clubId,res:pe.golesFavor!==undefined?`${num(pe.golesFavor)}-${num(pe.golesContra)}`:''}}
+function playerMatches(pid,incl){const own=S.acts.filter(a=>a.playerId===pid&&incl(a));const team=S.peq.map(pe=>peqPlayer(pe,pid)).filter(x=>x&&incl(x));return own.concat(team)}
+function computeAll(){if(S.calc)return S.calc;const c=cfg();const out={};
+  const ms=S.matches.filter(m=>m.jugado);
+  for(const p of S.players){
+    const ev=[];for(const m of ms){const s=m.stats&&m.stats[p.id];if(!s||!s.j)continue;const contra=s.c===m.local?num(m.golesV):num(m.golesL);ev.push({k:'a',tipo:'liga',oficial:true,ts:Date.parse(m.fecha)||num(m.creado),l:'J'+num(m.jornada),s:{g:s.g,a:s.a,ta:s.ta,tr:s.tr,at:s.at,pa:s.pa,mvp:m.mvp===p.id,vi:contra===0}})}
+    for(const a of playerMatches(p.id,a=>a.estado==='aprobado'&&ACTV[a.tipo]))ev.push({k:'a',tipo:a.tipo,ts:Date.parse(a.fecha)||num(a.aprobado),l:(ACTV[a.tipo]||ACTV.liga)[0],s:a});
+    for(const l of S.logros.filter(l=>l.playerId===p.id&&l.estado==='aprobado'))ev.push({k:'l',ts:num(l.aprobado)||num(l.creado),l:(LOGROS[l.tipo]||LOGROS.otro)[0],x:l});
+    ev.sort((a,b)=>a.ts-b.ts);
+    const st={pj:0,pjL:0,ent:0,g:0,a:0,ta:0,tr:0,mvp:0,vi:0,at:0,pa:0};
+    const baseAm=p.baseAm!==undefined?num(p.baseAm):0,baseEl=p.baseEl!==undefined?num(p.baseEl):0;
+    const br={tAm:baseAm+baseEl,tEl:0,asis:0,gol:0,asist:0,valla:0,ataj:0,mvp:0,tarj:0,lAm:0,lEl:0};const ls=[];
+    const A=()=>br.tAm+br.asis+br.gol+br.asist+br.valla+br.ataj+br.mvp+br.tarj+br.lAm;const E=()=>br.lEl;
+    const raw=()=>mediaDe(A(),E(),p.ajusteOvr);const ovrOf=()=>Math.max(55,Math.min(99,Math.floor(raw()+1e-9)));
+    const valOf=o=>Math.round(num(c.valorBase)*Math.pow(1+num(c.crecimiento)/100,o-70)/10000)*10000;
+    const hist=[{l:'Inicio',o:ovrOf(),r:raw()}];
+    for(const e of ev){if(e.k==='a'){const b=actPts(e.tipo,e.s,p.pos);['asis','gol','asist','valla','ataj','mvp','tarj'].forEach(k=>br[k]+=b[k]);st.at+=num(e.s.at);st.pa+=num(e.s.pa);
+        if(e.tipo!=='tarjetas'){st.pj++;if(e.oficial)st.pjL++}st.g+=num(e.s.g);st.a+=num(e.s.a);if(e.s.mvp)st.mvp++;if(e.s.vi&&DEFENSORES.includes(p.pos))st.vi++;st.ta+=num(e.s.ta);st.tr+=num(e.s.tr)}
+      else{if(poolLogro(e.x)==='el')br.lEl+=num(e.x.pts);else br.lAm+=num(e.x.pts);ls.push(e.x)}
+      hist.push({l:e.l,o:ovrOf(),r:raw()})}
+    const ovr=ovrOf();const r=raw();hist.forEach(h=>h.v=valOf(h.o));const valor=valOf(ovr);const prom=Math.round(hist.reduce((s,h)=>s+h.v,0)/hist.length);
+    const clausula=num(p.clausulaFija)>0?num(p.clausulaFija):Math.round(valor*num(c.multClausula));
+    out[p.id]={...st,ovr,raw:r,A:A(),E:E(),prog:Math.min(1,Math.max(0,r-Math.floor(r))),valor,prom,max:Math.max(...hist.map(h=>h.v)),clausula,hist,br,logros:ls,logroPts:br.lAm+br.lEl}}
+  S.calc=out;return out}
+const V=p=>computeAll()[p.id]||{at:0,pa:0,A:0,E:0,br:{},pj:0,pjL:0,ent:0,g:0,a:0,ta:0,tr:0,mvp:0,vi:0,ovr:70,raw:70,prog:0,valor:0,prom:0,max:0,clausula:0,hist:[],logros:[],br:{}};
+function standings(){const t={};leagueClubs().forEach(c=>t[c.id]={club:c,pj:0,g:0,e:0,p:0,gf:0,gc:0,pts:0});
+  S.matches.filter(m=>m.jugado).forEach(m=>{const a=t[m.local],b=t[m.visitante];if(!a||!b)return;const gl=num(m.golesL),gv=num(m.golesV);a.pj++;b.pj++;a.gf+=gl;a.gc+=gv;b.gf+=gv;b.gc+=gl;if(gl>gv){a.g++;a.pts+=3;b.p++}else if(gl<gv){b.g++;b.pts+=3;a.p++}else{a.e++;b.e++;a.pts++;b.pts++}});
+  return Object.values(t).sort((x,y)=>y.pts-x.pts||(y.gf-y.gc)-(x.gf-x.gc)||y.gf-x.gf||String(x.club.nombre).localeCompare(String(y.club.nombre)))}
+const squad=id=>S.players.filter(p=>p.clubId===id&&p.estado==='aprobado');
+const squadValue=id=>squad(id).reduce((s,p)=>s+V(p).valor,0);
+const squadOvr=id=>{const s=squad(id);return s.length?Math.round(s.reduce((a,p)=>a+V(p).ovr,0)/s.length):0};
+function myClubs(){return S.isAdmin?leagueClubs():leagueClubs().filter(c=>c.managerId&&c.managerId===S.me)}
+function actingId(){const l=myClubs();if(!l.length)return null;if(S.acting&&l.some(c=>c.id===S.acting))return S.acting;return S.isAdmin?null:l[0].id}
+const windowOk=id=>cfg().ventanaAbierta||!!clubById(id)?.reemplazoPendiente;
+const fichajesVentana=id=>S.transfers.filter(t=>t.a===id&&num(t.fecha)>=num(cfg().ventanaInicio)&&t.tipo!=='profesional').length;
+const puedeConfirmar=p=>!!p&&(S.isAdmin||(p.userId&&p.userId===S.me));
+
+/* ===== Carta ===== */
+function cardHTML(p,big){const v=V(p);const t=tier(v.ovr);const c=clubById(p.clubId);const at=(ATTR[p.pos]||ATTR.MC).map(([k,o])=>[k,Math.max(30,Math.min(99,v.ovr+o))]);
+  const nm=String(p.nombre||'');const fs=(big?1.45:1)*(nm.length>20?14:nm.length>15?16.5:nm.length>11?19:22);
+  const r=([k,n])=>`<b>${n}</b><span>${k}</span>`;
+  return `<a class="pcard ${big?'big':''}" href="#jugador-${esc(p.id)}" style="--cbg:${t.bg};--cfg:${t.fg};--cbd:${t.bd}">
+   <div class="tp"><div class="lc"><div class="ovr">${v.ovr}</div><div class="ps">${esc(p.pos)}</div>${c?`<div class="ln"></div>${crest(c,big?34:24)}`:''}</div>${okImg(p.foto)?`<img class="ph" src="${p.foto}" alt="">`:`<div class="ph">${esc(initials(p.nombre))}</div>`}</div>
+   <div class="nm" style="font-size:${fs}px">${esc(nm)}</div>
+   <div class="at"><div class="col">${at.slice(0,3).map(r).join('')}</div><div class="sep"></div><div class="col">${at.slice(3).map(r).join('')}</div></div></a>`}
+/* ===== Render ===== */
+let rq=false;
+function scheduleRender(){if(rq)return;rq=true;requestAnimationFrame(()=>{rq=false;if(document.querySelector('#app form.keep.dirty')){renderHeader();return}render()})}
+const route=()=>(location.hash||'#inicio').slice(1)||'inicio';
+const LOCK=()=>!S.isAdmin&&cfg().ligaAbierta!==true;
+window.toggleLiga=async()=>{const open=cfg().ligaAbierta===true;if(await W(()=>db.doc('liga/config').update({ligaAbierta:!open})))toast(open?'ELEVN League bloqueada 🔒':'ELEVN League abierta 🏆')};
+function ovl(html){let o=document.getElementById('ovl');if(o)o.remove();o=document.createElement('div');o.id='ovl';o.innerHTML=`<div class="ovb">${html}<button class="ovx" onclick="document.getElementById('ovl').remove()">✕</button></div>`;o.onclick=e=>{if(e.target===o)o.remove()};document.body.appendChild(o);return o}
+window.exportData=()=>{const data={v:1,from:S.realMe||S.me||null,fecha:Date.now(),cfg:S.cfg||null,clubes:S.clubs,jugadores:S.players,ofertas:S.offers,traspasos:S.transfers,partidos:S.matches,logros:S.logros,actividades:S.acts,partidosEq:S.peq,contactos:S.contacts||{}};const js=JSON.stringify(data);
+  const o=ovl(`<h3>📦 Exportar datos</h3><p class="muted small">Copia todo este texto y pégalo en <b>Importar datos</b> de la nueva página. (${Math.round(js.length/1024)} KB · ${S.players.length} jugadores · ${S.clubs.length} equipos)</p><textarea id="expTxt" readonly style="width:100%;height:220px;font-size:11px"></textarea><div class="row wrapf" style="margin-top:10px;gap:8px"><button class="btn gold" id="expCopy">📋 Copiar</button><button class="btn" id="expDl">⬇️ Descargar archivo</button></div>`);
+  const ta=o.querySelector('#expTxt');ta.value=js;
+  o.querySelector('#expCopy').onclick=async()=>{try{await navigator.clipboard.writeText(js);toast('Copiado ✅')}catch(e){ta.select();try{document.execCommand('copy');toast('Copiado ✅')}catch(_){toast('Selecciona el texto y cópialo a mano',true)}}};
+  o.querySelector('#expDl').onclick=()=>{try{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([js],{type:'application/json'}));a.download='elevn-datos.json';document.body.appendChild(a);a.click();a.remove()}catch(e){toast('No se pudo descargar; usa Copiar',true)}}};
+window.importSeed=async()=>{try{const t=JSON.stringify(window.__SEED);importData();setTimeout(()=>{const ta=document.getElementById('impTxt');if(ta)ta.value=t},50)}catch(e){toast('No se pudo leer seed.json',true)}};
+window.importData=()=>{const o=ovl(`<h3>📥 Importar datos</h3><p class="muted small">Pega el texto que copiaste en <b>Exportar datos</b>, o sube el archivo <i>elevn-datos.json</i>. Los documentos con el mismo ID se reemplazan.</p><input type="file" id="impFile" accept=".json,application/json" style="margin-bottom:8px"><textarea id="impTxt" style="width:100%;height:180px;font-size:11px" placeholder="Pega aquí…"></textarea><div class="row" style="margin-top:10px"><button class="btn gold" id="impGo">Importar</button><span id="impMsg" class="small muted" style="margin-left:10px"></span></div>`);
+  o.querySelector('#impFile').onchange=async e=>{const f=e.target.files[0];if(f)o.querySelector('#impTxt').value=await f.text()};
+  o.querySelector('#impGo').onclick=async()=>{const msg=o.querySelector('#impMsg');let d;try{let t=o.querySelector('#impTxt').value.trim();const me=S.realMe||S.me;const parsed=JSON.parse(t);if(parsed.from&&me&&parsed.from!==me)t=t.split(parsed.from).join(me);d=JSON.parse(t)}catch(e){msg.textContent='❌ El texto no es válido';return}
+    const cols=['clubes','jugadores','ofertas','traspasos','partidos','logros','actividades','partidosEq'];let n=0,err=0;
+    const put=async(path,data)=>{try{await db.doc(path).set(data);n++}catch(e){console.error(path,e);err++}msg.textContent=`Importando… ${n}`};
+    if(d.cfg)await put('liga/config',d.cfg);
+    for(const c of cols)for(const it of (d[c]||[])){const {id,...rest}=it;if(id)await put(c+'/'+id,rest)}
+    for(const [id,val] of Object.entries(d.contactos||{}))await put('contactos/'+id,val);
+    msg.textContent=err?`⚠️ ${n} importados, ${err} con error`:`✅ ${n} documentos importados`;if(!err)setTimeout(()=>location.reload(),1500)}};
+const inLiga=()=>{const r=route();return LIGA_ROUTES.includes(r)||(r==='admin'&&S.lastSec==='liga')};
+function setVis(on){S.vis=on;S.isAdmin=on?false:S.realAdmin;S.me=on?null:S.realMe;S.canWrite=on?false:S.realCW;try{localStorage.setItem('elevn_vis',on?'1':'0')}catch(e){}if(on&&route()==='admin')location.hash='#inicio';render();window.scrollTo(0,0)}
+function renderVis(){let b=document.getElementById('visBtn');if(!S.realAdmin){if(b)b.remove();return}if(!b){b=document.createElement('button');b.id='visBtn';b.onclick=()=>setVis(!S.vis);document.body.appendChild(b)}
+  b.className=S.vis?'on':'';b.innerHTML=S.vis?'👁️ Viendo como visitante · <u>Salir</u>':'👁️ Ver como visitante'}
+function renderHeader(){renderVis();const c=cfg();const r=route();if(r!=='admin')S.lastSec=LIGA_ROUTES.includes(r)?'liga':'red';const lg=inLiga();document.body.classList.toggle('liga',lg);
+  $('#sw').innerHTML=`<a href="#inicio" class="${!lg?'on red':''}">JUGADORES</a><a href="#liga" class="${lg?'on lg':''}"><span class="dk">ELEVN </span>LEAGUE${LOCK()?' 🔒':''}</a>`;
+  const items=lg&&LOCK()?[['inicio','← Volver a Jugadores']]:lg?[['liga','Inicio'],['tabla','Tabla y partidos'],['liga-clubes','Clubes'],...(MK()?[['mercado','Mercado 💸']]:[]),['reglamento','Reglamento']]:[['inicio','Inicio'],['jugadores','Jugadores'],['equipos','Equipos'],['ranking','Ranking'],['que-es','¿Cómo funciona?']];
+  if(S.isAdmin)items.push(['admin','⚙️ Admin']);
+  const act=h=>r===h||(h==='equipos'&&r.startsWith('club-'))||(h==='jugadores'&&r.startsWith('jugador-'));
+  $('#nav').innerHTML=items.map(([h,t])=>`<a href="#${h}" class="${act(h)?'on':''}">${t}</a>`).join('')+(lg?'':`<a href="#registro" class="${r==='registro'?'on':'cta'}">✍️ Crear mi cuenta</a>`);
+  const mine=myClubs();const a=actingId();let h='';
+  if(lg&&MK()&&!LOCK()){h=`<span class="badge ${c.ventanaAbierta?'open':'closed'}"><span class="dot"></span>${c.ventanaAbierta?'Mercado abierto':'Mercado cerrado'}</span>`;
+    if(mine.length)h+=`<select id="actSel" style="width:auto;max-width:200px;padding:6px 9px;font-size:13px">${S.isAdmin?'<option value="">Negociar como…</option>':''}${mine.map(x=>`<option value="${esc(x.id)}" ${x.id===a?'selected':''}>${esc(x.nombre)}</option>`).join('')}</select>`}
+  h+=(S.realMe?`<button class="btn sm" onclick="elevnLogout()" title="Cerrar sesión">👤 Salir</button>`:`<button class="btn sm gold" onclick="elevnLogin()">🔑 Entrar</button>`);
+  $('#hdrRight').innerHTML=h;document.title=lg?esc(c.nombre)+' · '+c.temporada:'ELEVN · Jugadores';
+  $('#foot').innerHTML=`ELEVN · ${esc(c.nombre)} · ${esc(c.temporada)} · Los valores y el dinero del mercado son ficticios: miden el rendimiento, no son dinero real.`}
+function render(){renderHeader();S.calc=null;const r=route();let html;
+  if(S.dbOk===false)html=`<div class="card empty"><div class="ic">🔒</div><h3>No se pudo conectar</h3><p>Revisa tu internet y recarga la página.</p></div>`;
+  else if(!S.loaded)html=`<div class="card empty"><div class="ic">⏳</div><h3>Cargando ELEVN…</h3>${S.slow?'<p>La conexión está tardando. Los datos aparecerán en cuanto lleguen.</p>':''}</div>`;
+  else if(r.startsWith('club-'))html=clubView(r.slice(5));
+  else if(r.startsWith('jugador-'))html=playerView(r.slice(8));
+  else if(LIGA_ROUTES.includes(r)&&LOCK())html=ligaLocked();
+  else if(r==='mercado'&&!MK())html=ligaHome();
+  else html=({inicio:homeRed,jugadores:cartasView,equipos:equiposView,ranking:rankingView,'que-es':queEsView,registro:()=>S.realMe?registroView():loginPage(),liga:ligaHome,tabla:tablaView,'liga-clubes':ligaClubesView,mercado:mercadoView,reglamento:reglaView,admin:adminView}[r]||homeRed)();
+  if(LIGA_ROUTES.includes(r)&&!LOCK())html=ligaAdminBar()+html;
+  $('#app').innerHTML=html;if(r==='registro')eligCheck()}
+
+function ligaLocked(){const c=cfg();return `<section class="hero" style="text-align:center;padding:56px 22px"><div style="font-size:54px">🔒</div><span class="badge open" style="margin-top:12px">Próximamente</span>
+   <h1 style="margin-top:14px">${esc(c.nombre)}<br><em>Todavía no se abre.</em></h1>
+   <p class="muted" style="max-width:560px;margin:14px auto 0;font-size:16px;line-height:1.5">Los clubes van a fichar a los mejores jugadores registrados en ELEVN. <b style="color:var(--text)">Si no tienes tu perfil, no te pueden fichar.</b> Créalo ya y empieza a subir tu media.</p>
+   <div class="row wrapf" style="margin-top:22px;justify-content:center"><a class="btn gold" href="#registro" data-tabreg="jugador">✍️ Crear mi jugador</a><a class="btn" href="#jugadores">👟 Ver jugadores</a></div></section>`}
+function ligaAdminBar(){return S.isAdmin&&cfg().ligaAbierta!==true?`<div class="card" style="margin-bottom:14px;border-color:#f5c542;display:flex;gap:12px;align-items:center;flex-wrap:wrap"><b>🔒 ELEVN League está bloqueada para el público.</b><span class="muted small" style="flex:1">Solo tú la ves. Los visitantes ven "Próximamente".</span><button class="btn gold" onclick="toggleLiga()">Abrir al público</button></div>`:''}
+function loginPage(){return `<section class="hero" style="text-align:center;padding:52px 22px"><div style="font-size:50px">⚽</div><h1 style="margin-top:10px">Crea tu cuenta<br><em>y arma tu jugador.</em></h1>
+   <p class="muted" style="max-width:520px;margin:14px auto 0;font-size:16px;line-height:1.5">Entra con Google o con tu correo. Toma 10 segundos y luego llenas tu perfil.</p>
+   <div class="row" style="margin-top:22px;justify-content:center"><button class="btn gold" onclick="elevnLogin()">🔑 Entrar / Crear cuenta</button></div></section>`}
+/* ----- ELEVN (red) ----- */
+function homeRed(){const ap=S.players.filter(p=>p.estado==='aprobado');const top=ap.slice().sort((a,b)=>V(b).ovr-V(a).ovr||V(b).valor-V(a).valor).slice(0,5);
+  const nuevos=ap.slice().sort((a,b)=>num(b.creado)-num(a.creado)).slice(0,5);const lg=S.logros.filter(l=>l.estado==='aprobado').sort((a,b)=>num(b.aprobado)-num(a.aprobado)).slice(0,6);
+  return `<section class="hero">
+   <h1>Crea tu jugador.<br><em>Gánate tu media.</em></h1>
+   <p class="muted" style="max-width:620px;margin:14px 0 0;font-size:17px;line-height:1.55">Todos arrancan en <b style="color:var(--text)">70</b>. Cada partido, gol, valla invicta y título te hace subir. Aquí nadie te regala nada: <b style="color:var(--gold)">lo que haces en la cancha queda en tu perfil.</b></p>
+   <div class="row wrapf" style="margin-top:20px"><a class="btn gold" href="#registro" data-tabreg="jugador">✍️ Crear mi cuenta</a><a class="btn" href="#registro" data-tabreg="equipo">🛡️ Registrar mi equipo</a></div>
+   <div class="stats"><div class="stat"><b>${ap.length}</b><span>Jugadores</span></div><div class="stat"><b>${activeClubs().length}</b><span>Equipos</span></div><div class="stat"><b>${S.logros.filter(l=>l.estado==='aprobado').length}</b><span>Logros verificados</span></div><div class="stat"><b style="color:var(--gold)">${top[0]?V(top[0]).ovr:70}</b><span>Media más alta</span></div></div></section>
+  <div class="card sec"><div class="sec-h"><h3>👑 Los mejores jugadores</h3><a href="#ranking" class="small">Ranking completo →</a></div>${top.length?`<div class="cards">${top.map(p=>cardHTML(p)).join('')}</div>`:emptyBox('👟','Todavía no hay jugadores aprobados. ¡Sé el primero!')}</div>
+  <div class="grid g2 sec"><div class="card"><div class="sec-h"><h3>🆕 Nuevos jugadores</h3><a href="#jugadores" class="small">Ver todas →</a></div>${nuevos.length?`<div class="cards">${nuevos.slice(0,4).map(p=>cardHTML(p)).join('')}</div>`:emptyBox('✍️','Aquí aparecerán los jugadores nuevos.')}</div>
+   <div class="card"><div class="sec-h"><h3>🏅 Últimos logros verificados</h3></div>${lg.length?lg.map(logroRow).join(''):emptyBox('🏅','Cuando la organización verifique un logro, aparecerá aquí.')}</div></div>
+  <div class="card sec"><h3>🏅 Los niveles de jugador</h3><p class="small muted">Todos arrancan en Plata. ¿Hasta dónde llegas tú?</p>${tiersHTML()}</div>`}
+function tiersHTML(){const c=cfg();const L=[[70,74],[75,79],[80,84],[85,89],[90,99]];return `<div class="tiers">${L.map(([a,b])=>{const t=tier(a);const v=Math.round(num(c.valorBase)*Math.pow(1+num(c.crecimiento)/100,a-70)/10000)*10000;return `<div class="tier" style="background:${t.bg};color:${t.fg};border-color:${t.bd}"><b>${a}–${b}</b></div>`}).join('')}</div>`}
+function logroRow(l){const p=playerById(l.playerId);const d=LOGROS[l.tipo]||LOGROS.otro;return `<div class="row between" style="padding:9px 0;border-bottom:1px solid rgba(34,52,92,.5)"><div class="row">${avatar(p)}<div><a href="#jugador-${esc(l.playerId)}" class="pname">${esc(p?.nombre||'Jugador')}</a><div class="small muted">${d[0]} ${esc(d[1])}${l.descripcion?' · '+esc(l.descripcion):''}</div></div></div><span class="badge gold">+${num(l.pts)}</span></div>`}
+function cartasView(){return `<div class="sec-h"><h2>👟 Jugadores</h2><a class="btn sm gold" href="#registro">+ Crear mi cuenta</a></div>
+  <div class="card" style="margin-bottom:16px"><div class="f2"><input id="fQ" placeholder="🔎 Buscar por nombre" value="${esc(S.fQ||'')}"><select id="fPos"><option value="">Todas las posiciones</option>${POS.map(([k,n])=>`<option value="${k}" ${S.fPos===k?'selected':''}>${n}</option>`).join('')}</select>
+  <select id="fClub"><option value="">Todos los equipos</option>${activeClubs().map(c=>`<option value="${esc(c.id)}" ${S.fClub===c.id?'selected':''}>${esc(c.nombre)}</option>`).join('')}</select>
+  <select id="fOrd"><option value="ovr">Ordenar: media</option><option value="valor" ${S.fOrd==='valor'?'selected':''}>Ordenar: precio</option><option value="g" ${S.fOrd==='g'?'selected':''}>Ordenar: goles</option><option value="pj" ${S.fOrd==='pj'?'selected':''}>Ordenar: partidos</option></select></div></div>
+  <div id="plist">${plist()}</div>`}
+function plist(){const q=(S.fQ||'').toLowerCase();const k=S.fOrd||'ovr';const l=S.players.filter(p=>p.estado==='aprobado'&&(!q||String(p.nombre).toLowerCase().includes(q)||String(p.apodo||'').toLowerCase().includes(q))&&(!S.fPos||p.pos===S.fPos)&&(!S.fClub||p.clubId===S.fClub)).sort((a,b)=>V(b)[k]-V(a)[k]||V(b).valor-V(a).valor);
+  return l.length?`<div class="cards">${l.map(p=>cardHTML(p)).join('')}</div>`:`<div class="card">${emptyBox('🔎','No hay jugadores con esos filtros.')}</div>`}
+function rankingView(){const l=S.players.filter(p=>p.estado==='aprobado').sort((a,b)=>V(b).ovr-V(a).ovr||V(b).valor-V(a).valor);
+  return `<h2>📈 Ranking ELEVN</h2><p class="muted">Todos los jugadores ordenados por media.</p><div class="card sec">${l.length?playersTable(l,{rank:true}):emptyBox('📈','Sin jugadores todavía.')}</div>`}
+function playersTable(list,o={}){return `<div class="tw"><table><tr>${o.rank?'<th>#</th>':''}<th>Media</th><th>Jugador</th>${o.noClub?'':'<th>Equipo</th>'}<th class="num">PJ</th><th class="num">⚽</th><th class="num hide-m">🅰️</th><th class="num hide-m">Prom.</th><th class="num">Precio</th>${o.actions&&MK()?'<th></th>':''}</tr>
+  ${list.map((p,i)=>{const v=V(p);return `<tr class="click" data-go="jugador-${esc(p.id)}">${o.rank?`<td>${i<3?['🥇','🥈','🥉'][i]:i+1}</td>`:''}<td>${ovrChip(v.ovr)}</td><td><div class="row">${avatar(p)}<div><div class="pname">${esc(p.nombre)}${p.numero?` <span class="muted">#${esc(p.numero)}</span>`:''}</div><span class="pos ${esc(p.pos)}">${esc(p.pos)}</span> <span class="tiny muted">${esc(posName(p.pos))}</span></div></div></td>
+   ${o.noClub?'':`<td>${clubTag(p.clubId)}</td>`}<td class="num">${v.pj}</td><td class="num">${v.g}</td><td class="num hide-m">${v.a}</td><td class="num hide-m muted">${money(v.prom)}</td><td class="num val">${money(v.valor)}</td>${o.actions&&MK()?`<td class="num">${marketBtns(p)}</td>`:''}</tr>`}).join('')}</table></div>`}
+function equiposView(){const cl=activeClubs().slice().sort((a,b)=>squadValue(b.id)-squadValue(a.id));
+  return `<div class="sec-h"><div><h2>🛡️ Equipos</h2><div class="small muted">Ordenados por valor del equipo: la suma del precio de todos sus jugadores.</div></div><a class="btn sm gold" href="#registro" data-tabreg="equipo">+ Registrar mi equipo</a></div>${cl.length?`<div class="grid g3">${cl.map(clubCard).join('')}</div>`:`<div class="card">${emptyBox('🛡️','Todavía no hay equipos registrados.')}</div>`}`}
+function clubCard(c){const sq=squad(c.id);const rk=activeClubs().slice().sort((a,b)=>squadValue(b.id)-squadValue(a.id)).findIndex(x=>x.id===c.id);return `<a class="card clubcard" href="#club-${esc(c.id)}"><div class="stripe" style="background:${okColor(c.color)}"></div><div class="row between"><div class="row">${crest(c,46)}<div><h3>${esc(c.nombre)}</h3><div class="row wrapf" style="gap:6px;margin-top:3px">${c.enLiga?'<span class="badge open" style="padding:2px 8px;font-size:11px">🏆 ELEVN League</span>':''}${c.ligaActual?`<span class="badge ghost" style="padding:2px 8px;font-size:11px">${esc(c.ligaActual)}</span>`:''}</div></div></div>${rk>=0&&sq.length?`<span class="badge ${rk<3?'gold':'ghost'}">#${rk+1}</span>`:''}</div>
+  <div style="margin-top:12px"><div class="tiny muted">VALOR DEL EQUIPO</div><div class="disp" style="font-size:34px;color:var(--gold);line-height:1">${money(squadValue(c.id))}</div></div>
+  <div class="kpis"><div class="kpi"><b>${sq.length}</b><span>Jugadores</span></div><div class="kpi"><b>${sq.length?ovrChip(squadOvr(c.id)):'—'}</b><span>Media</span></div>${c.enLiga&&MK()?`<div class="kpi"><b class="val">${money(c.presupuesto)}</b><span>Presupuesto fichajes</span></div>`:`<div class="kpi"><b>${sq.length?money(squadValue(c.id)/sq.length):'—'}</b><span>Promedio</span></div>`}</div></a>`}
+function clubView(id){const c=clubById(id);if(!c)return `<div class="card">${emptyBox('❓','No encontramos ese equipo.')}</div>`;const sq=squad(id).sort((a,b)=>V(b).ovr-V(a).ovr);const tv=squadValue(id);const st=standings();const pos=st.findIndex(r=>r.club.id===id);
+  const trs=S.transfers.filter(t=>t.de===id||t.a===id).slice(0,10);const pend=S.players.filter(p=>p.clubId===id&&p.estado==='pendiente').length;
+  return `<a href="#equipos" class="small">← Equipos</a><section class="hero sec" style="padding:26px;background:linear-gradient(120deg,${okColor(c.color)}33,#0F1A33 60%)"><div class="row wrapf" style="gap:18px">${crest(c,84)}<div style="flex:1;min-width:200px"><h1 style="font-size:52px">${esc(c.nombre)}</h1>
+  <div class="row wrapf" style="gap:8px;margin-top:6px">${c.enLiga?'<span class="badge open">🏆 Juega la ELEVN League</span>':''}${c.ligaActual?`<span class="badge">${esc(c.ligaActual)}</span>`:''}${c.enLiga&&pos>=0?`<span class="badge">📊 ${pos+1}º · ${st[pos].pts} pts</span>`:''}${c.enLiga&&MK()&&c.intransferible?'<span class="badge gold">🔒 No negocia</span>':''}${c.delegado?`<span class="badge ghost">👔 Delegado: ${esc(c.delegado)}</span>`:''}${c.instagram?`<a class="badge" href="https://instagram.com/${esc(c.instagram)}" target="_blank" rel="noopener">📸 @${esc(c.instagram)}</a>`:''}${S.isAdmin||c.managerId===S.me?`<button class="btn sm" data-act="editClub" data-id="${esc(c.id)}">✏️ Editar equipo</button>`:''}</div></div></div>
+  <div class="stats"><div class="stat"><b>${sq.length}</b><span>Jugadores${pend?` (+${pend} pendientes)`:''}</span></div><div class="stat"><b style="color:var(--gold)">${money(tv)}</b><span>💰 Valor del equipo</span></div><div class="stat"><b>${sq.length?squadOvr(id):'—'}</b><span>Media del equipo</span></div>${c.enLiga&&MK()?`<div class="stat"><b style="color:var(--lime)">${money(c.presupuesto)}</b><span>🏆 Presupuesto de fichajes</span></div>`:''}</div></section>
+  ${peqSection(c)}
+  <div class="card sec"><div class="sec-h"><h3>👥 Plantilla</h3></div>${sq.length?`<div class="cards">${sq.map(p=>cardHTML(p)).join('')}</div>`:emptyBox('👟','Este equipo todavía no tiene jugadores aprobados.')}</div>
+  ${c.enLiga&&sq.length?`<div class="card sec"><h3>📋 Tabla de la plantilla</h3>${playersTable(sq,{noClub:true,actions:true})}</div>`:''}
+  ${trs.length?`<div class="card sec"><h3>🔁 Traspasos</h3>${transfersTable(trs)}</div>`:''}`}
+function playerView(id){const p=playerById(id);if(!p)return `<div class="card">${emptyBox('❓','No encontramos ese jugador.')}</div>`;const v=V(p);const t=tier(v.ovr);const trs=S.transfers.filter(x=>x.playerId===id);const e=elegib(p);
+  const mios=S.logros.filter(l=>l.playerId===id).sort((a,b)=>num(b.creado)-num(a.creado));const canE=puedeEditarJ(p);
+  const rank=S.players.filter(x=>x.estado==='aprobado').sort((a,b)=>V(b).ovr-V(a).ovr||V(b).valor-V(a).valor).findIndex(x=>x.id===id);
+  const nxt=TIERS.slice().reverse().find(x=>x[0]>v.ovr);
+  const estado={pendiente:'<span class="badge gold">⏳ Pendiente de aprobación</span>',rechazado:'<span class="badge closed">❌ No aprobado</span>',profesional:`<span class="badge gold">🚀 Profesional${p.destino?' · '+esc(p.destino):''}</span>`}[p.estado]||'';
+  return `<a href="#jugadores" class="small">← Jugadores</a>
+  <div class="grid sec" style="grid-template-columns:minmax(0,300px) minmax(0,1fr);align-items:start" id="pgrid">
+   <div>${cardHTML(p,true)}${canE?`<div class="grid" style="margin-top:12px;gap:8px"><button class="btn lime" data-act="nuevaAct" data-id="${esc(p.id)}">➕ Registrar partido</button><div class="row wrapf"><button class="btn gold" data-act="nuevoLogro" data-id="${esc(p.id)}">🏅 Subir logro</button><button class="btn" data-act="editMi" data-id="${esc(p.id)}">✏️ Editar ficha</button></div></div>`:''}</div>
+   <div><div class="row wrapf" style="gap:8px">${estado}<span class="pos ${esc(p.pos)}" style="font-size:12px">${esc(posName(p.pos))}</span>${p.numero?`<span class="badge">#${esc(p.numero)}</span>`:''}${p.prestadoDe?`<span class="badge cyan">Cedido por ${esc(clubById(p.prestadoDe)?.nombre||'otro club')}</span>`:''}</div>
+    <h1 class="pname" style="font-size:52px;margin-top:8px">${esc(p.nombre)}</h1>${p.apodo?`<div class="muted">“${esc(p.apodo)}”</div>`:''}
+    <div class="row wrapf pinfo" style="margin-top:10px;gap:16px">${clubTag(p.clubId)}${p.edad?`<span class="muted">🎂 ${esc(p.edad)} años</span>`:''}${p.pie?`<span class="muted">🦶 ${esc(p.pie)}</span>`:''}${p.instagram?`<a href="https://instagram.com/${esc(String(p.instagram).replace(/^@/,''))}" target="_blank" rel="noopener">📸 @${esc(String(p.instagram).replace(/^@/,''))}</a>`:''}${rank>=0?`<span class="muted">📈 #${rank+1} de ELEVN</span>`:''}</div>
+    <div class="grid g4 pval" style="margin-top:16px"><div class="statbox"><b style="color:${t.bg}">${v.ovr}</b><span>Media</span></div><div class="statbox"><b style="color:var(--gold);font-size:28px">${money(v.valor)}</b><span>Precio</span></div><div class="statbox"><b style="font-size:28px">${money(v.prom)}</b><span>Precio promedio</span></div>${MK()&&clubById(p.clubId)?.enLiga?`<div class="statbox"><b style="font-size:28px">${money(v.clausula)}</b><span>Cláusula</span></div>`:`<div class="statbox"><b>${v.logros.length}</b><span>Logros verificados</span></div>`}</div>
+    
+    <div class="row wrapf" style="margin-top:12px">${marketBtns(p,true)}</div></div></div>
+  ${p.trayPend&&canE?`<div class="note warn sec">📊 Tu trayectoria actualizada está en revisión. Con ella arrancarías con media <b>${Math.floor(mediaDe(baseSugerida(p.historial).am,baseSugerida(p.historial).el))}</b>.</div>`:''}
+  ${S.offers.filter(o=>o.playerId===id&&o.estado==='jugador').map(o=>`<div class="sec">${offerCard(o,null,false)}</div>`).join('')}
+  <div class="grid g4 sec"><div class="statbox"><b>${v.pj}</b><span>Partidos${v.pjL?` (${v.pjL} de liga)`:''}</span></div><div class="statbox"><b style="color:var(--lime)">${v.g}</b><span>Goles</span></div><div class="statbox"><b style="color:var(--cyan)">${v.a}</b><span>Asistencias</span></div><div class="statbox"><b style="color:var(--gold)">${v.mvp}</b><span>MVP</span></div><div class="statbox"><b>${v.vi}</b><span>Vallas invictas</span></div>${p.pos==='POR'?`<div class="statbox"><b style="color:var(--cyan)">${v.at}</b><span>Atajadas</span></div><div class="statbox"><b style="color:var(--gold)">${v.pa}</b><span>Penales atajados</span></div>`:''}<div class="statbox"><b style="color:var(--gold)">${v.ta}</b><span>Amarillas</span></div><div class="statbox"><b style="color:var(--red)">${v.tr}</b><span>Rojas</span></div><div class="statbox"><b>${v.pj?(v.g/v.pj).toFixed(2):'0.00'}</b><span>Goles por partido</span></div></div>
+  <div class="grid g2 sec"><div class="card"><h3>📈 Evolución de la media</h3>${chart(v.hist)}</div><div class="card"><h3>🧮 Cómo se calcula su media</h3>${ovrBreak(p,v)}</div></div>
+  <div class="card sec"><div class="sec-h"><h3>📋 Últimos partidos</h3>${canE?`<button class="btn sm" data-act="nuevaAct" data-id="${esc(p.id)}" title="Si tu equipo no está en ELEVN">+ Registrar partido suelto</button>`:''}</div>${actList(p,canE)}</div>
+  ${(p.historial||[]).length||canE?`<div class="card sec"><div class="sec-h"><h3>⚽ Trayectoria</h3>${canE?`<button class="btn sm" data-act="editHist" data-id="${esc(p.id)}">✏️ Editar trayectoria</button>`:''}</div>${histTable(p.historial)||emptyBox('⚽','Todavía no agregó su trayectoria.')}</div>`:''}
+  <div class="card sec"><div class="sec-h"><h3>🏅 Logros</h3>${canE?`<button class="btn sm gold" data-act="nuevoLogro" data-id="${esc(p.id)}">+ Subir logro</button>`:''}</div>
+   ${mios.filter(l=>l.estado==='aprobado'||canE).length?`<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))">${mios.filter(l=>l.estado==='aprobado'||canE).map(logroCard).join('')}</div>`:emptyBox('🏅','Todavía no tiene logros verificados.')}</div>
+  ${S.isAdmin&&!e.ok?`<div class="note warn sec">⚠️ Jugó como profesional hasta ${e.anioPro||esc(p.ultimoPro||'—')}. Para la ELEVN League necesita 1 año sin jugar profesionalmente.</div>`:''}
+  ${p.exPro&&!(p.historial||[]).length?`<div class="note ${e.ok?'ok':'warn'} sec">🏅 Exprofesional${p.clubPro?' ('+esc(p.clubPro)+')':''} · último partido profesional: ${esc(p.ultimoPro||'—')}. ${e.ok?'Cumple el año sin jugar profesionalmente.':'Puede jugar la ELEVN League desde el '+(e.desde?fdate(e.desde):'—')+'.'}</div>`:''}
+  ${trs.length?`<div class="card sec"><h3>🔁 Traspasos</h3>${transfersTable(trs)}</div>`:''}`}
+function actList(p,canE){const l=playerMatches(p.id,a=>a.estado==='aprobado'||canE).sort((a,b)=>String(b.fecha).localeCompare(String(a.fecha)));
+  if(!l.length)return emptyBox('📋','Todavía no hay partidos registrados.');
+  const chip=(ic,n,show=true)=>show?`<span class="badge ghost" style="padding:3px 8px;font-size:12px">${ic}${n>1?' '+n:''}</span>`:'';
+  const fd=f=>{const d=new Date(f+'T12:00:00');return isNaN(d)?esc(f||''):d.toLocaleDateString('es-PA',{day:'numeric',month:'short',year:'numeric'})};
+  const row=a=>{const t=ACTV[a.tipo]||ACTV.liga;const b=actPts(a.tipo,a,p.pos);const st=a.estado==='pendiente'?'<span class="badge gold" style="font-size:11px">⏳ En revisión</span>':a.estado==='rechazado'?'<span class="badge closed" style="font-size:11px">❌</span>':(a.tipo==='tarjetas'?'<span class="muted small">—</span>':`<b style="color:var(--lime)">${b.total>=0?'+':''}${b.total.toFixed(2)}</b>`);
+    const ch=[chip('⚽ Gol',num(a.g),num(a.g)>0),chip('🅰️ Asist.',num(a.a),num(a.a)>0),chip('🧤 Valla invicta',1,!!a.vi&&DEFENSORES.includes(p.pos)),chip('🧤 Atajadas',num(a.at),num(a.at)>0),chip('🛑 Penal atajado',num(a.pa),num(a.pa)>0),chip('⭐ MVP',1,!!a.mvp),chip('🟨',num(a.ta),num(a.ta)>0),chip('🟥',num(a.tr),num(a.tr)>0)].join(' ')||'<span class="muted small">Jugó</span>';
+    return `<tr><td class="small muted" style="white-space:nowrap">${fd(a.fecha)}</td><td><div class="row" style="gap:8px">${okImg(a.foto)?`<img src="${a.foto}" data-zoom="1" style="width:30px;height:30px;object-fit:cover;border-radius:8px;cursor:zoom-in">`:`<span style="font-size:18px">${t[0]}</span>`}<div><b>${esc(a.detalle||t[1])}</b><div class="tiny muted">${esc(t[1])}${a.res?' · '+esc(a.res):''}${a.equipo?' · '+esc(clubById(a.equipo)?.nombre||''):''}</div></div></div></td><td><div class="row wrapf" style="gap:4px">${ch}</div></td><td class="num">${st}</td></tr>`};
+  const head='<tr><th>Fecha</th><th>Competición</th><th>Resultado</th><th class="num">Puntos</th></tr>';
+  return `<div class="tw"><table class="acttb">${head}${l.slice(0,3).map(row).join('')}</table></div>${l.length>3?`<details style="margin-top:8px"><summary class="btn sm" style="list-style:none;display:inline-flex">Ver toda la actividad (${l.length}) ▾</summary><div class="tw" style="margin-top:8px"><table class="acttb">${head}${l.slice(3).map(row).join('')}</table></div></details>`:''}`}
+const esDelegado=c=>!!c&&(S.isAdmin||(c.managerId&&c.managerId===S.me));
+function peqSection(c){const can=esDelegado(c);const l=S.peq.filter(x=>x.clubId===c.id&&(x.estado==='aprobado'||can)).sort((a,b)=>String(b.fecha).localeCompare(String(a.fecha)));if(!l.length&&!can)return '';
+  const row=x=>{const mv=playerById(x.mvp);const n=Object.values(x.stats||{}).filter(s=>s.j).length;const res=num(x.golesFavor)>num(x.golesContra)?'lime':num(x.golesFavor)<num(x.golesContra)?'red':'gold';
+    return `<tr><td class="small muted" style="white-space:nowrap">${esc(x.fecha||'')}</td><td><b>${esc(x.competicion||'')}</b><div class="tiny muted">${x.rival?'vs '+esc(x.rival):''} · ${(ACTV[x.tipo]||ACTV.liga)[1]}</div></td><td><b style="color:var(--${res});font-family:'Bebas Neue';font-size:22px">${num(x.golesFavor)} - ${num(x.golesContra)}</b></td><td class="small">${n} jugadores${mv?' · ⭐ '+esc(mv.apodo||mv.nombre):''}</td><td class="num">${x.estado==='pendiente'?'<span class="badge gold" style="font-size:11px">⏳ En revisión</span>':x.estado==='rechazado'?'<span class="badge closed" style="font-size:11px">❌</span>':'<span class="badge open" style="font-size:11px">✅</span>'}</td></tr>`};
+  return `<div class="card sec"><div class="sec-h"><div><h3>⚽ Partidos del equipo</h3><div class="small muted">El delegado registra cada partido una vez y se le suma a todos los que jugaron.</div></div>${can?`<button class="btn lime" data-act="nuevoPeq" data-id="${esc(c.id)}">➕ Registrar partido del equipo</button>`:''}</div>
+   ${l.length?`<div class="tw"><table><tr><th>Fecha</th><th>Competición</th><th>Resultado</th><th>Jugaron</th><th></th></tr>${l.slice(0,3).map(row).join('')}</table></div>${l.length>3?`<details style="margin-top:8px"><summary class="btn sm" style="list-style:none;display:inline-flex">Ver todos (${l.length}) ▾</summary><div class="tw" style="margin-top:8px"><table>${l.slice(3).map(row).join('')}</table></div></details>`:''}`:emptyBox('⚽','Todavía no hay partidos registrados.')}</div>`}
+function peqForm(c){const sq=squad(c.id).sort((a,b)=>POS.findIndex(x=>x[0]===a.pos)-POS.findIndex(x=>x[0]===b.pos));
+  return `<h3>➕ Partido de ${esc(c.nombre)}</h3><p class="small muted">Marca quién jugó y sus números. Si no recibieron goles, la valla invicta se le suma sola al portero y a los defensas que jugaron.</p>
+  <form data-form="peq" data-id="${esc(c.id)}"><div class="f2"><div class="fld"><label>Tipo</label><select name="tipo">${Object.entries(ACTV).filter(([k])=>k!=='tarjetas').map(([k,[i,n]])=>`<option value="${k}">${i} ${n}</option>`).join('')}</select></div><div class="fld"><label>Competición *</label><input name="competicion" required maxlength="50" placeholder="Ej: Birrias Sanas"></div><div class="fld"><label>Rival</label><input name="rival" maxlength="40"></div><div class="fld"><label>Fecha *</label><input name="fecha" type="date" required max="${new Date().toISOString().slice(0,10)}"></div>
+  <div class="fld"><label>Goles a favor</label><input name="gf" type="number" min="0" value="0"></div><div class="fld"><label>Goles en contra</label><input name="gc" type="number" min="0" value="0"></div></div>
+  ${sq.length?`<div class="row between" style="margin:6px 0"><b>Jugadores</b><button type="button" class="btn sm" data-act="marcarTodos">Marcar todos</button></div><div class="tw"><table><tr><th>Jugador</th><th>Jugó</th><th>⚽</th><th>🅰️</th><th>🧤 Ataj.</th><th>🛑 Pen.</th><th>🟨</th><th>🟥</th><th>⭐ MVP</th></tr>${sq.map(p=>`<tr data-pid="${esc(p.id)}"><td><span class="pos ${esc(p.pos)}">${esc(p.pos)}</span> ${esc(p.apodo||p.nombre)}</td><td><input type="checkbox" name="j"></td><td><input class="mini-in" name="g" type="number" min="0" value=""></td><td><input class="mini-in" name="a" type="number" min="0" value=""></td><td>${p.pos==='POR'?'<input class="mini-in" name="at" type="number" min="0" max="30" value="">':''}</td><td>${p.pos==='POR'?'<input class="mini-in" name="pa" type="number" min="0" max="5" value="">':''}</td><td><input class="mini-in" name="ta" type="number" min="0" max="2" value=""></td><td><input class="mini-in" name="tr" type="number" min="0" max="1" value=""></td><td><input type="radio" name="mvp" value="${esc(p.id)}"></td></tr>`).join('')}</table></div>`:'<div class="note warn">Este equipo todavía no tiene jugadores aprobados.</div>'}
+  <div class="fld" style="margin-top:12px"><label>Foto de prueba (opcional)</label><input type="file" name="fotoLogro" accept="image/*"><input type="hidden" name="foto"><div id="lgPrev" style="margin-top:8px"></div></div>
+  <div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn lime">Guardar partido</button></div></form>`}
+function actForm(p){return `<h3>➕ Registrar partido</h3><p class="small muted">Si tienes foto (del partido, la planilla o una publicación), súbela. Si no, envíalo igual: la organización lo puede confirmar contigo por privado.</p>
+  <form data-form="act" data-id="${esc(p.id)}" id="actF"><div class="f2"><div class="fld"><label>¿Qué fue?</label><select name="tipo">${Object.entries(ACTV).filter(([k])=>k!=='tarjetas').map(([k,[i,n]])=>`<option value="${k}">${i} ${n}</option>`).join('')}</select></div><div class="fld"><label>Fecha *</label><input name="fecha" type="date" required max="${new Date().toISOString().slice(0,10)}"></div></div>
+  <div class="fld"><label>Liga, torneo o rival *</label><input name="detalle" required maxlength="80" placeholder="Ej: Birrias Sanas vs Costa Brava"></div>
+  <div id="actStats"><div class="f2"><div class="fld"><label>Goles</label><input name="g" type="number" min="0" max="15" value="0"></div><div class="fld"><label>Asistencias</label><input name="a" type="number" min="0" max="15" value="0"></div><div class="fld"><label>Amarillas</label><input name="ta" type="number" min="0" max="2" value="0"></div>${p.pos==='POR'?'<div class="fld"><label>🧤 Atajadas</label><input name="at" type="number" min="0" max="30" value="0"></div><div class="fld"><label>🛑 Penales atajados</label><input name="pa" type="number" min="0" max="5" value="0"></div>':''}</div>
+  <div class="row wrapf" style="gap:18px;margin-bottom:12px">${DEFENSORES.includes(p.pos)?'<label style="margin:0;color:var(--text)"><input type="checkbox" name="vi"> 🧤 Valla invicta</label>':''}<label style="margin:0;color:var(--text)"><input type="checkbox" name="mvp"> ⭐ Fui el MVP</label><label style="margin:0;color:var(--text)"><input type="checkbox" name="tr"> 🟥 Me expulsaron</label></div></div>
+  <div class="fld"><label>Foto de prueba (opcional)</label><input type="file" name="fotoLogro" accept="image/*"><input type="hidden" name="foto"><div id="lgPrev" style="margin-top:8px"></div></div>
+  <div class="note ok" id="actPrev" style="margin-bottom:12px">Esto te sumaría <b>+0.10</b></div>
+  <div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn lime">Enviar para verificar</button></div></form>`}
+function actPreview(){const f=$('#actF');if(!f)return;const p=playerById(f.dataset.id);const tipo=fv(f,'tipo');const s=actRead(f);const b=actPts(tipo,s,p.pos);const v=V(p);const d=mediaDe(v.A+b.total,v.E,p.ajusteOvr)-mediaDe(v.A,v.E,p.ajusteOvr);$('#actPrev').innerHTML=`Suma <b>${b.total>=0?'+':''}${b.total.toFixed(2)} puntos</b> → tu media sube <b>${d>=0?'+':''}${d.toFixed(2)}</b> cuando se verifique.`}
+const actRead=f=>({at:num(fv(f,'at')),pa:num(fv(f,'pa')),g:num(fv(f,'g')),a:num(fv(f,'a')),ta:Math.min(2,num(fv(f,'ta'))),tr:f.elements.tr?.checked?1:0,vi:!!f.elements.vi?.checked,mvp:!!f.elements.mvp?.checked});
+function logroCard(l){const d=LOGROS[l.tipo]||LOGROS.otro;const st={pendiente:'<span class="badge gold">⏳ En revisión</span>',rechazado:'<span class="badge closed">❌ No aprobado</span>',aprobado:`<span class="badge open">✅ +${num(l.pts)}</span>`}[l.estado]||'';
+  return `<div class="card" style="padding:12px">${okImg(l.foto)?`<img class="lgph" src="${l.foto}" data-zoom="1" alt="">`:`<div class="lgph" style="display:grid;place-items:center;font-size:44px;cursor:default;background:rgba(255,200,61,.08)">${d[0]}</div>`}<div class="row between" style="margin-top:8px"><b>${d[0]} ${esc(d[1])}</b>${st}</div><div class="small muted" style="margin-top:4px">${esc(l.descripcion||'')}${l.fecha?' · '+esc(l.fecha):''}</div>${l.nota?`<div class="tiny" style="margin-top:4px;color:var(--red)">${esc(l.nota)}</div>`:''}</div>`}
+function ovrBreak(p,v){const B=v.br||{};const f=x=>(x>0?'+':x<0?'−':'')+Math.abs(x).toFixed(2);const row=(a,b)=>`<tr><td class="small" style="padding-left:18px;color:var(--muted)">${a}</td><td class="num small" style="color:${b<0?'var(--red)':'var(--muted)'}">${f(b||0)}</td></tr>`;
+  const am=fAm(v.A),el=fEl(v.E);
+  return `<table><tr><td class="small">Media inicial</td><td class="num small">70</td></tr>
+  <tr><td><b>⚽ Trayectoria y partidos</b> <span class="tiny muted">${v.A.toFixed(2)} pts · hasta 84</span></td><td class="num"><b>+${am.toFixed(2)}</b></td></tr>
+  ${row('Trayectoria',B.tAm)}${row('Partidos jugados',B.asis)}${row('Goles',B.gol)}${row('Asistencias',B.asist)}${row('Vallas invictas',B.valla)}${p.pos==='POR'?row('Atajadas y penales atajados',B.ataj):''}${row('MVP de partido',B.mvp)}${row('Tarjetas',B.tarj)}
+  <tr><td><b>🏆 Logros</b> <span class="tiny muted">${v.E.toFixed(2)} pts · hasta +15</span></td><td class="num"><b>+${el.toFixed(2)}</b></td></tr>
+  ${row('Títulos, MVP de torneo, convocatorias…',B.lEl)}
+  ${num(p.ajusteOvr)?`<tr><td class="small">Ajuste de la organización</td><td class="num small">${f(num(p.ajusteOvr))}</td></tr>`:''}
+  <tr><td><b>Media exacta</b></td><td class="num"><b>${v.raw.toFixed(2)}</b></td></tr><tr><td><b>Media</b></td><td class="num">${ovrChip(v.ovr)}</td></tr><tr><td><b>Precio</b></td><td class="num val">${money(v.valor)}</td></tr></table>
+  ${v.ovr<99?`<div style="margin-top:12px"><div class="row between small"><span>Progreso a ${v.ovr+1}</span><b>${Math.round(v.prog*100)}%</b></div><div style="height:10px;background:var(--bg2);border-radius:99px;margin-top:5px;overflow:hidden"><div style="height:100%;width:${Math.round(v.prog*100)}%;background:var(--gold)"></div></div></div>`:''}
+  <div class="tiny muted" style="margin-top:8px">Jugando llegas hasta 84. De 85 para arriba solo se llega con logros: títulos, MVP de torneos, convocatorias o fútbol profesional.</div>`}
+function ptsTable(){const r=(a,b,red)=>`<tr><td>${a}</td><td class="num" ${red?'style="color:var(--red)"':''}>${b}</td></tr>`;
+  return `<table>${r('🏆 Jugar un partido de liga o torneo','+0.10')}${r('🤝 Jugar un amistoso o birria','+0.05')}${r('⚽ Cada gol','+0.25')}${r('🅰️ Cada asistencia','+0.15')}${r('🧤 Valla invicta del portero','+0.30')}${r('🛡️ Valla invicta de un defensa','+0.15')}${r('🧤 Cada atajada (porteros)','+0.05')}${r('🛑 Penal atajado','+0.30')}${r('⭐ MVP del partido','+0.50')}${r('🟨 Cada amarilla','−0.10',1)}${r('🟥 Roja','−0.50',1)}</table>
+  <div class="tiny muted" style="margin-top:8px">Suman a Trayectoria y partidos. En amistosos y birrias los goles, asistencias, vallas y MVP valen la mitad, y un partido suma como máximo 1.00. Los partidos de la ELEVN League cuentan solos.</div>`}
+function chart(h){if(!h||h.length<2)return `<div class="empty small" style="padding:40px 10px">📈 La gráfica aparece con su primer partido o su primer logro verificado.</div>`;
+  const W=560,H=170,P=28;const vs=h.map(x=>x.o);const mn=Math.min(...vs)-1,mx=Math.max(...vs)+1;const X=i=>P+i*(W-P*2)/(h.length-1),Y=v=>H-P-(v-mn)/(mx-mn||1)*(H-P*2);const pts=h.map((x,i)=>`${X(i).toFixed(1)},${Y(x.o).toFixed(1)}`).join(' ');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><polygon points="${X(0)},${H-P} ${pts} ${X(h.length-1)},${H-P}" fill="rgba(255,200,61,.15)"/><polyline points="${pts}" fill="none" stroke="#FFC83D" stroke-width="3" stroke-linejoin="round"/>
+  ${h.map((x,i)=>`<circle cx="${X(i)}" cy="${Y(x.o)}" r="4" fill="#0A1224" stroke="#FFC83D" stroke-width="2"><title>${esc(x.l)}: media ${x.o} · ${money(x.v)}</title></circle>${h.length<=12?`<text x="${X(i)}" y="${H-8}" fill="#8E9FC4" font-size="11" text-anchor="middle">${esc(x.l)}</text><text x="${X(i)}" y="${Y(x.o)-9}" fill="#EEF3FF" font-size="11" text-anchor="middle">${x.o}</text>`:''}`).join('')}</svg>`}
+function queEsView(){const R=[['✍️','Crea tu cuenta','Te registras con tus datos y tu equipo. Al activarse tu cuenta recibes tu perfil ELEVN con media, posición, atributos y precio. Todos arrancan en 70 (Plata).'],['📋','Suma jugando','Cada partido de liga, amistoso, birria o entrenamiento que registres con foto suma poquito a poco: un gol +0.25, una valla invicta +0.25. La constancia se premia. Los partidos de la ELEVN League cuentan solos.'],['🏅','Sube con tu historial','Agrega tu trayectoria y adjunta pruebas de tus logros (campeonatos, MVP, convocatorias). Cuando la organización las verifica, tu media sube.'],['💰','Tu precio','Cada punto de media sube tu precio. Es un valor simbólico para medir tu nivel, no es dinero real.'],['🛡️','Tu equipo','Registra a tu equipo, juegue la liga que juegue. Si quiere, puede inscribirse en la ELEVN League.'],['👀','Una vitrina, no un chat','Aquí cualquiera ve los jugadores y sus medias, pero no hay mensajes entre jugadores.']];
+  return `<h2>🤔 ¿Cómo funciona ELEVN?</h2><div class="grid g2 sec">${R.map(([i,t,d])=>`<div class="card rule"><div class="n">${i}</div><div><h3>${t}</h3><p>${d}</p></div></div>`).join('')}</div>
+  <div class="grid g2 sec"><div class="card"><h3>📋 Puntos por jugar</h3>${ptsTable()}</div>
+  <div class="card"><h3>🏅 Logros con prueba</h3><table>${Object.entries(LOGROS).filter(([k])=>k!=='otro').map(([k,[i,n,pt]])=>`<tr><td>${i} ${n}</td><td class="num">+${pt}</td></tr>`).join('')}<tr><td>🎖️ Otro logro</td><td class="num">La organización decide</td></tr></table></div></div>
+  <div class="card sec"><h3>📐 Cómo se calcula tu media</h3><p class="small muted">Dos tipos de puntos. Cada uno sube rápido al principio y cada vez más lento.</p>
+   <div class="grid g2" style="margin-top:10px"><div class="note"><b>⚽ Trayectoria y partidos · hasta 84</b><br>Todo lo que has jugado: años en equipos y estadísticas de tus partidos. Con 5 años de torneos amateur ya andas por 80.</div>
+   <div class="note warn"><b>🏆 Logros · hasta +15</b><br>Títulos, MVP de torneos, goleador, mejor portero, convocatorias y fútbol profesional. Es lo único que te lleva de 85 para arriba.</div></div>
+   <table style="margin-top:12px"><tr><th>Trayectoria</th><th class="num">Puntos por año</th></tr>${NIVELES.map(n=>`<tr><td>${n}</td><td class="num">${NIV[n][1].toFixed(1)}${SELB[n]?' (+'+SELB[n]+' por convocatoria)':''}</td></tr>`).join('')}</table>
+   <div class="tiny muted" style="margin-top:8px">Una línea por equipo. Cada año cuenta completo el nivel más alto, y otros equipos ese mismo año suman la mitad. La organización confirma tu base.</div></div>
+  <div class="card sec"><h3>🏅 Niveles</h3>${tiersHTML()}</div><div class="sec row wrapf"><a class="btn gold" href="#registro">✍️ Crear mi cuenta</a></div>`}
+
+/* ----- Registro ----- */
+function registroView(){const c=cfg();const mine=S.players.filter(p=>p.userId&&p.userId===S.me);const myClub=S.clubs.filter(x=>x.managerId&&x.managerId===S.me);const noW=S.canWrite===false;const t=S.tabReg;const wa=String(c.whatsapp||'').replace(/\D/g,'');
+  const head=`<h2>✍️ Únete a ELEVN</h2><p class="muted">Crea tu cuenta de jugador o registra a tu equipo. Tu perfil con media y precio se crea con tu cuenta.</p>
+  ${noW?(wa?'<div class="note warn sec">📲 Llena el formulario y toca <b>Enviar por WhatsApp</b>: tus datos le llegan a la organización y ellos crean tu cuenta. Manda tu foto y tus pruebas en el mismo chat.</div>':'<div class="note bad sec">🔒 Tu acceso es solo de lectura. Pídele a la organización acceso de <b>Colaborador</b> para poder registrarte.</div>'):''}
+  ${mine.length?`<div class="card sec"><h3>Tu cuenta</h3>${mine.map(p=>`<div class="row between wrapf" style="margin-top:10px"><div class="row">${avatar(p)}<div><b>${esc(p.nombre)}</b><div class="small muted">${esc(clubById(p.clubId)?.nombre||'Sin equipo')} · ${esc(posName(p.pos))}</div></div></div><div>${{pendiente:'<span class="badge gold">⏳ En revisión</span>',aprobado:'<span class="badge open">✅ Activa</span>',rechazado:'<span class="badge closed">❌ No aprobada</span>'}[p.estado]||''} <a class="btn sm" href="#jugador-${esc(p.id)}">Ver mi perfil</a></div></div>${S.offers.filter(o=>o.playerId===p.id&&o.estado==='jugador').map(o=>`<div style="margin-top:10px">${offerCard(o,null,false)}</div>`).join('')}`).join('')}</div>`:''}
+  <div class="tabs sec"><span class="tab ${t==='jugador'?'on':''}" data-tabr="jugador">👟 Soy jugador</span><span class="tab ${t==='equipo'?'on':''}" data-tabr="equipo">🛡️ Registrar mi equipo</span></div>`;
+  if(t==='equipo')return head+`<div class="card">${myClub.length?`<div class="note ok" style="margin-bottom:14px">Ya eres delegado de: <b>${myClub.map(x=>esc(x.nombre)+(x.estado==='pendiente'?' (pendiente)':'')).join(', ')}</b></div>`:''}
+    <form class="keep" data-form="club"><div class="f2"><div class="fld"><label>Nombre del equipo *</label><input name="nombre" required maxlength="40"></div><div class="fld"><label>Siglas (2–3 letras)</label><input name="sigla" maxlength="3"></div><div class="fld"><label>Color principal</label><input name="color" type="color" value="#FFC83D" style="height:42px;padding:4px"></div><div class="fld"><label>¿En qué liga juegan ahora?</label><input name="ligaActual" maxlength="40" placeholder="Ej: Birrias Sanas"></div>
+    <div class="fld"><label>Instagram del equipo</label><input name="instagram" maxlength="40" placeholder="@equipo"></div>
+    <div class="fld"><label>Nombre del delegado *</label><input name="delegado" required maxlength="60"></div><div class="fld"><label>Teléfono de contacto del equipo *</label><input name="telefono" type="tel" required maxlength="20" placeholder="+507 6000-0000"></div></div>
+    <div class="row wrapf" style="gap:14px;margin-bottom:12px"><div id="logoPrev" class="av" style="width:70px;height:70px;border-radius:14px;font-size:26px">🛡️</div><div><label>Logo del equipo</label><input type="file" name="logoFile" accept="image/*"><div class="tiny muted">Si el logo tiene fondo de un solo color (blanco, por ejemplo), se lo quitamos solos. Lo ideal es un PNG sin fondo.</div><input type="hidden" name="logo"></div></div>
+    <div class="fld"><label style="color:var(--text)"><input type="checkbox" name="solicitudLiga"> Queremos jugar la <b>${esc(c.nombre)}</b></label></div>
+    <div class="note" style="margin-bottom:12px">🔒 El teléfono solo lo ve la organización. Quien registra queda como delegado del equipo y puede editar el logo cuando quiera.</div><button class="btn gold" ${noW?'disabled':''}>Registrar equipo</button></form></div>`;
+  return head+`<div class="card"><form class="keep" data-form="jugador">
+   <h3>1 · Tus datos</h3>
+   <div class="row wrapf" style="gap:16px;margin:12px 0 14px"><div id="fotoPrev" class="av" style="width:84px;height:84px;font-size:30px">📷</div><div><label>Foto de perfil</label><input type="file" name="fotoFile" accept="image/*" style="max-width:260px"><input type="hidden" name="foto"></div></div>
+   <div class="f2"><div class="fld"><label>Nombre completo *</label><input name="nombre" required maxlength="60"></div><div class="fld"><label>Teléfono *</label><input name="telefono" type="tel" required maxlength="20" placeholder="+507 6000-0000"></div>
+   <div class="fld"><label>Nombre en tu perfil (apodo)</label><input name="apodo" maxlength="18"></div><div class="fld"><label>Edad *</label><input name="edad" type="number" min="15" max="70" required></div>
+   <div class="fld"><label>Posición *</label><select name="pos" required>${POS.map(([k,n])=>`<option value="${k}">${n}</option>`).join('')}</select></div><div class="fld"><label>Número de camiseta</label><input name="numero" type="number" min="1" max="99"></div>
+   <div class="fld"><label>Pie hábil</label><select name="pie"><option>Derecho</option><option>Izquierdo</option><option>Ambos</option></select></div><div class="fld"><label>Instagram (opcional)</label><input name="instagram" maxlength="40" placeholder="@usuario"></div>
+   <div class="fld"><label>Equipo actual</label><select name="clubId"><option value="">Sin equipo por ahora</option>${activeClubs().map(x=>`<option value="${esc(x.id)}">${esc(x.nombre)}</option>`).join('')}</select><div class="tiny muted" style="margin-top:4px">¿Tu equipo no aparece? Que el delegado lo registre en la otra pestaña.</div></div></div>
+   <div class="tiny muted">🔒 Tu teléfono solo lo ve la organización, nunca aparece en tu perfil.</div>
+   <h3 style="margin-top:22px">2 · Tu historial de fútbol <span class="badge ghost" style="font-size:11px;vertical-align:middle">Opcional</span></h3>
+   <div class="note warn" style="margin:10px 0 12px">📈 <b>¿Quieres arrancar con más media y más valor?</b> Según tu trayectoria arrancas <b>entre 70 y 80</b>: no es lo mismo haber jugado toda la vida en torneos o en selección que solo en el colegio. Cuéntanos dónde has jugado y <b>adjunta evidencia de tus logros</b> (fotos de medallas, trofeos, convocatorias o publicaciones del torneo). La organización revisa cada prueba y, si la aprueba, tu media sube. Y después de crear tu cuenta, cada partido, amistoso, birria o entrenamiento que registres con foto también te suma.</div>
+   <label style="color:var(--text);margin-bottom:12px"><input type="checkbox" name="sinHist" id="sinHist"> Prefiero no poner mi historial por ahora</label>
+   <div id="histBox">${histEditor([])}
+    <div class="sec-h" style="margin-top:16px;margin-bottom:6px"><b>🏅 Logros con evidencia</b><button type="button" class="btn sm gold" data-act="addLog">+ Agregar logro</button></div><div id="logRows"></div><div class="tiny muted">📎 La foto ayuda a que te lo aprueben más rápido. Si no tienes, envíalo igual: la organización lo puede confirmar contigo por privado.</div></div>
+   <h3 style="margin-top:22px">3 · Confirmar</h3>
+   <div class="fld" style="margin-top:8px"><label style="color:var(--text)"><input type="checkbox" name="acepto" required> Confirmo que mis datos son reales y acepto el reglamento.</label></div>
+   ${noW&&wa?`<button type="button" class="btn gold" data-act="waReg">📲 Enviar por WhatsApp</button>`:`<button class="btn gold" ${noW?'disabled':''}>Crear mi cuenta</button><div class="tiny muted" style="margin-top:8px">Arrancas con media 70. La organización revisa tu cuenta antes de activarla.</div>`}</form></div>`}
+const NIVELES=['Amateur','Liga distrital / provincial','Colegial / universitario','Juvenil de club profesional','Semiprofesional','Profesional','Selección juvenil','Selección mayor'];
+const NIV={'Amateur':['am',1.0],'Colegial / universitario':['am',0.6],'Liga distrital / provincial':['am',1.2],'Juvenil de club profesional':['am',1.5],'Semiprofesional':['am',2.5],'Profesional':['am',3.5],'Selección juvenil':['am',2.0],'Selección mayor':['am',3.5],'Selección':['am',3.5]};
+const NIVW=Object.fromEntries(Object.entries(NIV).map(([k,v])=>[k,v[1]]));
+const SELB={'Selección juvenil':1,'Selección mayor':2,'Selección':2};
+function baseSugerida(hist){const Y=new Date().getFullYear();const yr={am:{},el:{}};const out={am:0,el:0};const selB={};
+  for(const x of (hist||[])){const d=num(x.desde);let a=x.actual?Y:(num(x.hasta)||Y);if(!d||d<1970||d>Y)continue;a=Math.min(Math.max(a,d),Y);const [pool,w]=NIV[x.nivel]||['am',0.15];
+    if(SELB[x.nivel]!==undefined){out.el+=(a-d+1)*w;selB[x.nivel==='Selección'?'Selección mayor':x.nivel]=SELB[x.nivel];continue}for(let y=d;y<=a;y++)(yr[pool][y]=yr[pool][y]||[]).push(w)}
+  for(const pool of ['am','el'])out[pool]+=Object.values(yr[pool]).reduce((s,l)=>{l.sort((p,q)=>q-p);return s+l[0]+0.5*l.slice(1,3).reduce((t,v)=>t+v,0)},0);
+  out.am+=out.el+Object.values(selB).reduce((s,v)=>s+v,0);out.el=0;out.am=Math.round(out.am*100)/100;out.el=Math.round(out.el*100)/100;return out}
+function baseEst(){const root=document.querySelector('#histRows');const out=document.querySelector('#baseEst');if(!root||!out)return;const b=baseSugerida(readHist(root.closest('form')||document));out.innerHTML=`📊 Con esta trayectoria arrancarías con media <b>${Math.floor(mediaDe(b.am,b.el))}</b>. La organización lo confirma.`}
+function histRow(h={}){const act=h.actual||(h.desde&&!h.hasta&&h.actual===undefined&&false);return `<div class="hrow f2" style="align-items:end;background:rgba(10,18,36,.4);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:8px;grid-template-columns:repeat(auto-fit,minmax(120px,1fr))">
+  <div style="grid-column:span 2"><label>Equipo</label><input class="h-eq" maxlength="40" value="${esc(h.equipo||'')}"></div>
+  <div><label>Nivel</label><select class="h-nv">${NIVELES.map(n=>`<option ${(h.nivel==='Selección'?'Selección mayor':h.nivel)===n?'selected':''}>${n}</option>`).join('')}</select></div>
+  <div><label>Desde (año)</label><input class="h-d" type="number" min="1970" max="2100" value="${esc(h.desde||'')}"></div>
+  <div><label>Hasta (año)</label><input class="h-h" type="number" min="1970" max="2100" value="${esc(h.actual?'':(h.hasta||''))}" ${h.actual?'disabled':''}><label style="margin:4px 0 0;color:var(--text);font-weight:600"><input type="checkbox" class="h-ac" ${h.actual?'checked':''}> Actualmente</label></div>
+  <div><button type="button" class="btn sm red" data-act="delRow">Quitar</button></div></div>`}
+const readHist=root=>[...root.querySelectorAll('.hrow')].map(r=>{const ac=r.querySelector('.h-ac').checked;return{equipo:r.querySelector('.h-eq').value.trim(),nivel:r.querySelector('.h-nv').value,desde:r.querySelector('.h-d').value,hasta:ac?'':r.querySelector('.h-h').value,actual:ac}}).filter(h=>h.equipo).slice(0,15);
+function histTable(list){if(!list||!list.length)return '';const srt=list.slice().sort((a,b)=>(b.actual?9999:num(b.hasta||9999))-(a.actual?9999:num(a.hasta||9999))||num(b.desde)-num(a.desde));
+  return `<div class="tw"><table><tr><th>Años</th><th>Equipo</th></tr>${srt.map(h=>`<tr><td class="small" style="white-space:nowrap">${esc(h.desde||'?')} – ${h.actual||!h.hasta?'<b style="color:var(--lime)">Actualidad</b>':esc(h.hasta)}</td><td><b>${esc(h.equipo)}</b></td></tr>`).join('')}</table></div>`}
+function histEditor(list){return `<div class="sec-h" style="margin-bottom:6px"><b>⚽ Trayectoria: una línea por equipo</b><button type="button" class="btn sm" data-act="addHist">+ Agregar equipo</button></div><div id="histRows">${(list.length?list:[{}]).map(histRow).join('')}</div><div class="note ok" id="baseEst" style="margin-top:6px">📊 Agrega tu trayectoria para calcular tu media inicial (entre 70 y 80).</div>`}
+function logRow(){return `<div class="lrow f2" style="align-items:end;background:rgba(255,200,61,.06);border:1px solid rgba(255,200,61,.3);border-radius:12px;padding:10px;margin-bottom:8px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+  <div><label>¿Qué lograste?</label><select class="l-tp">${Object.entries(LOGROS).map(([k,[i,n]])=>`<option value="${k}">${i} ${n}</option>`).join('')}</select></div>
+  <div><label>Torneo / detalle</label><input class="l-ds" maxlength="80" placeholder="Ej: Campeón Copa X 2024"></div><div><label>Fecha</label><input class="l-fc" type="date"></div>
+  <div><label>Foto de prueba (opcional)</label><input type="file" class="lfile" accept="image/*"><input type="hidden" class="ldata"></div><div class="l-pv"></div><div><button type="button" class="btn sm red" data-act="delRow">Quitar</button></div></div>`}
+
+/* ----- ELEVN LEAGUE ----- */
+function ligaHome(){const c=cfg();const tb=standings().slice(0,6);const ap=S.players.filter(p=>p.estado==='aprobado'&&clubById(p.clubId)?.enLiga);const top=ap.slice().sort((a,b)=>V(b).ovr-V(a).ovr).slice(0,5);const spons=(c.patrocinadores||[]).filter(Boolean);
+  return `<section class="hero"><span class="badge open">🏆 ${esc(c.temporada)} · Fútbol 11</span><h1 style="margin-top:14px">${esc(c.nombre)}<br><em>Aquí se ficha.</em></h1>
+   <p class="muted" style="max-width:580px;margin:12px 0 0;font-size:16px;line-height:1.5">La liga amateur de Panamá de 6 meses con ventanas de fichajes entre clubes. Cada partido le sube la media a sus jugadores.</p>
+   <div class="row wrapf" style="margin-top:20px"><a class="btn lime" href="#tabla">📊 Tabla</a>${MK()?'<a class="btn" href="#mercado">💸 Mercado</a>':''}<a class="btn" href="#reglamento">📜 Reglamento</a></div>
+   <div class="stats"><div class="stat"><b>${leagueClubs().length}/${num(c.maxClubes)}</b><span>Clubes</span></div><div class="stat"><b>${ap.length}</b><span>Jugadores</span></div><div class="stat"><b>${S.matches.filter(m=>m.jugado).length}</b><span>Partidos jugados</span></div><div class="stat"><b>${S.transfers.length}</b><span>Traspasos</span></div></div></section>
+  ${MK()?`<div class="banner ${c.ventanaAbierta?'open':'closed'} sec"><div class="ic">${c.ventanaAbierta?'🟢':'🔴'}</div><div><b>${c.ventanaAbierta?esc(c.ventanaNombre)+' abierta':'Mercado cerrado'}</b><div class="small muted">${c.ventanaAbierta?'Los clubes pueden ofertar ahora mismo.':'Las negociaciones se abren en la próxima ventana de fichajes.'}</div></div></div>`:''}
+  <div class="grid g2 sec"><div class="card"><div class="sec-h"><h3>📊 Tabla</h3><a href="#tabla" class="small">Ver todo →</a></div>${tb.length?miniTable(tb):emptyBox('🏟️','Todavía no hay clubes inscritos en la liga.')}</div>
+   <div class="card"><div class="sec-h"><h3>👑 Mejores jugadores de la liga</h3></div>${top.length?playersTable(top,{}):emptyBox('👟','Aún no hay jugadores en la liga.')}</div></div>
+  ${S.transfers.length?`<div class="card sec"><h3>🔁 Últimos traspasos</h3>${transfersTable(S.transfers.slice(0,6))}</div>`:''}
+  <div class="sec"><div class="sec-h"><h3>🤝 Patrocinadores</h3><span class="small muted">¿Quieres ver tu marca aquí? Escríbenos.</span></div><div class="spons">${spons.map(s=>`<div class="spon real">${esc(s)}</div>`).join('')}${Array.from({length:Math.max(0,4-spons.length)},()=>`<div class="spon">Tu marca aquí</div>`).join('')}</div></div>`}
+function miniTable(rows){return `<div class="tw"><table><tr><th>#</th><th>Club</th><th class="num">PJ</th><th class="num">DG</th><th class="num">PTS</th></tr>${rows.map((r,i)=>`<tr class="click" data-go="club-${esc(r.club.id)}"><td>${i+1}</td><td>${clubTag(r.club.id)}</td><td class="num">${r.pj}</td><td class="num">${r.gf-r.gc>0?'+':''}${r.gf-r.gc}</td><td class="num"><b>${r.pts}</b></td></tr>`).join('')}</table></div>`}
+function ligaClubesView(){const c=cfg();const cl=leagueClubs().slice().sort((a,b)=>squadValue(b.id)-squadValue(a.id));return `<h2>🛡️ Clubes de la ${esc(c.nombre)}</h2><p class="muted">Cada club entra a la liga con <b style="color:var(--lime)">${money(c.presupuestoInicial)}</b> de presupuesto para el mercado de fichajes.</p>
+  ${cl.length?`<div class="card sec"><h3>💰 Valor y presupuesto</h3><div class="tw"><table><tr><th>#</th><th>Club</th><th class="num">Jugadores</th><th class="num">Media</th><th class="num">Valor del equipo</th>${MK()?'<th class="num">Presupuesto fichajes</th>':''}</tr>${cl.map((x,i)=>`<tr class="click" data-go="club-${esc(x.id)}"><td>${i+1}</td><td>${clubTag(x.id)}</td><td class="num">${squad(x.id).length}</td><td class="num">${squad(x.id).length?ovrChip(squadOvr(x.id)):'—'}</td><td class="num" style="color:var(--gold);font-weight:800">${money(squadValue(x.id))}</td>${MK()?`<td class="num val">${money(x.presupuesto)}</td>`:''}</tr>`).join('')}</table></div></div><div class="grid g3 sec">${cl.map(clubCard).join('')}</div>`:`<div class="card sec">${emptyBox('🛡️','Todavía no hay clubes inscritos en la liga.')}</div>`}`}
+function transfersTable(list){const tipo={compra:'Compra',prestamo:'Préstamo',clausula:'Cláusula',profesional:'Llamado a profesional'};
+  return `<div class="tw"><table><tr><th>Jugador</th><th>De</th><th></th><th>A</th><th class="hide-m">Tipo</th><th class="num">Monto</th></tr>${list.map(t=>`<tr class="click" data-go="jugador-${esc(t.playerId)}"><td><b>${esc(t.nombre)}</b><div class="tiny muted">${fdate(t.fecha)}</div></td><td>${t.de?clubTag(t.de):'<span class="muted">—</span>'}</td><td class="arrow">→</td><td>${t.tipo==='profesional'?`<span class="badge gold">🚀 ${esc(t.destino||'Profesional')}</span>`:clubTag(t.a)}</td><td class="hide-m"><span class="badge ghost">${esc(tipo[t.tipo]||t.tipo)}</span></td><td class="num val">${money(t.monto)}</td></tr>`).join('')}</table></div>`}
+function tablaView(){const rows=standings();const ms=S.matches.slice().sort((a,b)=>num(a.jornada)-num(b.jornada)||String(a.fecha||'').localeCompare(String(b.fecha||'')));const jors=[...new Set(ms.map(m=>num(m.jornada)))];
+  const ap=S.players.filter(p=>p.estado==='aprobado');const rk=(k)=>ap.filter(p=>V(p)[k]>0).sort((a,b)=>V(b)[k]-V(a)[k]).slice(0,k==='g'?10:5);
+  const rank=(l,k)=>l.length?l.map((p,i)=>`<div class="row between click" data-go="jugador-${esc(p.id)}" style="padding:7px 0;border-bottom:1px solid rgba(34,52,92,.5);cursor:pointer"><div class="row">${i<3?`<span class="medal">${['🥇','🥈','🥉'][i]}</span>`:`<span class="muted" style="width:22px">${i+1}</span>`}${avatar(p)}<div><b>${esc(p.nombre)}</b><div class="tiny muted">${esc(clubById(p.clubId)?.nombre||'')}</div></div></div><b class="disp" style="font-size:26px">${V(p)[k]}</b></div>`).join(''):`<div class="muted small">Sin datos todavía.</div>`;
+  return `<h2>📊 Tabla de posiciones</h2><div class="card sec">${rows.length?`<div class="tw"><table><tr><th>#</th><th>Club</th><th class="num">PJ</th><th class="num">G</th><th class="num">E</th><th class="num">P</th><th class="num hide-m">GF</th><th class="num hide-m">GC</th><th class="num">DG</th><th class="num">PTS</th></tr>
+  ${rows.map((r,i)=>`<tr class="click" data-go="club-${esc(r.club.id)}"><td>${i<4?`<span class="badge cyan" style="padding:3px 8px">${i+1}</span>`:i+1}</td><td>${clubTag(r.club.id)}</td><td class="num">${r.pj}</td><td class="num">${r.g}</td><td class="num">${r.e}</td><td class="num">${r.p}</td><td class="num hide-m">${r.gf}</td><td class="num hide-m">${r.gc}</td><td class="num">${r.gf-r.gc>0?'+':''}${r.gf-r.gc}</td><td class="num"><b style="font-size:17px">${r.pts}</b></td></tr>`).join('')}</table></div><div class="tiny muted" style="margin-top:8px">🔵 Los 4 primeros clasifican a semifinales.</div>`:emptyBox('🏟️','Todavía no hay clubes en la liga.')}</div>
+  <div class="grid g3 sec"><div class="card"><h3>⚽ Goleadores</h3>${rank(rk('g'),'g')}</div><div class="card"><h3>🅰️ Asistencias</h3>${rank(rk('a'),'a')}</div><div class="card"><h3>⭐ MVP</h3>${rank(rk('mvp'),'mvp')}</div></div>
+  <div class="card sec"><h3>🗓️ Calendario y resultados</h3>${jors.length?jors.map(j=>`<div class="jor">Jornada ${j}</div>${ms.filter(m=>num(m.jornada)===j).map(matchRow).join('')}`).join(''):emptyBox('🗓️','El calendario se publicará pronto.')}</div>`}
+function matchRow(m){const l=clubById(m.local),v=clubById(m.visitante);return `<div class="match"><div class="row" style="justify-content:flex-end;text-align:right"><b>${esc(l?.nombre||'?')}</b>${crest(l,26)}</div><div class="r">${m.jugado?`${num(m.golesL)} - ${num(m.golesV)}`:`<span class="small muted" style="font-family:Inter">${esc(m.fecha||'Por definir')}${m.hora?'<br>'+esc(m.hora):''}</span>`}</div><div class="row">${crest(v,26)}<b>${esc(v?.nombre||'?')}</b></div>
+  ${m.cancha||(m.jugado&&m.mvp)?`<div class="tiny muted" style="grid-column:1/-1;text-align:center">${m.cancha?'📍 '+esc(m.cancha):''}${m.jugado&&m.mvp&&playerById(m.mvp)?' · ⭐ MVP: '+esc(playerById(m.mvp).nombre):''}</div>`:''}</div>`}
+function marketBtns(p,big){if(!MK())return '';const a=actingId();const sz=big?'':'sm';if(p.estado!=='aprobado'||!p.clubId||!clubById(p.clubId)?.enLiga)return '';if(!a)return '';if(p.clubId===a)return big?'<span class="badge ghost">Es de tu club</span>':'';
+  if(!windowOk(a))return big?'<span class="badge closed">Mercado cerrado</span>':'';const seller=clubById(p.clubId);let h='';
+  if(!seller?.intransferible)h+=`<button class="btn ${sz} cyan" data-act="ofertar" data-id="${esc(p.id)}">💬 Ofertar</button> `;return h+`<button class="btn ${sz} gold" data-act="clausula" data-id="${esc(p.id)}">⚡ Pagar cláusula</button>`}
+function mercadoView(){const c=cfg();const a=actingId();const club=clubById(a);const open=S.offers.filter(isOpen);
+  const mineResp=a?open.filter(o=>o.estado!=='jugador'&&((o.para===a&&o.turno==='vendedor')||(o.de===a&&o.turno==='comprador'))):[];const mineWait=a?open.filter(o=>(o.de===a||o.para===a)&&!mineResp.includes(o)):[];
+  const done=a?S.offers.filter(o=>(o.de===a||o.para===a)&&!open.includes(o)).sort((x,y)=>num(y.creado)-num(x.creado)).slice(0,20):[];const t=S.tabMercado;let body='';
+  if(!a)body=`<div class="note">👔 Para negociar tienes que ser <b>delegado de un club de la liga</b>. ${S.isAdmin?'Como organizador, elige arriba con qué club quieres negociar.':'Si eres delegado, pídele a la organización que te asigne a tu club.'}</div>`;
+  else{body=`<div class="card" style="margin-bottom:16px"><div class="row wrapf between"><div class="row">${crest(club,46)}<div><div class="small muted">Negociando como</div><h3>${esc(club.nombre)}</h3></div></div><div class="row wrapf"><div class="stat"><b style="color:var(--lime)">${money(club.presupuesto)}</b><span>Presupuesto</span></div><div class="stat"><b>${squad(a).length}/${num(c.maxPlantilla)}</b><span>Plantilla</span></div>${c.ventanaAbierta?`<div class="stat"><b>${fichajesVentana(a)}/${num(c.limiteFichajes)}</b><span>Fichajes en esta ventana</span></div>`:''}</div></div>
+    ${club.reemplazoPendiente&&!c.ventanaAbierta?'<div class="note ok" style="margin-top:12px">🚀 Tienes un fichaje de reemplazo disponible fuera de ventana.</div>':''}</div>
+    <div class="tabs"><span class="tab ${t==='responder'?'on':''}" data-tab="responder">Para responder (${mineResp.length})</span><span class="tab ${t==='espera'?'on':''}" data-tab="espera">En espera (${mineWait.length})</span><span class="tab ${t==='cerradas'?'on':''}" data-tab="cerradas">Cerradas</span><span class="tab ${t==='historial'?'on':''}" data-tab="historial">Historial de la liga</span></div>`;
+    if(t==='responder')body+=mineResp.length?mineResp.map(o=>offerCard(o,a,true)).join(''):emptyBox('📭','No tienes ofertas por responder.');
+    if(t==='espera')body+=mineWait.length?mineWait.map(o=>offerCard(o,a,false)).join(''):emptyBox('⏳','No tienes ofertas en espera. Busca jugadores en la página de cada club.');
+    if(t==='cerradas')body+=done.length?done.map(o=>offerCard(o,a,false)).join(''):emptyBox('🗂️','Sin ofertas cerradas.')}
+  if(!a||t==='historial')body+=`<div class="card" style="margin-top:12px"><h3>🔁 Historial de traspasos</h3>${S.transfers.length?transfersTable(S.transfers):emptyBox('🤝','Aún no hay traspasos.')}</div>`;
+  return `<h2>💸 Mercado de fichajes</h2><div class="banner ${c.ventanaAbierta?'open':'closed'} sec" style="margin-bottom:16px"><div class="ic">${c.ventanaAbierta?'🟢':'🔴'}</div><div><b>${c.ventanaAbierta?esc(c.ventanaNombre)+' abierta':'Ventana cerrada'}</b><div class="small muted">${c.ventanaAbierta?'Ofertas, contraofertas y cláusulas habilitadas. Límite: '+num(c.limiteFichajes)+' fichajes por club.':'Fuera de ventana solo se permiten reemplazos de jugadores llamados al profesional.'}</div></div></div>${body}`}
+function offerCard(o,a,canAct){const p=playerById(o.playerId);const buy=clubById(o.de),sell=clubById(o.para);const est={jugador:'🙋 Esperando al jugador',pendiente:'⏳ Pendiente',contraoferta:'🔄 Contraoferta',aceptada:'✅ Aceptada',rechazada:'❌ Rechazada',cancelada:'🚫 Cancelada',cerrada:'🔒 Cerrada'}[o.estado]||o.estado;const turn=o.turno==='vendedor'?sell:buy;
+  return `<div class="offer"><div><div class="row wrapf" style="gap:8px">${avatar(p)}<div><a href="#jugador-${esc(o.playerId)}" class="pname">${esc(p?.nombre||o.nombre||'Jugador')}</a> ${p?ovrChip(V(p).ovr):''}<div class="small muted row" style="gap:6px">${clubTag(o.de)} <span class="arrow">quiere de</span> ${clubTag(o.para)}</div></div></div>
+   <div class="row wrapf" style="margin-top:8px;gap:8px"><span class="badge">${o.tipo==='prestamo'?'🔁 Préstamo':o.tipo==='clausula'?'⚡ Cláusula':'💰 Compra'}</span><span class="badge ghost">${est}</span>${o.estado==='jugador'?`<span class="small muted">El club ya aceptó. Falta que <b>${esc(p?.nombre||'el jugador')}</b> confirme.</span>`:isOpen(o)?`<span class="small muted">Le toca responder a <b>${esc(turn?.nombre||'')}</b></span>`:''}</div>${o.mensaje?`<div class="small" style="margin-top:8px;color:#C9D4EE">💬 “${esc(o.mensaje)}”</div>`:''}</div>
+   <div style="text-align:right"><div class="val disp" style="font-size:30px">${money(o.monto)}</div><div class="tiny muted">Precio: ${p?money(V(p).valor):'—'}</div>
+   ${canAct?`<div class="row wrapf" style="justify-content:flex-end;margin-top:8px;gap:6px"><button class="btn sm lime" data-act="aceptar" data-id="${esc(o.id)}">Aceptar</button><button class="btn sm" data-act="contra" data-id="${esc(o.id)}">Contraofertar</button><button class="btn sm red" data-act="rechazar" data-id="${esc(o.id)}">Rechazar</button></div>`:''}
+   ${o.estado==='jugador'&&puedeConfirmar(p)?`<div class="row wrapf" style="justify-content:flex-end;margin-top:8px;gap:6px"><button class="btn sm lime" data-act="jugAcepta" data-id="${esc(o.id)}">${p.userId===S.me?'✅ Acepto ir':'✅ El jugador aceptó'}</button><button class="btn sm red" data-act="jugRechaza" data-id="${esc(o.id)}">${p.userId===S.me?'No quiero ir':'El jugador no acepta'}</button></div>`:''}
+   ${!canAct&&isOpen(o)&&o.de===a&&o.estado!=='jugador'?`<div style="margin-top:8px"><button class="btn sm red" data-act="cancelar" data-id="${esc(o.id)}">Retirar oferta</button></div>`:''}</div></div>`}
+function reglaView(){const c=cfg();const S_=(t)=>`<span class="badge gold" style="font-size:11px">${t}</span>`;
+const REG=[
+ ['general','📘','Información general',[
+  'La '+esc(c.nombre)+' es una liga de fútbol amateur 11 vs 11 con <b>mercado de fichajes</b> entre clubes, usando dinero ficticio.',
+  'Al inscribirse, clubes, delegados y jugadores aceptan cumplir todas las normas de este reglamento.',
+  'Lo que no esté en este reglamento se rige por las Reglas de Juego de la IFAB/FIFA. Los casos especiales los resuelve la organización.']],
+ ['formato','🏟️','Formato del torneo',[
+  'Modalidad: <b>Fútbol 11 vs 11</b>, en cancha de fútbol 11.',
+  'Hasta <b>'+num(c.maxClubes)+' clubes</b>. Duración aproximada: <b>6 meses</b>.',
+  '<b>Fase regular:</b> todos contra todos a ida y vuelta (18 jornadas con 10 clubes), en una sola tabla general.',
+  '<b>Fase final:</b> los 4 primeros juegan semifinales (1º vs 4º y 2º vs 3º) y luego la Gran Final.',
+  'Los partidos se juegan los domingos, salvo aviso de la organización. Sede: '+S_('Por definir')+'.']],
+ ['calendario','🗓️','Calendario',[
+  'El calendario oficial se publica en la web antes de la Jornada 1.',
+  'Una vez publicado no se cambia, salvo fuerza mayor (lluvia que impida jugar, cierre de la cancha o algo parecido). En ese caso la organización reprograma el partido.',
+  'Los clubes no pueden pedir cambios de fecha ni de horario.']],
+ ['elegibilidad','🚫','Jugadores y elegibilidad',[
+  'Edad mínima: <b>18 años</b> cumplidos al inscribirse.',
+  'No pueden participar jugadores inscritos actualmente en <b>LPF, Liga Prom o LFN</b>, ni en ninguna liga profesional de otro país.',
+  '<b>Exprofesionales:</b> pueden inscribirse cuando haya pasado <b>al menos 1 año</b> desde su último partido oficial como profesional. La organización lo verifica.',
+  'Un jugador solo puede estar inscrito en <b>un club</b> de la liga a la vez.',
+  'Dar datos falsos en la inscripción significa la baja del jugador, y el club pierde por 3-0 los partidos en que haya jugado.']],
+ ['plantillas','👥','Clubes y plantillas',[
+  'Cada club debe tener entre <b>'+num(c.minPlantilla)+' y '+num(c.maxPlantilla)+' jugadores</b> inscritos.',
+  'Es obligatorio tener al menos <b>2 porteros</b> inscritos.',
+  'Todo jugador tiene que tener su <b>perfil ELEVN</b> (foto, posición y número) <b>aprobada</b> por la organización antes de jugar.',
+  'Cada club nombra un <b>delegado</b>: es quien negocia en el mercado y quien habla con la organización.',
+  'Fuera de las ventanas de fichajes solo se pueden agregar <b>agentes libres</b> (jugadores sin club) y solo si hay cupo, hasta la Jornada 12. Desde ahí la plantilla queda cerrada.']],
+ ['partidos','⏱️','Duración de los partidos',[
+  '<b>Fase regular:</b> 80 minutos (2 tiempos de 40) y 10 minutos de descanso.',
+  '<b>Semifinales y Gran Final:</b> 90 minutos (2 tiempos de 45).',
+  '<b>Tolerancia:</b> 15 minutos después de la hora oficial. Si pasado ese tiempo un club no tiene 7 jugadores en cancha, pierde por no presentación.',
+  'Para empezar o seguir un partido se necesitan al menos <b>7 jugadores</b> por club.']],
+ ['cambios','🔄','Cambios',[
+  '<b>Fase regular:</b> cambios ilimitados, con reingreso, hasta el minuto 70. Después del minuto 70 solo se permiten 3 cambios, en una sola ventana.',
+  '<b>Semifinales y Final:</b> cambios ilimitados hasta el minuto 80. Después, 3 cambios en una sola ventana.',
+  'Los cambios se hacen con el juego detenido y con permiso del árbitro.']],
+ ['puntos','📊','Puntos, desempates y playoffs',[
+  'Victoria: <b>3 puntos</b>. Empate: <b>1 punto</b>. Derrota: <b>0 puntos</b>.',
+  '<b>Desempate en la tabla, en este orden:</b> 1) puntos, 2) diferencia de goles, 3) partidos entre los clubes empatados, 4) goles a favor, 5) menos goles en contra, 6) fair play (menos tarjetas), 7) sorteo.',
+  '<b>Semifinales y Final:</b> si terminan empatados, van directo a penales (5 por club y luego muerte súbita).']],
+ ['mercado','💸','Mercado de fichajes',[
+  '<b>Dinero ficticio:</b> cada club empieza con <b>'+money(c.presupuestoInicial)+'</b>. Es dinero de juego, sin ningún valor real.',
+  '<b>Ganar dinero:</b> '+money(c.premioVictoria)+' por victoria y '+money(c.premioEmpate)+' por empate. Además, cuando un jugador tuyo es llamado al fútbol profesional, recibes su valor de mercado completo.',
+  '<b>Ventanas:</b> solo se negocia con una ventana abierta. <b>Ventana 1:</b> pretemporada, antes de la Jornada 1. <b>Ventana 2:</b> a mitad de temporada, entre la Jornada 9 y la 10. Las fechas exactas se anuncian en la web.',
+  '<b>Todo pasa por la web:</b> ofertas, contraofertas, aceptaciones y pagos de cláusula. Un acuerdo hecho fuera de la web no vale.',
+  '<b>Tipos de operación:</b> compra (el jugador pasa definitivamente al nuevo club) o préstamo (juega en el nuevo club hasta el final de la temporada y después vuelve a su club). El jugador cedido <b>sí puede jugar contra el club que lo prestó</b>.',
+  '<b>Quién decide: hacen falta dos sí.</b> Primero el club dueño acepta la oferta (los dos clubes pueden hacer contraofertas). Después el <b>jugador confirma en la web</b> que quiere irse. Si el jugador no acepta o no responde en 48 horas, el traspaso se cancela y nadie pierde dinero.',
+  '<b>Cláusula de rescisión:</b> cada jugador tiene una, de '+num(c.multClausula)+' veces su valor de mercado, salvo que la organización fije otra. Si un club ofrece la cláusula completa durante una ventana, el club dueño <b>no puede bloquear</b> el traspaso, aunque sea un club que no negocia. Igual el jugador tiene que aceptar.',
+  '<b>Clubes que no negocian:</b> un club puede declarar su plantilla intransferible. No recibe ofertas, aunque sus jugadores pueden salir si alguien paga la cláusula y el jugador acepta. Igual tiene que tener a todos sus jugadores inscritos.',
+  '<b>Límite de fichajes por club:</b> máximo <b>5 en la Ventana 1</b> y <b>3 en la Ventana 2</b>. Ninguna venta puede dejar una plantilla por debajo de '+num(c.minPlantilla)+' jugadores.',
+  '<b>Sin regreso:</b> un jugador vendido no puede volver a su club anterior en la misma temporada.',
+  '<b>Debut:</b> el jugador fichado puede jugar desde la jornada siguiente al traspaso.',
+  '<b>Uniforme:</b> al cambiar de club, la liga le entrega el uniforme de su nuevo club, sin costo extra.',
+  '<b>Media y precio:</b> cada jugador tiene un perfil ELEVN que arranca en media 70. La media sube con partidos, goles, asistencias, MVP y logros verificados, y baja con las rojas directas. El precio sale de la media.',
+  '<b>Prohibido el dinero real:</b> pagar o recibir dinero real por un traspaso lleva a la expulsión de los involucrados.']],
+ ['profesional','🚀','Llamado al fútbol profesional',[
+  'Si un club profesional ficha a un jugador de la liga, el jugador puede irse <b>en cualquier momento</b>, aunque el mercado esté cerrado.',
+  'Su club recibe como compensación su <b>valor de mercado completo</b> en dinero ficticio, y puede fichar <b>un reemplazo fuera de ventana</b>.',
+  'Si el jugador vuelve a ser amateur, tiene que esperar el año que pide la regla de elegibilidad.']],
+ ['costos','💵','Costos y servicios',[
+  '<b>Cuota por club por temporada:</b> '+esc(c.cuotaTemporada)+'.',
+  'La cuota incluye los <b>uniformes oficiales</b> (camiseta, pantalón y medias), arbitraje, la ficha de cada jugador en la web con sus estadísticas y la premiación.',
+  'Servicios por confirmar: '+S_('Fotos')+' '+S_('Transmisión en vivo')+' '+S_('Paramédico')+' '+S_('Seguro')+'.',
+  'La cuota se paga en las fechas que anuncie la organización. Un club con pagos pendientes no puede jugar ni negociar en el mercado.']],
+ ['generales','📋','Reglas generales',[
+  'Solo juegan jugadores <b>inscritos y aprobados</b> en la web.',
+  'Uniforme completo y obligatorio: camiseta, pantalón, medias y <b>espinilleras</b>.',
+  'En cada partido el jugador tiene que poder identificarse con cédula o con su ficha en la web.',
+  'Prohibidos los tacos de metal o aluminio. Se juega con tacos de plástico o de goma.',
+  '<b>Multas:</b> jugador no inscrito o suspendido: el club pierde 3-0 y paga una multa '+S_('monto por definir')+'. No presentación: el club pierde 3-0 y paga una multa '+S_('monto por definir')+'. Dos no presentaciones: expulsión del club.']],
+ ['tarjetas','🟨','Tarjetas y suspensiones',[
+  '<b>5 amarillas acumuladas:</b> 1 partido de suspensión.',
+  '<b>Doble amarilla en un partido:</b> 1 partido de suspensión.',
+  '<b>Roja directa:</b> 2 partidos de suspensión como mínimo.',
+  '<b>Agresión a un árbitro, a un rival o al público:</b> la organización decide. Puede ser desde varios partidos hasta la expulsión de la liga.',
+  'Las amarillas acumuladas se borran antes de las semifinales. Las suspensiones pendientes se cumplen igual.',
+  'Las suspensiones se publican en la web después de cada jornada. Es responsabilidad del club no alinear a un jugador suspendido.']],
+ ['conducta','🤝','Conducta y disciplina',[
+  'Cero tolerancia a peleas, amenazas, insultos, discriminación o daños a la cancha y a los implementos.',
+  'Las sanciones pueden ser: suspensión de uno o más partidos, multa, expulsión del jugador o expulsión del club.',
+  'Un club es responsable por el comportamiento de su barra.',
+  'Si un club tiene problemas de conducta graves, la organización puede bajar su presupuesto ficticio o cerrarle el mercado.',
+  'Los videos no sirven para reclamar decisiones del árbitro. La organización sí puede revisarlos para casos disciplinarios graves.']],
+ ['reclamos','📨','Reclamos',[
+  'Solo el delegado del club puede reclamar, por escrito, en las <b>24 horas</b> siguientes al partido.',
+  'La organización responde antes de la jornada siguiente. Su decisión es final.']],
+ ['trofeo','🏆','Trofeo y premiación',[
+  'El campeón recibe el trofeo de la '+esc(c.nombre)+' y lo devuelve antes de la siguiente edición. Si lo devuelve dañado, el club paga la reparación.',
+  'Premios individuales: Goleador, MVP de la temporada, Mejor portero (el de más vallas invictas) y el <b>Jugador más valioso</b> (el de mayor valor de mercado).']],
+ ['firma','✍️','Aceptación',[
+  'Al inscribirse en la web, cada jugador acepta este reglamento.',
+  'El capitán o delegado de cada club firma una hoja de aceptación con: nombre del capitán, nombre del club, cédula, fecha y firma.',
+  'Este reglamento entra en vigencia cuando se publica y se aplica a todos los partidos de la temporada. La organización puede actualizarlo y avisa por la web.']]
+];
+ return `<section class="hero" style="padding:28px">
+  <span class="badge gold">📜 Reglamento oficial · ${esc(c.temporada)}</span>
+  <h1 style="margin-top:12px;font-size:clamp(40px,6vw,64px)">${esc(c.nombre)}<br><em>Reglamento oficial</em></h1>
+  <div class="stats"><div class="stat"><b>11v11</b><span>Modalidad</span></div><div class="stat"><b>${num(c.maxClubes)}</b><span>Clubes máximo</span></div><div class="stat"><b>18</b><span>Jornadas + playoffs</span></div><div class="stat"><b>2</b><span>Ventanas de fichajes</span></div><div class="stat"><b style="color:var(--lime)">${money(c.presupuestoInicial)}</b><span>Presupuesto por club</span></div></div></section>
+ <div class="card sec"><h3>⚡ En 30 segundos</h3><div class="grid g3" style="margin-top:10px">
+  <div class="note">🚫 Nada de profesionales activos. Los exprofesionales entran después de 1 año sin jugar.</div>
+  <div class="note">✍️ Todo jugador tiene que estar en la web y aprobado antes de jugar.</div>
+  <div class="note">💸 Fichajes solo en 2 ventanas y siempre por la web. El jugador siempre tiene la última palabra.</div>
+  <div class="note">🟨 5 amarillas = 1 partido. Roja directa = 2 partidos.</div>
+  <div class="note">⏱️ 80 minutos en fase regular, 90 en semis y final, con 15 minutos de tolerancia.</div>
+  <div class="note">🚀 Si te llama un equipo profesional, te vas cuando quieras.</div></div></div>
+ <div class="row wrapf sec" style="gap:6px">${REG.map(([id,ic,t],i)=>`<a class="badge" href="#reglamento" data-jump="r-${id}">${ic} ${i+1}. ${t}</a>`).join('')}</div>
+ <div class="grid sec" style="gap:14px">${REG.map(([id,ic,t,it],i)=>`<div class="card" id="r-${id}" ${id==='mercado'?'style="border-color:rgba(198,255,61,.5)"':''}><div class="row" style="gap:12px;margin-bottom:8px"><div class="rule"><div class="n">${ic}</div></div><div><div class="tiny muted">CAPÍTULO ${i+1}</div><h3 style="font-size:26px">${t}</h3></div></div>
+  <ol style="margin:0;padding-left:22px;line-height:1.65;color:#D3DCF2">${it.map(x=>`<li style="margin:6px 0">${x}</li>`).join('')}</ol></div>`).join('')}</div>
+ <div class="card sec" style="text-align:center"><h3>¿Listo para jugar?</h3><p class="muted">Inscribirte en la web significa que aceptas este reglamento.</p><a class="btn lime" href="#registro">✍️ Inscribirme</a></div>`}
+
+/* ----- Admin ----- */
+function adminView(){if(!S.isAdmin)return `<div class="card">${emptyBox('🔒','Solo la organización puede ver esta sección.')}</div>`;const t=S.tabAdmin;const pend=S.players.filter(p=>p.estado==='pendiente');const cpend=S.clubs.filter(c=>c.estado==='pendiente');const lpend=S.logros.filter(l=>l.estado==='pendiente');
+  const apend=S.acts.filter(a=>a.estado==='pendiente');const ppend=S.peq.filter(x=>x.estado==='pendiente');
+  const tabs=[['actividad','📋 Actividad'+(apend.length+ppend.length?` (${apend.length+ppend.length})`:'')],['logros','🏅 Logros'+(lpend.length?` (${lpend.length})`:'')],['jugadores','👟 Jugadores'+(pend.length?` (${pend.length})`:'')],['clubes','🛡️ Equipos'+(cpend.length?` (${cpend.length})`:'')],['partidos','🗓️ Partidos de la liga'],['config','⚙️ Configuración']];let b='';
+  if(t==='actividad'){b=`${ppend.length?`<div class="card" style="margin-bottom:14px"><h3>⚽ Partidos de equipos por aprobar</h3><p class="small muted">Al aprobar, se suma a todos los jugadores que jugaron.</p>${ppend.map(x=>{const c=clubById(x.clubId);const js=Object.entries(x.stats||{}).filter(([k,s])=>s.j);return `<div class="offer"><div><div class="row" style="gap:8px">${crest(c,26)}<b>${esc(c?.nombre||'?')}</b> <b style="font-family:'Bebas Neue';font-size:22px">${num(x.golesFavor)} - ${num(x.golesContra)}</b> <span class="small muted">vs ${esc(x.rival||'—')} · ${esc(x.competicion||'')} · ${esc(x.fecha||'')}</span></div>
+      <div class="small" style="margin-top:6px">${js.map(([k,s])=>{const p=playerById(k);return esc(p?.apodo||p?.nombre||'?')+(s.g?' ⚽'+s.g:'')+(s.a?' 🅰️'+s.a:'')+(s.ta?' 🟨'+s.ta:'')+(s.tr?' 🟥':'')+(x.mvp===k?' ⭐':'')}).join(' · ')}</div>${okImg(x.foto)?`<img src="${x.foto}" data-zoom="1" style="height:60px;border-radius:8px;margin-top:6px;cursor:zoom-in">`:''}</div>
+      <div class="row" style="gap:6px"><button class="btn sm lime" data-act="aprobarPeq" data-id="${esc(x.id)}">Aprobar</button><button class="btn sm red" data-act="rechPeq" data-id="${esc(x.id)}">Rechazar</button></div></div>`}).join('')}</div>`:''}<div class="card"><h3>📋 Partidos individuales por verificar</h3><p class="small muted">Revisa la foto y los números. Al aprobar, los puntos se suman a la media del jugador.</p>
+    ${apend.length?`<div class="grid" style="margin-top:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr))">${apend.map(a=>{const p=playerById(a.playerId);const t=ACTV[a.tipo]||ACTV.liga;const bp=p?actPts(a.tipo,a,p.pos):{total:0};return `<div class="card" style="padding:12px">${okImg(a.foto)?`<img class="lgph" src="${a.foto}" data-zoom="1" alt="">`:'<div class="note warn">📝 Sin foto: confírmalo con el jugador por privado</div>'}
+      <div style="margin-top:8px"><a href="#jugador-${esc(a.playerId)}"><b>${esc(p?.nombre||'?')}</b></a> ${p?ovrChip(V(p).ovr):''}</div><div class="small">${t[0]} ${esc(t[1])} · ${esc(a.fecha||'')}</div><div class="small muted">${esc(a.detalle||'')}</div>
+      <div class="small" style="margin-top:4px">${false?'':`⚽ ${num(a.g)} · 🅰️ ${num(a.a)}${a.vi?' · 🧤':''}${a.mvp?' · ⭐ MVP':''}${num(a.ta)?' · 🟨'+num(a.ta):''}${num(a.tr)?' · 🟥':''}`}</div>
+      <div class="row between" style="margin-top:8px"><span class="badge gold">${bp.total>=0?'+':''}${bp.total.toFixed(2)}</span><div class="row" style="gap:6px"><button class="btn sm lime" data-act="aprobarAct" data-id="${esc(a.id)}">Aprobar</button><button class="btn sm red" data-act="rechAct" data-id="${esc(a.id)}">Rechazar</button></div></div></div>`}).join('')}</div>`:emptyBox('✅','No hay actividad pendiente.')}</div>`}
+  if(t==='logros'){b=`<div class="card"><h3>🏅 Logros por verificar</h3><p class="small muted">Revisa la foto. Si es real, apruébalo: la media del jugador sube con los puntos que pongas.</p>
+    ${lpend.length?`<div class="grid" style="margin-top:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))">${lpend.map(l=>{const p=playerById(l.playerId);const d=LOGROS[l.tipo]||LOGROS.otro;return `<form class="card keep" data-form="aprobarLogro" data-id="${esc(l.id)}" style="padding:12px">${okImg(l.foto)?`<img class="lgph" src="${l.foto}" data-zoom="1" alt="">`:'<div class="note warn">📝 Sin foto: confírmalo con el jugador por privado</div>'}
+      <div style="margin-top:8px"><b>${esc(p?.nombre||'?')}</b> ${p?ovrChip(V(p).ovr):''}</div><div class="small">${d[0]} ${esc(d[1])}</div><div class="small muted">${esc(l.descripcion||'')}${l.fecha?' · '+esc(l.fecha):''}</div>
+      <div class="row" style="margin-top:8px"><label style="margin:0">Puntos</label><input class="mini-in" name="pts" type="number" step="any" min="0" max="10" value="${d[2]}"></div>
+      <div class="row" style="margin-top:8px;gap:6px"><button class="btn sm lime">Aprobar</button><button type="button" class="btn sm red" data-act="rechLogro" data-id="${esc(l.id)}">Rechazar</button></div></form>`}).join('')}</div>`:emptyBox('✅','No hay logros pendientes.')}</div>
+    <div class="card sec"><h3>✅ Últimos aprobados</h3>${S.logros.filter(l=>l.estado==='aprobado').sort((a,b)=>num(b.aprobado)-num(a.aprobado)).slice(0,15).map(l=>`<div class="row between">${logroRow(l)}<button class="btn sm red" data-act="delLogro" data-id="${esc(l.id)}">Quitar</button></div>`).join('')||'<div class="muted small">Ninguno todavía.</div>'}</div>`}
+  if(t==='config'){const c=cfg();const f=(k,l,ty='number')=>`<div class="fld"><label>${l}</label><input name="${k}" type="${ty}" value="${esc(c[k])}"></div>`;
+    b=`<form class="keep card" data-form="config"><h3>🪟 Ventana de fichajes</h3><div class="f2" style="margin-top:10px"><div class="fld"><label>Estado</label><select name="ventanaAbierta"><option value="0">🔴 Cerrada</option><option value="1" ${c.ventanaAbierta?'selected':''}>🟢 Abierta</option></select></div>${f('ventanaNombre','Nombre de la ventana','text')}${f('limiteFichajes','Fichajes por club en esta ventana')}</div><div class="tiny muted" style="margin:-4px 0 10px">Reglamento: 5 en la Ventana 1 y 3 en la Ventana 2. El contador vuelve a cero cada vez que abres una ventana.</div>
+    <h3 style="margin-top:14px">🧩 Funciones</h3><div class="f2" style="margin-top:10px"><div class="fld"><label>Mercado de fichajes</label><select name="mercadoActivo"><option value="0">Apagado</option><option value="1" ${MK()?'selected':''}>Encendido</option></select></div><div class="fld"><label>Regla de exprofesionales (1 año)</label><select name="reglaExPro"><option value="1">Activa</option><option value="0" ${c.reglaExPro===false?'selected':''}>Apagada</option></select></div>${f('whatsapp','WhatsApp para registros','text')}</div>
+    <h3 style="margin-top:14px">🏆 Liga</h3><div class="f2" style="margin-top:10px">${f('nombre','Nombre de la liga','text')}${f('temporada','Temporada','text')}${f('cuotaTemporada','Cuota por temporada (texto)','text')}${f('maxClubes','Máximo de clubes')}${f('minPlantilla','Mínimo por plantilla')}${f('maxPlantilla','Máximo por plantilla')}</div>
+    <div class="fld"><label>Patrocinadores (separados por coma)</label><input name="patrocinadores" value="${esc((c.patrocinadores||[]).join(', '))}"></div>
+    <h3 style="margin-top:14px">💰 Precios y dinero</h3><div class="f2" style="margin-top:10px">${f('valorBase','Precio de un jugador con media 70')}${f('crecimiento','% que sube el precio por punto de media')}${f('multClausula','Cláusula = precio ×')}${f('presupuestoInicial','Presupuesto inicial por club')}${f('premioVictoria','Premio por victoria')}${f('premioEmpate','Premio por empate')}</div>
+    <button class="btn lime">Guardar configuración</button></form>`}
+  if(t==='clubes'){b=`<div class="card" style="margin-bottom:14px"><form class="keep" data-form="clubAdmin"><h3>+ Crear equipo</h3><div class="f2" style="margin-top:10px"><input name="nombre" placeholder="Nombre del equipo" required maxlength="40"><input name="sigla" placeholder="Siglas" maxlength="3"><input name="ligaActual" placeholder="Liga actual (opcional)"><input name="instagram" placeholder="Instagram (opcional)"><input name="color" type="color" value="#FFC83D" style="height:42px;padding:4px"><div><input type="file" name="logoFile" accept="image/*"><input type="hidden" name="logo"></div><button class="btn lime">Crear</button></div></form></div>
+    <div class="card"><div class="tw"><table><tr><th>Equipo</th><th>Estado</th><th>ELEVN League</th><th>Delegado</th>${MK()?'<th class="num">Presupuesto</th><th>Cuota</th><th>Negocia</th>':''}<th></th></tr>${S.clubs.map(c=>`<tr><td>${clubTag(c.id)}${c.ligaActual?`<div class="tiny muted">${esc(c.ligaActual)}</div>`:''}</td>
+    <td>${c.estado==='pendiente'?`<button class="btn sm lime" data-act="aprobarClub" data-id="${esc(c.id)}">Aprobar</button>`:'<span class="badge open" style="font-size:11px">Activo</span>'}</td>
+    <td><button class="btn sm ${c.enLiga?'lime':''}" data-act="enLiga" data-id="${esc(c.id)}">${c.enLiga?'✅ En la liga':'Agregar'}</button>${c.solicitudLiga&&!c.enLiga?'<div class="tiny" style="color:var(--gold)">Quiere jugar</div>':''}</td>
+    <td class="small">${c.delegado?esc(c.delegado):c.managerId?esc(S.names[c.managerId]||'Asignado'):'<span class="muted">—</span>'}${c.contactoId?'<div>'+telLink(S.contacts[c.contactoId]?.telefono)+'</div>':''} <button class="btn sm" data-act="manager" data-id="${esc(c.id)}">Cambiar</button></td>
+    ${MK()?`<td class="num"><button class="btn sm" data-act="presu" data-id="${esc(c.id)}">${money(c.presupuesto)}</button></td><td><button class="btn sm ${c.cuotaPagada?'lime':'red'}" data-act="cuota" data-id="${esc(c.id)}">${c.cuotaPagada?'✅ Pagada':'⏳ Pendiente'}</button></td><td><button class="btn sm" data-act="intrans" data-id="${esc(c.id)}">${c.intransferible?'🔒 No':'🤝 Sí'}</button></td>`:''}
+    <td><button class="btn sm red" data-act="delClub" data-id="${esc(c.id)}">Borrar</button></td></tr>`).join('')||`<tr><td colspan="8">${emptyBox('🛡️','Crea el primer equipo arriba.')}</td></tr>`}</table></div></div>`}
+  if(t==='jugadores'){b=`${pend.length?`<div class="card" style="margin-bottom:14px"><h3>⏳ Jugadores por aprobar</h3><div class="tw"><table><tr><th>Jugador</th><th>Equipo</th><th>Historial</th><th></th></tr>${pend.map(p=>{const e=elegib(p);const nl=S.logros.filter(l=>l.playerId===p.id&&l.estado==='pendiente').length;return `<tr><td><div class="row">${avatar(p)}<div><a href="#jugador-${esc(p.id)}"><b>${esc(p.nombre)}</b></a><div class="tiny muted">${esc(posName(p.pos))} · ${esc(p.edad)} años · ${telLink(S.contacts[p.contactoId]?.telefono)}</div></div></div></td><td>${clubTag(p.clubId)}</td>
+      <td class="small">${(p.historial||[]).length?`${(p.historial||[]).length} equipos en su trayectoria`:'Sin historial'}${nl?` · <b style="color:var(--gold)">${nl} logros por verificar</b>`:''}${!e.ok?`<div style="color:var(--red)">⚠️ Profesional hasta ${e.anioPro||'—'}</div>`:''}${p.exPro?(e.ok?`<span style="color:var(--green)">✅ Exprofesional, ya cumplió 1 año</span>`:`<span style="color:var(--red)">⚠️ Exprofesional: elegible desde ${e.desde?fdate(e.desde):'—'}</span>`)+`<div class="tiny muted">${esc(p.clubPro||'')} · último partido ${esc(p.ultimoPro||'—')}</div>`:'<span style="color:var(--green)">✅ Nunca fue profesional</span>'}</td>
+      <td class="num"><button class="btn sm lime" data-act="aprobar" data-id="${esc(p.id)}">Aprobar</button> <button class="btn sm red" data-act="rechazarJ" data-id="${esc(p.id)}">Rechazar</button></td></tr>`}).join('')}</table></div></div>`:''}
+    ${S.players.filter(p=>p.trayPend&&p.estado==='aprobado').length?`<div class="card" style="margin-bottom:14px"><h3>📊 Trayectorias actualizadas por revisar</h3>${S.players.filter(p=>p.trayPend&&p.estado==='aprobado').map(p=>`<div class="row between" style="padding:8px 0;border-bottom:1px solid rgba(34,52,92,.5)"><div class="row">${avatar(p)}<b>${esc(p.nombre)}</b><span class="small muted">media actual ${V(p).ovr} · con la nueva trayectoria ${Math.floor(mediaDe(baseSugerida(p.historial).am+V(p).A-num(p.baseAm),baseSugerida(p.historial).el+V(p).E-num(p.baseEl),p.ajusteOvr))}</span></div><button class="btn sm lime" data-act="revisarBase" data-id="${esc(p.id)}">Revisar</button></div>`).join('')}</div>`:''}
+    ${S.offers.filter(o=>o.estado==='jugador').length?`<div class="card" style="margin-bottom:14px"><h3>🙋 Traspasos esperando al jugador</h3><p class="small muted">Si el jugador no tiene cuenta, confírmalo tú cuando te diga que acepta.</p>${S.offers.filter(o=>o.estado==='jugador').map(o=>offerCard(o,null,false)).join('')}</div>`:''}
+    <div class="card"><div class="sec-h"><h3>👟 Todos los jugadores (${S.players.length})</h3><button class="btn sm lime" data-act="nuevoJ">+ Agregar jugador</button></div>
+    <div class="tw"><table><tr><th>Media</th><th>Jugador</th><th>Teléfono</th><th>Equipo</th><th>Estado</th><th class="num">Precio</th><th></th></tr>${S.players.slice().sort((a,b)=>String(a.nombre).localeCompare(String(b.nombre))).map(p=>`<tr><td>${ovrChip(V(p).ovr)}</td><td><div class="row">${avatar(p)}<b>${esc(p.nombre)}</b></div></td><td class="small">${telLink(S.contacts[p.contactoId]?.telefono)}</td><td>${clubTag(p.clubId)}</td><td class="small">${esc(p.estado)}</td><td class="num val">${money(V(p).valor)}</td>
+    <td class="num"><button class="btn sm" data-act="editJ" data-id="${esc(p.id)}">Editar</button> <button class="btn sm gold" data-act="nuevoLogro" data-id="${esc(p.id)}">+ Logro</button>${p.estado==='aprobado'&&p.clubId&&clubById(p.clubId)?.enLiga&&MK()?` <button class="btn sm" data-act="pro" data-id="${esc(p.id)}">🚀 Pro</button>`:''}</td></tr>`).join('')||`<tr><td colspan="6">${emptyBox('👟','Sin jugadores todavía.')}</td></tr>`}</table></div></div>`}
+  if(t==='partidos'){const ms=S.matches.slice().sort((a,b)=>num(a.jornada)-num(b.jornada)||String(a.fecha||'').localeCompare(String(b.fecha||'')));const opts=leagueClubs().map(c=>`<option value="${esc(c.id)}">${esc(c.nombre)}</option>`).join('');
+    b=`<div class="card" style="margin-bottom:14px"><form class="keep" data-form="partido"><h3>+ Programar partido</h3><div class="f2" style="margin-top:10px"><div><label>Jornada</label><input name="jornada" type="number" min="1" value="${ms.length?num(ms[ms.length-1].jornada):1}" required></div><div><label>Fecha</label><input name="fecha" type="date"></div><div><label>Hora</label><input name="hora" type="time"></div><div><label>Cancha</label><input name="cancha" maxlength="50"></div><div><label>Local</label><select name="local" required><option value="">—</option>${opts}</select></div><div><label>Visitante</label><select name="visitante" required><option value="">—</option>${opts}</select></div></div><button class="btn lime" style="margin-top:12px">Programar</button></form></div>
+    <div class="card"><h3>Resultados y estadísticas</h3><p class="small muted">Carga el marcador y luego las estadísticas de cada jugador: con eso se actualizan la tabla, los goleadores y la media de cada jugador.${MK()?' Los premios en dinero ficticio se pagan la primera vez que guardas el resultado.':''}</p>
+    ${ms.length?ms.map(m=>{const l=clubById(m.local),v=clubById(m.visitante);return `<form class="keep match" data-form="resultado" data-id="${esc(m.id)}" style="grid-template-columns:1fr auto 1fr auto"><div class="row" style="justify-content:flex-end"><span class="tiny muted">J${num(m.jornada)}</span><b>${esc(l?.nombre||'?')}</b>${crest(l,22)}</div>
+      <div class="row" style="gap:4px"><input class="mini-in" name="gl" type="number" min="0" value="${m.jugado?num(m.golesL):''}"><span>-</span><input class="mini-in" name="gv" type="number" min="0" value="${m.jugado?num(m.golesV):''}"></div><div class="row">${crest(v,22)}<b>${esc(v?.nombre||'?')}</b></div>
+      <div class="row" style="gap:4px"><button class="btn sm lime">Guardar</button><button type="button" class="btn sm cyan" data-act="statsM" data-id="${esc(m.id)}">📋 Stats</button><button type="button" class="btn sm red" data-act="delM" data-id="${esc(m.id)}">✕</button></div></form>`}).join(''):emptyBox('🗓️','Programa el primer partido arriba.')}</div>`}
+  return `<h2>⚙️ Panel de la organización</h2><div class="card" style="margin-bottom:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap"><b>${cfg().ligaAbierta===true?'🏆 ELEVN League: abierta al público':'🔒 ELEVN League: bloqueada para el público'}</b><span style="flex:1"></span><button class="btn ${cfg().ligaAbierta===true?'':'gold'}" onclick="toggleLiga()">${cfg().ligaAbierta===true?'Bloquear':'Abrir al público'}</button></div><div class="row wrapf" style="gap:8px;margin-bottom:14px"><button class="btn sm" onclick="exportData()">📦 Exportar datos</button><button class="btn sm" onclick="importData()">📥 Importar datos</button></div><div class="tabs sec">${tabs.map(([k,n])=>`<span class="tab ${t===k?'on':''}" data-taba="${k}">${n}</span>`).join('')}</div>${b}`}
+
+/* ===== Modal ===== */
+function openModal(html,wide){const m=$('#modal');m.innerHTML=`<div class="mbox ${wide?'wide':''}">${html}</div>`;m.classList.remove('hidden')}
+function closeModal(){const m=$('#modal');m.classList.add('hidden');m.innerHTML='';render()}
+function ask(title,text,okLabel='Confirmar'){return new Promise(res=>{openModal(`<h3>${title}</h3><p class="muted" style="line-height:1.5">${text}</p><div class="row" style="justify-content:flex-end;margin-top:16px"><button class="btn" id="mNo">Cancelar</button><button class="btn lime" id="mOk">${okLabel}</button></div>`);
+  $('#mNo').onclick=()=>{$('#modal').classList.add('hidden');res(false)};$('#mOk').onclick=()=>{$('#modal').classList.add('hidden');res(true)}})}
+
+/* ===== Traspasos ===== */
+async function ejecutarTraspaso({p,de,a,monto,tipo,ofertaId}){const buyer=clubById(a),seller=clubById(de);monto=Math.round(num(monto));
+  if(!buyer)throw 'Club comprador no encontrado';if(num(buyer.presupuesto)<monto)throw 'Presupuesto insuficiente para este traspaso';
+  if(squad(a).length>=num(cfg().maxPlantilla))throw 'La plantilla del club comprador está llena';
+  if(cfg().ventanaAbierta&&fichajesVentana(a)>=num(cfg().limiteFichajes))throw 'El club comprador ya llegó al límite de fichajes de esta ventana';
+  if(seller&&tipo!=='prestamo'&&squad(de).length<=num(cfg().minPlantilla))throw 'El club vendedor quedaría por debajo del mínimo de jugadores';
+  const bUpd={presupuesto:num(buyer.presupuesto)-monto};if(!cfg().ventanaAbierta&&buyer.reemplazoPendiente)bUpd.reemplazoPendiente=false;
+  await db.doc('clubes/'+a).update(bUpd);if(seller)await db.doc('clubes/'+de).update({presupuesto:num(seller.presupuesto)+monto});
+  await db.doc('jugadores/'+p.id).update({clubId:a,prestadoDe:tipo==='prestamo'?de:null});
+  await db.collection('traspasos').add({playerId:p.id,nombre:p.nombre,de:de||null,a,monto,tipo,fecha:Date.now()});
+  if(ofertaId)await db.doc('ofertas/'+ofertaId).update({estado:'aceptada',cerrado:Date.now()});
+  for(const o of S.offers.filter(o=>o.playerId===p.id&&o.id!==ofertaId&&isOpen(o)))await db.doc('ofertas/'+o.id).update({estado:'cerrada',cerrado:Date.now()})}
+
+/* ===== Acciones ===== */
+const ACT={
+  ofertar(d){const p=playerById(d.id);const a=actingId();if(!p||!a)return;const v=V(p);
+    openModal(`<h3>💬 Ofertar por ${esc(p.nombre)}</h3><p class="small muted">${clubTag(a)} → ${clubTag(p.clubId)} · Precio: <b>${money(v.valor)}</b> · Tu presupuesto: <b>${money(clubById(a).presupuesto)}</b></p>
+    <form data-form="oferta" data-id="${esc(p.id)}"><div class="f2"><div class="fld"><label>Tipo</label><select name="tipo"><option value="compra">💰 Compra</option><option value="prestamo">🔁 Préstamo</option></select></div><div class="fld"><label>Monto ($)</label><input name="monto" type="number" min="0" step="10000" value="${v.valor}" required></div></div>
+    <div class="fld"><label>Mensaje para el club (opcional)</label><textarea name="mensaje" rows="2" maxlength="200"></textarea></div><div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn cyan">Enviar oferta</button></div></form>`)},
+  async clausula(d){const p=playerById(d.id);const a=actingId();if(!p||!a)return;const v=V(p);
+    if(!await ask('⚡ Pagar cláusula',`Ofreces la cláusula completa de <b>${money(v.clausula)}</b> por <b>${esc(p.nombre)}</b>. ${esc(clubById(p.clubId)?.nombre||'Su club')} no puede bloquearlo: el traspaso se cierra en cuanto el jugador acepte, y el dinero se cobra en ese momento.`,'Pagar cláusula'))return;
+    if(!windowOk(a))return toast('El mercado está cerrado',true);if(num(clubById(a).presupuesto)<v.clausula)return toast('No te alcanza el presupuesto',true);
+    if(cfg().ventanaAbierta&&fichajesVentana(a)>=num(cfg().limiteFichajes))return toast('Ya hiciste los '+cfg().limiteFichajes+' fichajes de esta ventana',true);
+    if(S.offers.some(o=>o.playerId===p.id&&o.de===a&&isOpen(o)))return toast('Ya tienes una operación abierta por este jugador',true);
+    if(await W(()=>db.collection('ofertas').add({playerId:p.id,nombre:p.nombre,de:a,para:p.clubId,monto:v.clausula,tipo:'clausula',mensaje:'',estado:'jugador',turno:'jugador',creado:Date.now(),autor:S.me||null})))toast('⚡ Cláusula ofrecida. Falta que el jugador acepte.');S.tabMercado='espera';render()},
+  async aceptar(d){const o=S.offers.find(x=>x.id===d.id);const p=o&&playerById(o.playerId);if(!p)return;if(!windowOk(o.de))return toast('El mercado está cerrado',true);if(p.clubId!==o.para)return toast('Este jugador ya no está en ese club',true);
+    if(!await ask('✅ Aceptar oferta',`Aceptas que ${esc(clubById(o.de)?.nombre)} se lleve a <b>${esc(p.nombre)}</b> (${o.tipo==='prestamo'?'préstamo':'compra'}) por <b>${money(o.monto)}</b>. El traspaso se cierra cuando el jugador lo confirme.`,'Aceptar'))return;
+    if(await W(()=>db.doc('ofertas/'+o.id).update({estado:'jugador',aceptadoClub:Date.now()})))toast('🙋 Listo. Ahora falta que el jugador confirme.');render()},
+  async jugAcepta(d){const o=S.offers.find(x=>x.id===d.id);const p=o&&playerById(o.playerId);if(!p||!puedeConfirmar(p))return;if(!windowOk(o.de))return toast('El mercado está cerrado',true);if(p.clubId!==o.para)return toast('Este jugador ya no está en ese club',true);
+    if(!await ask('✅ Confirmar traspaso',`<b>${esc(p.nombre)}</b> se va a <b>${esc(clubById(o.de)?.nombre)}</b> (${o.tipo==='prestamo'?'préstamo':o.tipo==='clausula'?'cláusula pagada':'compra'}) por <b>${money(o.monto)}</b>.`,'Confirmar'))return;
+    if(await W(()=>ejecutarTraspaso({p,de:o.para,a:o.de,monto:o.monto,tipo:o.tipo,ofertaId:o.id})))toast('🤝 ¡Traspaso cerrado!');render()},
+  async jugRechaza(d){const o=S.offers.find(x=>x.id===d.id);const p=o&&playerById(o.playerId);if(!puedeConfirmar(p))return;if(await W(()=>db.doc('ofertas/'+o.id).update({estado:'rechazada',rechazoJugador:true,cerrado:Date.now()})))toast('Traspaso cancelado: el jugador no aceptó')},
+  contra(d){const o=S.offers.find(x=>x.id===d.id);if(!o)return;openModal(`<h3>🔄 Contraoferta</h3><p class="small muted">Oferta actual: <b>${money(o.monto)}</b></p><form data-form="contra" data-id="${esc(o.id)}"><div class="fld"><label>Tu nuevo monto</label><input name="monto" type="number" min="0" step="10000" value="${num(o.monto)}" required></div><div class="fld"><label>Mensaje (opcional)</label><textarea name="mensaje" rows="2" maxlength="200"></textarea></div><div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn cyan">Enviar contraoferta</button></div></form>`)},
+  async rechazar(d){if(await W(()=>db.doc('ofertas/'+d.id).update({estado:'rechazada',cerrado:Date.now()})))toast('Oferta rechazada')},
+  async cancelar(d){if(await W(()=>db.doc('ofertas/'+d.id).update({estado:'cancelada',cerrado:Date.now()})))toast('Oferta retirada')},
+  close(){closeModal()},
+  nuevoPeq(d){const c=clubById(d.id);if(!esDelegado(c))return;openModal(peqForm(c),true)},
+  marcarTodos(d,el){el.closest('form').querySelectorAll('tr[data-pid] [name=j]').forEach(x=>x.checked=true)},
+  async aprobarPeq(d){if(await W(()=>db.doc('partidosEq/'+d.id).update({estado:'aprobado',aprobado:Date.now()})))toast('✅ Partido aprobado: sumado a sus jugadores')},
+  async rechPeq(d){if(await W(()=>db.doc('partidosEq/'+d.id).update({estado:'rechazado'})))toast('Partido rechazado')},
+  nuevaAct(d){const p=playerById(d.id);if(!puedeEditarJ(p))return;openModal(actForm(p));actPreview()},
+  async rechAct(d){openModal(`<h3>Rechazar actividad</h3><form data-form="rechAct" data-id="${esc(d.id)}"><div class="fld"><label>Motivo (lo ve el jugador)</label><input name="nota" maxlength="120" placeholder="Ej: La foto no muestra el partido"></div><div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn red">Rechazar</button></div></form>`)},
+  async aprobarAct(d){if(await W(()=>db.doc('actividades/'+d.id).update({estado:'aprobado',aprobado:Date.now()})))toast('✅ Actividad verificada')},
+  editClub(d){const c=clubById(d.id);if(!c||!(S.isAdmin||c.managerId===S.me))return;openModal(`<h3>✏️ Editar ${esc(c.nombre)}</h3><form data-form="editClub" data-id="${esc(c.id)}"><div class="row wrapf" style="gap:14px;margin-bottom:12px">${crest(c,60)}<div><label>Logo</label><input type="file" name="logoFile" accept="image/*"><input type="hidden" name="logo"></div></div>
+    <div class="f2"><div class="fld"><label>Siglas</label><input name="sigla" maxlength="3" value="${esc(c.sigla||'')}"></div><div class="fld"><label>Color</label><input name="color" type="color" value="${okColor(c.color)}" style="height:42px;padding:4px"></div><div class="fld"><label>Instagram del equipo</label><input name="instagram" value="${esc(c.instagram||'')}"></div><div class="fld"><label>Liga actual</label><input name="ligaActual" value="${esc(c.ligaActual||'')}"></div></div>
+    <div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn gold">Guardar</button></div></form>`)},
+  addHist(){const c=$('#histRows');if(c&&c.querySelectorAll('.hrow').length<15)c.insertAdjacentHTML('beforeend',histRow())},
+  addLog(){const c=$('#logRows');if(c&&c.querySelectorAll('.lrow').length<8)c.insertAdjacentHTML('beforeend',logRow())},
+  delRow(d,el){el.closest('.hrow,.lrow')?.remove();baseEst()},
+  editHist(d){const p=playerById(d.id);if(!puedeEditarJ(p))return;openModal(`<h3>⚽ Trayectoria de ${esc(p.nombre)}</h3><p class="small muted">Para que tu media suba, sube también tus logros con foto desde tu perfil.</p><form data-form="historial" data-id="${esc(p.id)}">${histEditor(p.historial||[])}<div class="row" style="justify-content:flex-end;margin-top:12px"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn gold">Guardar</button></div></form>`,true)},
+  waReg(){const f=document.querySelector('[data-form=jugador]');if(!f)return;if(!fv(f,'nombre')||!fv(f,'edad')||!fv(f,'telefono'))return toast('Llena nombre, teléfono y edad',true);if(!f.elements.acepto.checked)return toast('Marca que aceptas el reglamento',true);const c=cfg();const wa=String(c.whatsapp||'').replace(/\D/g,'');const hist=f.elements.sinHist.checked?[]:readHist(f);const lgs=f.elements.sinHist.checked?[]:[...f.querySelectorAll('.lrow')].map(r=>(LOGROS[r.querySelector('.l-tp').value]||LOGROS.otro)[1]+': '+r.querySelector('.l-ds').value);
+    const t=['*Cuenta ELEVN*','Nombre: '+fv(f,'nombre'),'Teléfono: '+fv(f,'telefono'),fv(f,'apodo')?'Nombre en el perfil: '+fv(f,'apodo'):'','Equipo: '+(clubById(fv(f,'clubId'))?.nombre||'Sin equipo'),'Posición: '+posName(fv(f,'pos')),fv(f,'numero')?'Número: '+fv(f,'numero'):'','Edad: '+fv(f,'edad'),'Pie: '+fv(f,'pie'),fv(f,'instagram')?'Instagram: @'+fv(f,'instagram').replace(/^@/,''):'',hist.length?'Trayectoria:\n'+hist.map(x=>'- '+x.equipo+' ('+x.liga+', '+x.nivel+', '+(x.desde||'?')+'-'+(x.hasta||'hoy')+')').join('\n'):'',lgs.length?'Logros:\n'+lgs.map(x=>'- '+x).join('\n'):'','(Te mando mi foto y mis pruebas aquí mismo)'].filter(Boolean).join('\n');
+    const a=document.createElement('a');a.href='https://wa.me/'+wa+'?text='+encodeURIComponent(t);a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();toast('📲 Abriendo WhatsApp…')},
+  nuevoLogro(d){const p=playerById(d.id);if(!puedeEditarJ(p))return;openModal(`<h3>🏅 Subir logro de ${esc(p.nombre)}</h3><p class="small muted">Si tienes una foto que lo pruebe (medalla, trofeo, convocatoria o publicación del torneo), súbela. Si no, envíalo igual: la organización lo puede confirmar contigo por privado. Si lo aprueba, tu media sube.</p>
+    <form data-form="logro" data-id="${esc(p.id)}"><div class="fld"><label>¿Qué lograste?</label><select name="tipo">${Object.entries(LOGROS).map(([k,[i,n,pt]])=>`<option value="${k}">${i} ${n}${k==='otro'?'':' (+'+pt+')'}</option>`).join('')}</select></div>
+    <div class="f2"><div class="fld"><label>Torneo / detalle *</label><input name="descripcion" required maxlength="80" placeholder="Ej: Campeón Birrias Sanas 2025"></div><div class="fld"><label>Fecha</label><input name="fecha" type="date"></div></div>
+    <div class="fld"><label>Foto de prueba (opcional)</label><input type="file" name="fotoLogro" accept="image/*"><input type="hidden" name="foto"><div id="lgPrev" style="margin-top:8px"></div></div>
+    <div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn gold">Enviar para verificar</button></div></form>`)},
+  async rechLogro(d){openModal(`<h3>Rechazar logro</h3><form data-form="rechLogro" data-id="${esc(d.id)}"><div class="fld"><label>Motivo (lo ve el jugador)</label><input name="nota" maxlength="120" placeholder="Ej: La foto no se ve clara"></div><div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn red">Rechazar</button></div></form>`)},
+  async delLogro(d){if(!await ask('Quitar logro','La media del jugador bajará esos puntos.','Quitar'))return;await W(()=>db.doc('logros/'+d.id).update({estado:'rechazado',nota:'Retirado por la organización'}))},
+  editMi(d){const p=playerById(d.id);if(!puedeEditarJ(p))return;openModal(`<h3>✏️ Editar mi ficha</h3><form data-form="editMi" data-id="${esc(p.id)}"><div class="f2"><div class="fld"><label>Nombre en el perfil</label><input name="apodo" maxlength="18" value="${esc(p.apodo||'')}"></div><div class="fld"><label>Número</label><input name="numero" type="number" value="${esc(p.numero||'')}"></div><div class="fld"><label>Instagram</label><input name="instagram" value="${esc(p.instagram||'')}"></div><div class="fld"><label>Pie hábil</label><select name="pie">${['Derecho','Izquierdo','Ambos'].map(x=>`<option ${p.pie===x?'selected':''}>${x}</option>`).join('')}</select></div></div>
+    <div class="fld"><label>Nueva foto</label><input type="file" name="fotoAdmin" accept="image/*"><input type="hidden" name="foto"></div><div class="tiny muted" style="margin-bottom:10px">La media, el equipo y la posición solo los cambia la organización.</div><div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn gold">Guardar</button></div></form>`)},
+  async aprobarClub(d){await W(()=>db.doc('clubes/'+d.id).update({estado:'activo'}))},
+  async enLiga(d){const c=clubById(d.id);if(!c.enLiga&&leagueClubs().length>=num(cfg().maxClubes))return toast('Ya hay '+cfg().maxClubes+' clubes en la liga',true);await W(()=>db.doc('clubes/'+d.id).update({enLiga:!c.enLiga,presupuesto:num(c.presupuesto)||num(cfg().presupuestoInicial)}))},
+  async cuota(d){const c=clubById(d.id);await W(()=>db.doc('clubes/'+d.id).update({cuotaPagada:!c.cuotaPagada}))},
+  async intrans(d){const c=clubById(d.id);await W(()=>db.doc('clubes/'+d.id).update({intransferible:!c.intransferible}))},
+  async delClub(d){const c=clubById(d.id);if(!await ask('Borrar equipo',`¿Borrar <b>${esc(c.nombre)}</b>? Sus jugadores quedarán sin equipo.`,'Borrar'))return;await W(async()=>{for(const p of S.players.filter(p=>p.clubId===d.id))await db.doc('jugadores/'+p.id).update({clubId:null});await db.doc('clubes/'+d.id).delete()})},
+  presu(d){const c=clubById(d.id);openModal(`<h3>💰 Presupuesto de ${esc(c.nombre)}</h3><form data-form="presu" data-id="${esc(c.id)}"><div class="fld"><label>Nuevo presupuesto</label><input name="v" type="number" value="${num(c.presupuesto)}"></div><div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn lime">Guardar</button></div></form>`)},
+  manager(d){const c=clubById(d.id);openModal(`<h3>👔 Delegado de ${esc(c.nombre)}</h3><p class="small muted">Busca a la persona (tiene que tener acceso a esta página).</p><input id="mgrQ" placeholder="Nombre o correo"><div id="mgrRes" style="margin-top:10px"></div><div class="row" style="justify-content:flex-end;margin-top:14px;gap:6px"><button class="btn sm" data-act="setMgr" data-club="${esc(c.id)}" data-uid="${esc(S.me||'')}">Asignarme a mí</button><button class="btn sm red" data-act="setMgr" data-club="${esc(c.id)}" data-uid="">Quitar delegado</button><button class="btn sm" data-act="close">Cerrar</button></div>`);
+    const q=$('#mgrQ');const run=async()=>{if(!user?.search){$('#mgrRes').innerHTML='<div class="small muted">La búsqueda no está disponible aquí.</div>';return}try{const hits=await user.search(q.value||'');$('#mgrRes').innerHTML=(hits||[]).slice(0,8).map(h=>`<button class="btn sm" style="margin:0 6px 6px 0" data-act="setMgr" data-club="${esc(c.id)}" data-uid="${esc(h.id)}">${esc(h.name||h.email||'Persona')}</button>`).join('')||'<div class="small muted">Sin resultados.</div>'}catch(e){}};
+    q.addEventListener('input',()=>{clearTimeout(q._t);q._t=setTimeout(run,250)});q.addEventListener('focus',run,{once:true});q.focus()},
+  async setMgr(d){if(await W(()=>db.doc('clubes/'+d.club).update({managerId:d.uid||null}))){toast('Delegado actualizado');closeModal()}},
+  aprobar(d){const p=playerById(d.id);const e=elegib(p);openModal(`<h3>✅ Aprobar a ${esc(p.nombre)}</h3>${!e.ok?`<div class="note bad" style="margin:10px 0">⚠️ Jugó profesional hasta ${e.anioPro||'—'}: todavía no cumple 1 año sin jugar profesionalmente (lo necesita para la ELEVN League).</div>`:''}<div style="margin:10px 0">${histTable(p.historial)||'<div class="muted small">No puso trayectoria.</div>'}</div>${baseForm(p,'Aprobar')}`,true)},
+  revisarBase(d){const p=playerById(d.id);openModal(`<h3>📊 Nueva trayectoria de ${esc(p.nombre)}</h3><div style="margin:10px 0">${histTable(p.historial)}</div>${baseForm(p,'Guardar base')}`,true)},
+  async rechazarJ(d){await W(()=>db.doc('jugadores/'+d.id).update({estado:'rechazado'}))},
+  nuevoJ(){openModal(playerForm(null))},editJ(d){openModal(playerForm(playerById(d.id)))},
+  pro(d){const p=playerById(d.id);openModal(`<h3>🚀 ${esc(p.nombre)} fue llamado a profesional</h3><p class="small muted">Sale del club de inmediato. ${esc(clubById(p.clubId)?.nombre)} recibe <b>${money(V(p).valor)}</b> de compensación y puede fichar un reemplazo fuera de ventana.</p><form data-form="pro" data-id="${esc(p.id)}"><div class="fld"><label>Equipo profesional</label><input name="destino" required maxlength="50"></div><div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn gold">Confirmar</button></div></form>`)},
+  async delJ(d){if(!await ask('Borrar jugador','¿Seguro? No se puede deshacer.','Borrar'))return;await W(()=>db.doc('jugadores/'+d.id).delete())},
+  async delM(d){if(!await ask('Borrar partido','¿Borrar este partido y sus estadísticas? Los premios ya pagados no se devuelven.','Borrar'))return;await W(()=>db.doc('partidos/'+d.id).delete())},
+  statsM(d){const m=S.matches.find(x=>x.id===d.id);if(!m)return;const side=cid=>S.players.filter(p=>(p.clubId===cid&&p.estado==='aprobado')||(m.stats&&m.stats[p.id]&&m.stats[p.id].c===cid&&p.clubId!==cid)).sort((a,b)=>POS.findIndex(x=>x[0]===a.pos)-POS.findIndex(x=>x[0]===b.pos));
+    const blk=cid=>{const l=side(cid);return `<div class="jor">${esc(clubById(cid)?.nombre||'?')}</div>${l.length?`<div class="tw"><table><tr><th>Jugador</th><th>Jugó</th><th>⚽</th><th>🅰️</th><th>🧤 Ataj.</th><th>🛑 Pen.</th><th>🟨</th><th>🟥</th><th>⭐</th></tr>${l.map(p=>{const s=(m.stats||{})[p.id]||{};return `<tr data-pid="${esc(p.id)}" data-c="${esc(cid)}"><td><span class="pos ${esc(p.pos)}">${esc(p.pos)}</span> ${esc(p.nombre)}</td><td><input type="checkbox" name="j" ${s.j?'checked':''}></td><td><input class="mini-in" name="g" type="number" min="0" value="${num(s.g)||''}"></td><td><input class="mini-in" name="a" type="number" min="0" value="${num(s.a)||''}"></td><td>${p.pos==='POR'?`<input class="mini-in" name="at" type="number" min="0" max="30" value="${num(s.at)||''}">`:''}</td><td>${p.pos==='POR'?`<input class="mini-in" name="pa" type="number" min="0" max="5" value="${num(s.pa)||''}">`:''}</td><td><input class="mini-in" name="ta" type="number" min="0" max="2" value="${num(s.ta)||''}"></td><td><input class="mini-in" name="tr" type="number" min="0" max="1" value="${num(s.tr)||''}"></td><td><input type="radio" name="mvp" value="${esc(p.id)}" ${m.mvp===p.id?'checked':''}></td></tr>`}).join('')}</table></div>`:'<div class="small muted">Sin jugadores aprobados.</div>'}`};
+    openModal(`<h3>📋 Estadísticas · J${num(m.jornada)}: ${esc(clubById(m.local)?.nombre)} ${m.jugado?num(m.golesL)+' - '+num(m.golesV):'vs'} ${esc(clubById(m.visitante)?.nombre)}</h3><p class="small muted">Marca quién jugó y sus números. Al poner goles o tarjetas se marca “jugó” solo.</p><form data-form="stats" data-id="${esc(m.id)}">${blk(m.local)}${blk(m.visitante)}<div class="row" style="justify-content:flex-end;margin-top:14px"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn lime">Guardar estadísticas</button></div></form>`,true)},
+};
+function baseForm(p,btn){const b=baseSugerida(p.historial);return `<form data-form="aprobarJ" data-id="${esc(p.id)}"><div class="note ok" style="margin-bottom:10px">📊 Con su trayectoria arranca con media <b>${Math.floor(mediaDe(b.am,0))}</b>. Puedes ajustar los puntos, por ejemplo si jugaba competencias que se repetían cada año.</div>
+  <div class="fld"><label>Puntos de trayectoria</label><input name="baseAm" type="number" step="any" min="0" value="${b.am}"><input type="hidden" name="baseEl" value="0"></div>
+  <div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn lime">${btn}</button></div></form>`}
+function playerForm(p){const x=p||{};const sel=(v,o)=>v===o?'selected':'';
+  return `<h3>${p?'✏️ Editar jugador':'+ Agregar jugador'}</h3><form data-form="jugadorAdmin" data-id="${esc(x.id||'')}"><div class="f2">
+  <div class="fld"><label>Nombre *</label><input name="nombre" required value="${esc(x.nombre||'')}"></div><div class="fld"><label>Nombre en el perfil</label><input name="apodo" maxlength="18" value="${esc(x.apodo||'')}"></div>
+  <div class="fld"><label>Posición</label><select name="pos">${POS.map(([k,n])=>`<option value="${k}" ${sel(x.pos,k)}>${n}</option>`).join('')}</select></div><div class="fld"><label>Número</label><input name="numero" type="number" value="${esc(x.numero||'')}"></div><div class="fld"><label>Edad</label><input name="edad" type="number" value="${esc(x.edad||'')}"></div>
+  <div class="fld"><label>Equipo</label><select name="clubId"><option value="">Sin equipo</option>${activeClubs().map(c=>`<option value="${esc(c.id)}" ${sel(x.clubId,c.id)}>${esc(c.nombre)}</option>`).join('')}</select></div>
+  <div class="fld"><label>Estado</label><select name="estado">${['aprobado','pendiente','rechazado','profesional'].map(s=>`<option ${sel(x.estado||'aprobado',s)}>${s}</option>`).join('')}</select></div>
+  <div class="fld"><label>Teléfono (privado)</label><input name="telefono" type="tel" value="${esc(S.contacts[x.contactoId]?.telefono||'')}"></div><div class="fld"><label>Instagram</label><input name="instagram" value="${esc(x.instagram||'')}"></div><div class="fld"><label>Foto</label><input type="file" name="fotoAdmin" accept="image/*"><input type="hidden" name="foto" value=""></div>
+  <div class="fld"><label>Puntos de trayectoria</label><input name="baseAm" type="number" step="any" min="0" value="${num(x.baseAm)+num(x.baseEl)}"><input type="hidden" name="baseEl" value="0"></div><div class="fld"><label>Ajuste de media (+/−)</label><input name="ajusteOvr" type="number" step="any" value="${num(x.ajusteOvr)}"></div><div class="fld"><label>Cláusula fija (vacío = automática)</label><input name="clausulaFija" type="number" step="10000" value="${num(x.clausulaFija)||''}"></div></div>
+  <div class="row between" style="margin-top:6px">${p?`<button type="button" class="btn sm red" data-act="delJ" data-id="${esc(p.id)}">Borrar jugador</button>`:'<span></span>'}<div class="row"><button type="button" class="btn" data-act="close">Cancelar</button><button class="btn lime">Guardar</button></div></div></form>`}
+
+/* ===== Formularios ===== */
+const fv=(f,n)=>{const e=f.elements[n];return e?String(e.value||'').trim():''};
+const FORM={
+  async oferta(f){const p=playerById(f.dataset.id);const a=actingId();const monto=Math.round(num(fv(f,'monto')));const club=clubById(a);if(!windowOk(a))return toast('El mercado está cerrado',true);if(monto>num(club.presupuesto))return toast('No te alcanza el presupuesto',true);
+    if(S.offers.some(o=>o.playerId===p.id&&o.de===a&&isOpen(o)))return toast('Ya tienes una oferta abierta por este jugador',true);if(cfg().ventanaAbierta&&fichajesVentana(a)>=num(cfg().limiteFichajes))return toast('Ya hiciste los '+cfg().limiteFichajes+' fichajes de esta ventana',true);
+    if(await W(()=>db.collection('ofertas').add({playerId:p.id,nombre:p.nombre,de:a,para:p.clubId,monto,tipo:fv(f,'tipo'),mensaje:fv(f,'mensaje'),estado:'pendiente',turno:'vendedor',creado:Date.now(),autor:S.me||null}))){toast('💬 Oferta enviada');S.tabMercado='espera';closeModal()}},
+  async contra(f){const o=S.offers.find(x=>x.id===f.dataset.id);const monto=Math.round(num(fv(f,'monto')));if(await W(()=>db.doc('ofertas/'+o.id).update({monto,estado:'contraoferta',turno:o.turno==='vendedor'?'comprador':'vendedor',mensaje:fv(f,'mensaje')||o.mensaje||''}))){toast('🔄 Contraoferta enviada');closeModal()}},
+  async jugador(f){if(f.querySelector('[name=fotoFile]')?.files?.length&&!fv(f,'foto'))return toast('La foto todavía se está procesando, intenta en un segundo',true);
+    const sin=f.elements.sinHist.checked;const hist=sin?[]:readHist(f);const lrows=sin?[]:[...f.querySelectorAll('.lrow')];
+    const ref=db.collection('jugadores').doc();const cid=S.me||('p_'+ref.id);
+    const d={nombre:fv(f,'nombre'),apodo:fv(f,'apodo'),pos:fv(f,'pos'),numero:fv(f,'numero'),edad:fv(f,'edad'),pie:fv(f,'pie'),instagram:fv(f,'instagram').replace(/^@/,''),clubId:fv(f,'clubId')||null,historial:hist,foto:fv(f,'foto'),estado:'pendiente',ajusteOvr:0,userId:S.me||null,contactoId:cid,creado:Date.now()};
+    const ok=await W(async()=>{await ref.set(d);try{await db.doc('contactos/'+cid).set({telefono:fv(f,'telefono'),nombre:d.nombre,playerId:ref.id,actualizado:Date.now()})}catch(e){console.error(e)}
+      for(const r of lrows){const tipo=r.querySelector('.l-tp').value;await db.collection('logros').add({playerId:ref.id,tipo,descripcion:r.querySelector('.l-ds').value.trim(),fecha:r.querySelector('.l-fc').value,foto:r.querySelector('.ldata').value,estado:'pendiente',pts:(LOGROS[tipo]||LOGROS.otro)[2],userId:S.me||null,creado:Date.now()})}});
+    if(ok){toast('✅ ¡Cuenta creada! La organización la revisará y activará tu perfil.');f.classList.remove('dirty');render()}},
+  async club(f){if(S.me){try{await db.doc('contactos/'+S.me).set({telefono:fv(f,'telefono'),nombre:fv(f,'delegado'),actualizado:Date.now()})}catch(e){console.error(e)}}if(f.querySelector('[name=logoFile]')?.files?.length&&!fv(f,'logo'))return toast('El logo todavía se está procesando, intenta en un segundo',true);const d={delegado:fv(f,'delegado'),contactoId:S.me||null,instagram:fv(f,'instagram').replace(/^@/,''),logo:fv(f,'logo'),logoLimpio:true,nombre:fv(f,'nombre'),sigla:fv(f,'sigla').toUpperCase(),color:okColor(fv(f,'color')),ligaActual:fv(f,'ligaActual'),solicitudLiga:!!f.elements.solicitudLiga.checked,enLiga:false,intransferible:false,estado:'pendiente',presupuesto:num(cfg().presupuestoInicial),cuotaPagada:false,managerId:S.me||null,creado:Date.now()};
+    if(await W(()=>db.collection('clubes').add(d))){toast('🛡️ Equipo registrado. Queda pendiente de aprobación.');f.classList.remove('dirty');render()}},
+  async clubAdmin(f){const d={logo:fv(f,'logo'),logoLimpio:true,instagram:fv(f,'instagram').replace(/^@/,''),nombre:fv(f,'nombre'),sigla:fv(f,'sigla').toUpperCase(),color:okColor(fv(f,'color')),ligaActual:fv(f,'ligaActual'),enLiga:false,solicitudLiga:false,intransferible:false,estado:'activo',presupuesto:num(cfg().presupuestoInicial),cuotaPagada:false,managerId:null,creado:Date.now()};
+    if(await W(()=>db.collection('clubes').add(d))){toast('Equipo creado');f.classList.remove('dirty');render()}},
+  async config(f){const c=cfg();const d={};for(const k of Object.keys(DEF)){if(k==='patrocinadores'){if(f.elements[k])d[k]=fv(f,k).split(',').map(s=>s.trim()).filter(Boolean);continue}if(['ventanaAbierta','mercadoActivo','reglaExPro'].includes(k)){if(f.elements[k])d[k]=fv(f,k)==='1';continue}if(!f.elements[k])continue;d[k]=typeof DEF[k]==='number'?num(fv(f,k)):fv(f,k)}
+    if(d.ventanaAbierta&&!c.ventanaAbierta)d.ventanaInicio=Date.now();if(await W(()=>db.doc('liga/config').set({...(S.cfg||{}),...d}))){toast('⚙️ Configuración guardada');f.classList.remove('dirty');render()}},
+  async presu(f){if(await W(()=>db.doc('clubes/'+f.dataset.id).update({presupuesto:Math.round(num(fv(f,'v')))})))closeModal()},
+  async jugadorAdmin(f){const id=f.dataset.id;const old=id?playerById(id):null;const ref=id?db.doc('jugadores/'+id):db.collection('jugadores').doc();const cid=old?.contactoId||('p_'+ref.id);
+    const d={nombre:fv(f,'nombre'),apodo:fv(f,'apodo'),pos:fv(f,'pos'),numero:fv(f,'numero'),edad:fv(f,'edad'),clubId:fv(f,'clubId')||null,estado:fv(f,'estado'),instagram:fv(f,'instagram').replace(/^@/,''),...(fv(f,'foto')?{foto:fv(f,'foto')}:{}),ajusteOvr:num(fv(f,'ajusteOvr')),baseAm:Math.max(0,num(fv(f,'baseAm'))),baseEl:Math.max(0,num(fv(f,'baseEl'))),clausulaFija:Math.round(num(fv(f,'clausulaFija'))),contactoId:cid};
+    if(await W(async()=>{if(id)await ref.update(d);else await ref.set({...d,historial:[],creado:Date.now(),userId:null});if(fv(f,'telefono'))await db.doc('contactos/'+cid).set({telefono:fv(f,'telefono'),nombre:d.nombre,playerId:ref.id,actualizado:Date.now()})})){toast('Jugador guardado');closeModal()}},
+  async peq(f){if(f.querySelector('[name=fotoLogro]')?.files?.length&&!fv(f,'foto'))return toast('La foto todavía se está procesando, intenta en un segundo',true);
+    const stats={};f.querySelectorAll('tr[data-pid]').forEach(tr=>{const g=k=>num(tr.querySelector(`[name=${k}]`)?.value);const s={g:g('g'),a:g('a'),at:g('at'),pa:g('pa'),ta:Math.min(2,g('ta')),tr:Math.min(1,g('tr'))};s.j=tr.querySelector('[name=j]').checked||s.g>0||s.a>0||s.at>0||s.pa>0||s.ta>0||s.tr>0?1:0;if(s.j)stats[tr.dataset.pid]=s});
+    const mvp=f.querySelector('[name=mvp]:checked')?.value||null;if(mvp){stats[mvp]=stats[mvp]||{g:0,a:0,ta:0,tr:0};stats[mvp].j=1}
+    if(!Object.keys(stats).length)return toast('Marca al menos un jugador que jugó',true);
+    if(await W(()=>db.collection('partidosEq').add({clubId:f.dataset.id,tipo:fv(f,'tipo'),competicion:fv(f,'competicion'),rival:fv(f,'rival'),fecha:fv(f,'fecha'),golesFavor:num(fv(f,'gf')),golesContra:num(fv(f,'gc')),stats,mvp,foto:fv(f,'foto'),estado:S.isAdmin?'aprobado':'pendiente',...(S.isAdmin?{aprobado:Date.now()}:{}),autor:S.me||null,creado:Date.now()}))){toast(S.isAdmin?'✅ Partido guardado y sumado a los jugadores':'⚽ Partido enviado. Se suma a los jugadores cuando la organización lo apruebe.');closeModal()}},
+  async act(f){if(f.querySelector('[name=fotoLogro]')?.files?.length&&!fv(f,'foto'))return toast('La foto todavía se está procesando, intenta en un segundo',true);const s=actRead(f);
+    if(await W(()=>db.collection('actividades').add({playerId:f.dataset.id,tipo:fv(f,'tipo'),fecha:fv(f,'fecha'),detalle:fv(f,'detalle'),...s,foto:fv(f,'foto'),estado:S.isAdmin?'aprobado':'pendiente',...(S.isAdmin?{aprobado:Date.now()}:{}),userId:S.me||null,creado:Date.now()}))){toast(S.isAdmin?'✅ Actividad registrada':'📋 Enviado. Te sumará cuando lo verifiquen.');closeModal()}},
+  async rechAct(f){if(await W(()=>db.doc('actividades/'+f.dataset.id).update({estado:'rechazado',nota:fv(f,'nota')})))closeModal()},
+  async editClub(f){const d={sigla:fv(f,'sigla').toUpperCase(),color:okColor(fv(f,'color')),instagram:fv(f,'instagram').replace(/^@/,''),ligaActual:fv(f,'ligaActual'),...(fv(f,'logo')?{logo:fv(f,'logo'),logoLimpio:true}:{})};if(await W(()=>db.doc('clubes/'+f.dataset.id).update(d))){toast('Equipo actualizado');closeModal()}},
+  async aprobarJ(f){const am=Math.max(0,num(fv(f,'baseAm'))),el=Math.max(0,num(fv(f,'baseEl')));if(await W(()=>db.doc('jugadores/'+f.dataset.id).update({estado:'aprobado',baseAm:am,baseEl:el,trayPend:false}))){toast('✅ Guardado');closeModal()}},
+  async historial(f){const hs=readHist(f);const upd=S.isAdmin?{historial:hs,baseAm:baseSugerida(hs).am,baseEl:baseSugerida(hs).el,trayPend:false}:{historial:hs,trayPend:true};if(await W(()=>db.doc('jugadores/'+f.dataset.id).update(upd))){toast(S.isAdmin?'⚽ Trayectoria y base guardadas':'⚽ Trayectoria enviada. La organización revisará tu nueva base.');closeModal()}},
+  async editMi(f){const d={apodo:fv(f,'apodo'),numero:fv(f,'numero'),instagram:fv(f,'instagram').replace(/^@/,''),pie:fv(f,'pie'),...(fv(f,'foto')?{foto:fv(f,'foto')}:{})};if(await W(()=>db.doc('jugadores/'+f.dataset.id).update(d))){toast('Ficha actualizada');closeModal()}},
+  async logro(f){if(f.querySelector('[name=fotoLogro]')?.files?.length&&!fv(f,'foto'))return toast('La foto todavía se está procesando, intenta en un segundo',true);const p=playerById(f.dataset.id);const tipo=fv(f,'tipo');
+    if(await W(()=>db.collection('logros').add({playerId:p.id,tipo,descripcion:fv(f,'descripcion'),fecha:fv(f,'fecha'),foto:fv(f,'foto'),estado:'pendiente',pts:(LOGROS[tipo]||LOGROS.otro)[2],userId:S.me||null,creado:Date.now()}))){toast('🏅 Logro enviado. Te avisamos cuando lo verifiquen.');closeModal()}},
+  async aprobarLogro(f){const pts=Math.max(0,Math.min(10,num(fv(f,'pts'))));if(await W(()=>db.doc('logros/'+f.dataset.id).update({estado:'aprobado',pts,aprobado:Date.now()}))){toast('✅ Logro aprobado: +'+pts);f.classList.remove('dirty');render()}},
+  async rechLogro(f){if(await W(()=>db.doc('logros/'+f.dataset.id).update({estado:'rechazado',nota:fv(f,'nota')})))closeModal()},
+  async pro(f){const p=playerById(f.dataset.id);const club=clubById(p.clubId);const comp=V(p).valor;const destino=fv(f,'destino');
+    if(await W(async()=>{await db.doc('clubes/'+club.id).update({presupuesto:num(club.presupuesto)+comp,reemplazoPendiente:true});await db.doc('jugadores/'+p.id).update({estado:'profesional',clubId:null,clubAnterior:club.id,destino});await db.collection('traspasos').add({playerId:p.id,nombre:p.nombre,de:club.id,a:null,monto:comp,tipo:'profesional',destino,fecha:Date.now()});for(const o of S.offers.filter(o=>o.playerId===p.id&&isOpen(o)))await db.doc('ofertas/'+o.id).update({estado:'cerrada'})})){toast('🚀 ¡Felicidades a '+p.nombre+'!');closeModal()}},
+  async partido(f){const l=fv(f,'local'),v=fv(f,'visitante');if(l===v)return toast('Local y visitante no pueden ser el mismo club',true);if(await W(()=>db.collection('partidos').add({jornada:num(fv(f,'jornada')),fecha:fv(f,'fecha'),hora:fv(f,'hora'),cancha:fv(f,'cancha'),local:l,visitante:v,jugado:false,premiado:false,stats:{},mvp:null,creado:Date.now()}))){toast('Partido programado');f.classList.remove('dirty');render()}},
+  async resultado(f){const m=S.matches.find(x=>x.id===f.dataset.id);if(fv(f,'gl')===''||fv(f,'gv')==='')return toast('Pon los goles de los dos equipos',true);const gl=num(fv(f,'gl')),gv=num(fv(f,'gv'));const c=cfg();
+    const ok=await W(async()=>{if(!m.premiado&&MK()){const L=clubById(m.local),Vv=clubById(m.visitante);if(gl>gv&&L)await db.doc('clubes/'+L.id).update({presupuesto:num(L.presupuesto)+num(c.premioVictoria)});else if(gv>gl&&Vv)await db.doc('clubes/'+Vv.id).update({presupuesto:num(Vv.presupuesto)+num(c.premioVictoria)});else if(gl===gv){if(L)await db.doc('clubes/'+L.id).update({presupuesto:num(L.presupuesto)+num(c.premioEmpate)});if(Vv)await db.doc('clubes/'+Vv.id).update({presupuesto:num(Vv.presupuesto)+num(c.premioEmpate)})}}
+      await db.doc('partidos/'+m.id).update({golesL:gl,golesV:gv,jugado:true,premiado:m.premiado||MK()})});if(ok){toast('Resultado guardado');f.classList.remove('dirty');render()}},
+  async stats(f){const stats={};f.querySelectorAll('tr[data-pid]').forEach(tr=>{const g=k=>num(tr.querySelector(`[name=${k}]`)?.value);const s={g:g('g'),a:g('a'),at:g('at'),pa:g('pa'),ta:g('ta'),tr:g('tr'),c:tr.dataset.c};s.j=tr.querySelector('[name=j]').checked||s.g>0||s.a>0||s.at>0||s.pa>0||s.ta>0||s.tr>0?1:0;stats[tr.dataset.pid]=s});
+    const mvp=f.querySelector('[name=mvp]:checked')?.value||null;if(mvp&&stats[mvp])stats[mvp].j=1;const m=S.matches.find(x=>x.id===f.dataset.id);const old=m.stats||{};for(const k of Object.keys(old))if(!stats[k])stats[k]={j:0,g:0,a:0,ta:0,tr:0,c:old[k].c||null};
+    if(await W(()=>db.doc('partidos/'+f.dataset.id).update({stats,mvp}))){toast('📋 Estadísticas guardadas · medias actualizadas');closeModal()}},
+};
+
+/* ===== Eventos ===== */
+document.addEventListener('click',e=>{const act=e.target.closest('[data-act]');if(act){e.preventDefault();e.stopPropagation();ACT[act.dataset.act]?.(act.dataset,act);return}
+  const z=e.target.closest('[data-zoom]');if(z){e.preventDefault();openModal(`<img src="${z.src}" style="width:100%;border-radius:12px"><div class="row" style="justify-content:flex-end;margin-top:12px"><button class="btn" data-act="close">Cerrar</button></div>`,true);return}
+  const jp=e.target.closest('[data-jump]');if(jp){e.preventDefault();document.getElementById(jp.dataset.jump)?.scrollIntoView({behavior:'smooth',block:'start'});return}
+  const tb=e.target.closest('[data-tab]');if(tb){S.tabMercado=tb.dataset.tab;render();return}
+  const tr=e.target.closest('[data-tabr]');if(tr){S.tabReg=tr.dataset.tabr;render();return}
+  const ta=e.target.closest('[data-taba]');if(ta){S.tabAdmin=ta.dataset.taba;render();return}
+  const tg=e.target.closest('[data-tabreg]');if(tg){S.tabReg=tg.dataset.tabreg;if(route()==='registro'){render()}}
+  const go=e.target.closest('[data-go]');if(go&&!e.target.closest('a,button,input,select')){location.hash=go.dataset.go}
+  if(e.target.id==='modal')closeModal()});
+document.addEventListener('submit',e=>{e.preventDefault();const f=e.target;const h=FORM[f.dataset.form];if(!h)return;const b=f.querySelector('button:not([type=button])');if(b)b.disabled=true;Promise.resolve(h(f)).finally(()=>{if(b&&document.body.contains(b))b.disabled=false})});
+document.addEventListener('input',e=>{if(e.target.closest('#actF'))actPreview();if(e.target.closest('.hrow'))baseEst();const f=e.target.closest('form.keep');if(f)f.classList.add('dirty');if(e.target.id==='fQ'){S.fQ=e.target.value;$('#plist').innerHTML=plist()}if(e.target.closest('[data-form=jugador]'))eligCheck()});
+document.addEventListener('change',e=>{const t=e.target;if(t.id==='actSel'){S.acting=t.value||null;S.tabMercado='responder';try{localStorage.setItem('elevn_acting',S.acting||'')}catch(_){};render();return}
+  if(['fPos','fClub','fOrd'].includes(t.id)){S[t.id]=t.value;$('#plist').innerHTML=plist();return}
+  if(t.name==='logoFile'&&t.files&&t.files[0]){const img=new Image();const url=URL.createObjectURL(t.files[0]);img.onload=()=>{const cv=document.createElement('canvas');const r=Math.min(1,220/Math.max(img.width,img.height));cv.width=Math.round(img.width*r);cv.height=Math.round(img.height*r);const cx=cv.getContext('2d');cx.drawImage(img,0,0,cv.width,cv.height);const quitado=quitarFondo(cx,cv.width,cv.height);const data=cv.toDataURL('image/png');URL.revokeObjectURL(url);t.form.elements.logo.value=data;if(quitado)toast('🪄 Fondo del logo eliminado');const pv=t.form.querySelector('#logoPrev');if(pv)pv.outerHTML=`<img id="logoPrev" src="${data}" style="width:70px;height:70px;object-fit:contain">`;else toast('🛡️ Logo listo')};img.src=url;return}
+  if(t.closest&&t.closest('#actF')){actPreview()}
+  if(t.classList&&t.classList.contains('h-ac')){const hh=t.closest('.hrow').querySelector('.h-h');hh.disabled=t.checked;if(t.checked)hh.value=''}
+  if(t.closest&&t.closest('.hrow'))baseEst();
+  if(t.id==='sinHist'){$('#histBox').style.display=t.checked?'none':'block';return}
+  if(t.classList.contains('lfile')&&t.files&&t.files[0]){const row=t.closest('.lrow');const img=new Image();const url=URL.createObjectURL(t.files[0]);img.onload=()=>{const cv=document.createElement('canvas');const r=Math.min(1,720/Math.max(img.width,img.height));cv.width=Math.round(img.width*r);cv.height=Math.round(img.height*r);cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);const data=cv.toDataURL('image/jpeg',.72);URL.revokeObjectURL(url);row.querySelector('.ldata').value=data;row.querySelector('.l-pv').innerHTML=`<img src="${data}" style="height:60px;border-radius:8px">`};img.src=url;return}
+  if(t.name==='exPro'){$('#proF').style.display=t.value==='si'?'grid':'none';eligCheck()}
+  if((t.name==='fotoFile'||t.name==='fotoAdmin')&&t.files&&t.files[0])resizePhoto(t.files[0],t.form,240,'prev');
+  if(t.name==='fotoLogro'&&t.files&&t.files[0])resizePhoto(t.files[0],t.form,720,'logro')});
+function eligCheck(){const f=document.querySelector('[data-form=jugador]');if(!f||!$('#eligMsg'))return;const ex=f.querySelector('[name=exPro]:checked')?.value==='si';const box=$('#eligMsg');if(!ex){box.innerHTML='';return}const d=fv(f,'ultimoPro');if(!d){box.innerHTML='<div class="note warn fld">Indica la fecha de tu último partido profesional.</div>';return}
+  const e=elegib({exPro:true,ultimoPro:d});box.innerHTML=e.ok?'<div class="note ok fld">✅ Cumples con el año sin jugar profesionalmente.</div>':`<div class="note bad fld">⚠️ Para la ELEVN League necesitas 1 año sin jugar profesionalmente: podrás jugar desde el <b>${fdate(e.desde)}</b>. Igual puedes crear tu cuenta.</div>`}
+function limpiarLogos(){for(const c of S.clubs){if(!okImg(c.logo)||c.logoLimpio||S.logoClean[c.id])continue;S.logoClean[c.id]=c.logo;const img=new Image();img.onload=()=>{const cv=document.createElement('canvas');cv.width=img.naturalWidth;cv.height=img.naturalHeight;const cx=cv.getContext('2d');cx.drawImage(img,0,0);
+    if(quitarFondo(cx,cv.width,cv.height)){const data=cv.toDataURL('image/png');S.logoClean[c.id]=data;S.calc=null;scheduleRender();if(db&&(S.isAdmin||(c.managerId&&c.managerId===S.me)))db.doc('clubes/'+c.id).update({logo:data,logoLimpio:true}).catch(e=>console.error(e))}};img.src=c.logo}}
+function quitarFondo(cx,w,h){const im=cx.getImageData(0,0,w,h);const d=im.data;const px=(x,y)=>(y*w+x)*4;
+  const corners=[[0,0],[w-1,0],[0,h-1],[w-1,h-1]].map(([x,y])=>px(x,y));if(corners.some(i=>d[i+3]<20))return false;
+  let r=0,g=0,b=0;corners.forEach(i=>{r+=d[i];g+=d[i+1];b+=d[i+2]});r/=4;g/=4;b/=4;
+  if(corners.some(i=>Math.abs(d[i]-r)+Math.abs(d[i+1]-g)+Math.abs(d[i+2]-b)>60))return false;
+  const tol=70,seen=new Uint8Array(w*h),q=[];const near=i=>Math.abs(d[i]-r)+Math.abs(d[i+1]-g)+Math.abs(d[i+2]-b)<=tol;
+  for(let x=0;x<w;x++){q.push(x,0,x,h-1)}for(let y=0;y<h;y++){q.push(0,y,w-1,y)}
+  let n=0;while(q.length){const y=q.pop(),x=q.pop();if(x<0||y<0||x>=w||y>=h)continue;const k=y*w+x;if(seen[k])continue;seen[k]=1;const i=k*4;if(!near(i))continue;d[i+3]=0;n++;q.push(x+1,y,x-1,y,x,y+1,x,y-1)}
+  for(let k=0;k<w*h;k++){if(seen[k])continue;const x=k%w,y=(k/w)|0;let c=0;for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const xx=x+dx,yy=y+dy;if(xx>=0&&yy>=0&&xx<w&&yy<h&&d[(yy*w+xx)*4+3]===0)c++}if(c)d[k*4+3]=Math.min(d[k*4+3],170)}
+  if(n<w*h*0.03)return false;cx.putImageData(im,0,0);return true}
+function resizePhoto(file,form,max,mode){const img=new Image();const url=URL.createObjectURL(file);img.onload=()=>{const cv=document.createElement('canvas');let data;
+  if(mode==='prev'){const s=max;cv.width=cv.height=s;const m=Math.min(img.width,img.height);cv.getContext('2d').drawImage(img,(img.width-m)/2,(img.height-m)/2,m,m,0,0,s,s);data=cv.toDataURL('image/jpeg',.8)}
+  else{const r=Math.min(1,max/Math.max(img.width,img.height));cv.width=Math.round(img.width*r);cv.height=Math.round(img.height*r);cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);data=cv.toDataURL('image/jpeg',.72)}
+  URL.revokeObjectURL(url);const f=form;if(!f)return;f.elements.foto.value=data;
+  if(mode==='logro'){const pv=f.querySelector('#lgPrev');if(pv)pv.innerHTML=`<img class="lgph" src="${data}">`}else{const pv=f.querySelector('#fotoPrev');if(pv)pv.outerHTML=`<img id="fotoPrev" class="av" style="width:84px;height:84px" src="${data}">`;else toast('📷 Foto lista')}};img.src=url}
+window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0)});
+
+/* ===== Conexión ===== */
+async function loadNames(){if(!user||!user.profiles)return;const ids=[...new Set(S.clubs.map(c=>c.managerId).filter(Boolean))].filter(id=>!(id in S.names));if(!ids.length)return;try{const ps=await user.profiles(ids);ids.forEach(id=>S.names[id]=(ps&&ps[id]&&ps[id].name)||'');scheduleRender()}catch(e){}}
+(async function init(){try{S.acting=localStorage.getItem('elevn_acting')||null}catch(_){}
+  render();const timer=setTimeout(()=>{S.slow=true;scheduleRender()},10000);
+  if(!window.claude||!window.claude.use){S.dbOk=false;clearTimeout(timer);render();return}
+  try{db=await window.claude.use('db')}catch(e){db=null}try{user=await window.claude.use('user')}catch(e){user=null}
+  if(!db){S.dbOk=false;clearTimeout(timer);render();return}S.dbOk=true;
+  if(user){try{S.me=await user.id()}catch(e){}try{S.isAdmin=!!(await user.canEdit())}catch(e){}try{S.canWrite=await user.can('data.write')}catch(e){}}
+  S.realAdmin=S.isAdmin;S.realMe=S.me;S.realCW=S.canWrite;try{if(S.realAdmin&&localStorage.getItem('elevn_vis')==='1'){S.vis=true;S.isAdmin=false;S.me=null;S.canWrite=false}}catch(e){}
+  const need=9;const got=new Set();const mark=k=>{if(!got.has(k)){got.add(k);if(got.size>=need){S.loaded=true;clearTimeout(timer)}}S.calc=null;scheduleRender()};const fail=k=>e=>{console.error(k,e);mark(k)};const list=s=>s.docs.map(d=>({id:d.id,...d.data()}));
+  db.doc('liga/config').onSnapshot(s=>{S.cfg=s.exists?s.data():null;mark('cfg')},fail('cfg'));
+  db.collection('clubes').onSnapshot(s=>{S.clubs=list(s);mark('clubes');loadNames();limpiarLogos()},fail('clubes'));
+  db.collection('jugadores').onSnapshot(s=>{S.players=list(s);mark('jugadores')},fail('jugadores'));
+  db.collection('ofertas').onSnapshot(s=>{S.offers=list(s).sort((a,b)=>num(b.creado)-num(a.creado));mark('ofertas')},fail('ofertas'));
+  db.collection('traspasos').orderBy('fecha','desc').limit(300).onSnapshot(s=>{S.transfers=list(s);mark('traspasos')},fail('traspasos'));
+  db.collection('partidos').onSnapshot(s=>{S.matches=list(s);mark('partidos')},fail('partidos'));
+  db.collection('logros').onSnapshot(s=>{S.logros=list(s);mark('logros')},fail('logros'));
+  db.collection('actividades').onSnapshot(s=>{S.acts=list(s);mark('acts')},fail('acts'));
+  db.collection('partidosEq').onSnapshot(s=>{S.peq=list(s);mark('peq')},fail('peq'));
+  if(S.isAdmin)db.collection('contactos').onSnapshot(s=>{S.contacts={};s.docs.forEach(d=>S.contacts[d.id]=d.data());scheduleRender()},e=>console.error('contactos',e));
+})();
+</script>
+</body>
+</html>
