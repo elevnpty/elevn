@@ -193,7 +193,7 @@ body.cover main,body.cover #app{padding:0!important;max-width:none!important}
 .pt-btn:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
 .pt-btn:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 0 28px rgba(255,200,61,.18)}
 .pt-bt small{display:block;font-size:10px;letter-spacing:3px;color:rgba(200,215,240,.6);font-weight:700}
-.pt-bt b{display:block;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(20px,5.2vw,26px);letter-spacing:2px;margin-top:3px}
+.pt-bt b{display:block;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(20px,5.2vw,26px);letter-spacing:2px;padding:4px 0}
 .pt-arrow{font-size:22px;color:var(--gold)}
 .pt-btn.main{background:linear-gradient(135deg,#ffd45e,#f2b21f);color:#140d02;border-color:#ffd45e}.pt-btn.main:before{background:#140d02}.pt-btn.main small{color:rgba(20,13,2,.65)}.pt-btn.main .pt-arrow{color:#140d02}
 .pt-btn.off{cursor:not-allowed;opacity:.7;background:repeating-linear-gradient(135deg,rgba(18,30,58,.85) 0 12px,rgba(28,40,70,.85) 12px 24px)}.pt-btn.off:before{background:rgba(200,215,240,.35)}.pt-btn.off:hover{transform:none;border-color:rgba(120,150,210,.28);box-shadow:none}
@@ -443,9 +443,9 @@ function portadaView(){const lk=LOCK();const n=S.players.filter(p=>p.estado==='a
    <div class="pt-logo">ELEV<i>N</i></div>
    <div class="pt-tag"><i></i><span>SÉ PARTE DE LA MEJOR COMUNIDAD<br>DE FÚTBOL AMATEUR</span><i></i></div>
    <div class="pt-btns">
-    <a class="pt-btn main" href="#inicio"><div class="pt-bt"><small>01 · ENTRAR</small><b>JUGADORES</b></div><span class="pt-arrow">→</span></a>
-    ${lk?`<div class="pt-btn off" title="En construcción"><div class="pt-bt"><small>02 · EN CONSTRUCCIÓN</small><b>ELEVN LEAGUE</b></div><span class="pt-lock">🔒</span></div>`
-        :`<a class="pt-btn" href="#liga"><div class="pt-bt"><small>02 · ${S.isAdmin&&cfg().ligaAbierta!==true?'SOLO ADMIN':'ENTRAR'}</small><b>ELEVN LEAGUE</b></div><span class="pt-arrow">→</span></a>`}
+    <a class="pt-btn main" href="#inicio"><div class="pt-bt"><b>JUGADORES</b></div><span class="pt-arrow">→</span></a>
+    ${lk?`<div class="pt-btn off" title="En construcción"><div class="pt-bt"><b>ELEVN LEAGUE</b></div><span class="pt-lock">🔒</span></div>`
+        :`<a class="pt-btn" href="#liga"><div class="pt-bt"><b>ELEVN LEAGUE</b></div><span class="pt-arrow">→</span></a>`}
    </div>
   </div>
   <div class="pt-hud bot"><span><b>${n}</b> JUGADORES</span><span class="pt-dot"></span><span><b>${nc}</b> EQUIPOS</span></div></section>`}
