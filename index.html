@@ -387,7 +387,8 @@ function renderHeader(){renderVis();const c=cfg();const r=route();if(r!=='admin'
   h+=(S.realMe?`<button class="btn sm" onclick="elevnLogout()" title="Cerrar sesión">👤 Salir</button>`:`<button class="btn sm gold" onclick="elevnLogin()">🔑 Entrar</button>`);
   $('#hdrRight').innerHTML=h;document.title=lg?esc(c.nombre)+' · '+c.temporada:'ELEVN · Jugadores';
   $('#foot').innerHTML=`ELEVN · ${esc(c.nombre)} · ${esc(c.temporada)} · Los valores y el dinero del mercado son ficticios: miden el rendimiento, no son dinero real.`}
-function render(){renderHeader();S.calc=null;const r=route();let html;
+async function migrarEscala(){const l=S.players.filter(p=>p.escala!==2);for(const p of l){try{await db.doc('jugadores/'+p.id).update({escala:2,baseAm:trayDe(p.historial),baseEl:0})}catch(e){console.error(e)}}}
+function render(){if(S.realAdmin&&!S._mig&&S.players.some(p=>p.escala!==2)){S._mig=1;setTimeout(migrarEscala,1500)}renderHeader();S.calc=null;const r=route();let html;
   if(S.dbOk===false)html=`<div class="card empty"><div class="ic">🔒</div><h3>No se pudo conectar</h3><p>Revisa tu internet y recarga la página.</p></div>`;
   else if(!S.loaded)html=`<div class="card empty"><div class="ic">⏳</div><h3>Cargando ELEVN…</h3>${S.slow?'<p>La conexión está tardando. Los datos aparecerán en cuanto lleguen.</p>':''}</div>`;
   else if(r.startsWith('club-'))html=clubView(r.slice(5));
