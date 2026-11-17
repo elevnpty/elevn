@@ -543,7 +543,7 @@ function homeRed(){const ap=S.players.filter(p=>p.estado==='aprobado');const top
   const nuevos=ap.slice().sort((a,b)=>num(b.creado)-num(a.creado)).slice(0,5);const lg=S.logros.filter(l=>l.estado==='aprobado').sort((a,b)=>num(b.aprobado)-num(a.aprobado)).slice(0,6);
   return `<section class="hero">
    <h1>Crea tu jugador.<br><em>Gánate tu media.</em></h1>
-   <p class="muted" style="max-width:560px;margin:12px 0 0;font-size:16px;line-height:1.5">Todos arrancan en <b style="color:var(--text)">50</b>. <b style="color:var(--gold)">Lo que haces en la cancha queda en tu perfil.</b></p>
+   <p class="muted" style="max-width:560px;margin:12px 0 0;font-size:16px;line-height:1.5"><b style="color:var(--gold)">Lo que haces en la cancha queda en tu perfil.</b></p>
    
   </section>
   <div class="card sec"><div class="sec-h"><h3>👑 Los mejores jugadores</h3><a href="#ranking" class="small">Ranking completo →</a></div>${top.length?`<div class="cards">${top.map(p=>cardHTML(p)).join('')}</div>`:emptyBox('👟','Todavía no hay jugadores aprobados. ¡Sé el primero!')}</div>
