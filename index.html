@@ -537,7 +537,7 @@ function queEsView(){const R=[['✍️','Crea tu cuenta','Te registras con tus d
    <div class="note"><b>📋 Partidos · hasta +${TOPE_P}</b><br>Lo que juegas aquí: partidos, goles, vallas, MVP. Un año jugando seguido suele dar entre +4 y +7.</div>
    <div class="note warn"><b>🏆 Logros · hasta +${TOPE_L}</b><br>Títulos, MVP de torneos, goleador, convocatorias o llamado profesional, con prueba.</div></div>
    <table style="margin-top:12px"><tr><th>Nivel más alto que jugaste</th><th class="num">Media con trayectoria larga</th></tr>${NIVELES.map(n=>`<tr><td>${n}</td><td class="num">hasta ${TRAY_TOP[n]}</td></tr>`).join('')}</table>
-   <div class="tiny muted" style="margin-top:8px">Unos 5 años en ese nivel te dejan cerca del máximo; 1 año, a mitad de camino. Otros niveles suman un poco extra. La mayoría de la gente queda entre 60 y 75; de 80 para arriba es para quien estuvo cerca del profesional. La organización confirma tu trayectoria.</div></div>
+   <div class="tiny muted" style="margin-top:8px">Unos 5 años en ese nivel te dejan cerca del máximo; 1 año, a mitad de camino. Otros niveles suman solo un poquito extra. La mayoría de la gente queda entre 60 y 75; de 80 para arriba es para quien estuvo cerca del profesional. La organización confirma tu trayectoria.</div></div>
   <div class="card sec"><h3>🏅 Niveles</h3>${tiersHTML()}</div><div class="sec row wrapf"><a class="btn gold" href="#registro">✍️ Crear mi cuenta</a></div>`}
 
 /* ----- Registro ----- */
@@ -576,7 +576,7 @@ const NIV=Object.fromEntries(Object.entries(TRAY_TOP).map(([k,v])=>[k,['am',v]])
 function trayDe(hist){const Y=new Date().getFullYear();const yrs={};
   for(const x of (hist||[])){const d=num(x.desde);let a=x.actual?Y:(num(x.hasta)||Y);if(!d||d<1970||d>Y)continue;a=Math.min(Math.max(a,d),Y);const n=TRAY_TOP[x.nivel]?(x.nivel==='Selección'?'Selección mayor':x.nivel):'Amateur';yrs[n]=yrs[n]||new Set();for(let y=d;y<=a;y++)yrs[n].add(y)}
   const vals=Object.entries(yrs).map(([n,set])=>(TRAY_TOP[n]-MEDIA0)*(1-Math.exp(-set.size/2.5))).sort((a,b)=>b-a);
-  return Math.round(((vals[0]||0)+0.25*(vals[1]||0)+0.1*(vals[2]||0))*100)/100}
+  return Math.round(((vals[0]||0)+0.15*(vals[1]||0)+0.05*(vals[2]||0))*100)/100}
 function baseSugerida(hist){return {am:trayDe(hist),el:0}}
 const trayPts=p=>p.escala===2?num(p.baseAm)+num(p.baseEl):trayDe(p.historial);
 function baseEst(){const root=document.querySelector('#histRows');const out=document.querySelector('#baseEst');if(!root||!out)return;const b=baseSugerida(readHist(root.closest('form')||document));out.innerHTML=`📊 Con esta trayectoria arrancarías con media <b>${Math.floor(mediaDe(b.am,b.el))}</b>. La organización lo confirma.`}
