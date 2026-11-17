@@ -223,35 +223,25 @@ body.cover main,body.cover #app{padding:0!important;max-width:none!important}
 #visBtn{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:999;border:1px solid rgba(255,255,255,.25);background:rgba(10,18,40,.92);color:#fff;font:600 13px 'Space Grotesk',sans-serif;padding:10px 18px;border-radius:99px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.4);backdrop-filter:blur(8px)}
 #visBtn.on{background:#f5c542;color:#111;border-color:#f5c542}#visBtn u{margin-left:4px}
 
-/* ===== Tema ELEVN (estilo portada) ===== */
-:root{--bg:#050a16;--bg2:#0a1328;--panel:#0e1830;--panel2:#13203d;--line:rgba(120,150,210,.24);--r:4px}
-body{background:radial-gradient(ellipse 70% 40% at 50% -5%,rgba(255,200,61,.09),transparent 70%),linear-gradient(180deg,#03060d 0%,#071024 45%,#040811 100%) fixed;}
-body:not(.cover):before{content:"";position:fixed;left:-30%;right:-30%;bottom:0;height:45vh;pointer-events:none;z-index:-1;opacity:.22;transform:perspective(500px) rotateX(62deg);transform-origin:50% 100%;background:linear-gradient(90deg,transparent 49.85%,rgba(235,245,255,.7) 49.85% 50.15%,transparent 50.15%),repeating-linear-gradient(0deg,rgba(40,150,80,.5) 0 50px,rgba(20,100,55,.5) 50px 100px);-webkit-mask-image:linear-gradient(to top,#000,transparent 85%);mask-image:linear-gradient(to top,#000,transparent 85%)}
-body:not(.cover):after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:repeating-linear-gradient(0deg,rgba(255,255,255,.015) 0 1px,transparent 1px 3px)}
-header{background:rgba(3,6,13,.82);border-bottom:1px solid transparent;border-image:linear-gradient(90deg,transparent,rgba(255,200,61,.55),transparent) 1}
-h1,h2,h3{font-family:Anton,'Bebas Neue',Impact,sans-serif;letter-spacing:1.2px;text-transform:uppercase}
-h1{letter-spacing:2px}
-.card,.hero,.mbox{border-radius:0;clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px);background:linear-gradient(135deg,rgba(18,30,58,.88),rgba(7,13,28,.9));border:1px solid var(--line)}
-.card{position:relative}
-.card:after{content:"";position:absolute;left:0;top:14px;width:2px;height:28px;background:var(--gold);opacity:.8}
-.hero{background:radial-gradient(ellipse 70% 80% at 85% 0%,rgba(255,200,61,.14),transparent 60%),linear-gradient(135deg,rgba(18,30,58,.92),rgba(5,10,22,.95))}
-body.liga .hero{background:radial-gradient(ellipse 70% 80% at 85% 0%,rgba(198,255,61,.12),transparent 60%),linear-gradient(135deg,rgba(18,30,58,.92),rgba(5,10,22,.95))}
-.btn{border-radius:0;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);letter-spacing:.4px;text-transform:uppercase;font-size:12.5px}
-.btn.sm{border-radius:0;font-size:11.5px}
-.btn.gold{background:linear-gradient(135deg,#ffd45e,#f2b21f);color:#140d02;border-color:#ffd45e}
-.btn.lime{background:linear-gradient(135deg,#d6ff6a,#b3ee2a);color:#0b1402}
-.stat,.statbox{border-radius:0;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);background:rgba(4,8,18,.6)}
-.tab{border-radius:0;clip-path:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px);text-transform:uppercase;letter-spacing:.6px;font-size:12px}
-.tab.on{background:var(--gold);border-color:var(--gold);color:#140d02}
-nav a{border-radius:0;text-transform:uppercase;letter-spacing:.8px;font-size:12.5px}
-nav a.on{background:transparent;color:var(--gold);box-shadow:inset 0 -2px 0 var(--gold)}
-#sw{border-radius:0!important;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
-#sw a{border-radius:0!important}
-.note{border-radius:0;border-left:3px solid var(--cyan)}
-.note.ok{border-left-color:var(--green)}.note.warn{border-left-color:var(--gold)}.note.bad{border-left-color:var(--red)}
-input,textarea,select{border-radius:2px!important;background:rgba(4,8,18,.7)!important}
-.badge{border-radius:2px}
-table th{letter-spacing:1.5px}
+/* ===== Tema ELEVN (suave, a juego con la portada) ===== */
+:root{--bg:#060c1a;--bg2:#0b1530;--panel:#0f1b36;--panel2:#152446;--line:rgba(130,160,220,.2);--r:14px}
+body{background:radial-gradient(ellipse 70% 40% at 50% -8%,rgba(255,200,61,.08),transparent 70%),radial-gradient(900px 500px at 100% 0,rgba(47,211,255,.06),transparent 60%),linear-gradient(180deg,#050a16 0%,#081228 50%,#050a16 100%) fixed}
+body:not(.cover):before{content:"";position:fixed;left:-30%;right:-30%;bottom:0;height:34vh;pointer-events:none;z-index:-1;opacity:.1;transform:perspective(500px) rotateX(62deg);transform-origin:50% 100%;background:linear-gradient(90deg,transparent 49.85%,rgba(235,245,255,.7) 49.85% 50.15%,transparent 50.15%),repeating-linear-gradient(0deg,rgba(40,150,80,.5) 0 50px,rgba(20,100,55,.5) 50px 100px);-webkit-mask-image:linear-gradient(to top,#000,transparent 85%);mask-image:linear-gradient(to top,#000,transparent 85%)}
+header{background:rgba(5,10,22,.85);border-bottom:1px solid rgba(255,200,61,.18)}
+h1,h2,h3{font-family:'Bebas Neue',Anton,Impact,sans-serif;letter-spacing:.6px}
+.card,.mbox{border-radius:16px;background:linear-gradient(160deg,rgba(21,36,70,.92),rgba(10,18,38,.92));border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.hero{border-radius:22px;background:radial-gradient(ellipse 70% 90% at 90% 0%,rgba(255,200,61,.14),transparent 60%),linear-gradient(140deg,rgba(21,36,70,.95),rgba(8,15,32,.95));border:1px solid rgba(255,200,61,.22)}
+body.liga .hero{background:radial-gradient(ellipse 70% 90% at 90% 0%,rgba(198,255,61,.12),transparent 60%),linear-gradient(140deg,rgba(21,36,70,.95),rgba(8,15,32,.95));border-color:rgba(198,255,61,.22)}
+.btn{border-radius:11px}
+.btn.gold{background:linear-gradient(135deg,#ffd45e,#f2b21f);color:#140d02;border-color:#ffd45e;box-shadow:0 4px 16px rgba(255,200,61,.18)}
+.hero .btn.gold,nav a.cta{clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px);border-radius:0}
+.stat,.statbox{border-radius:12px;background:rgba(5,10,22,.55);border:1px solid var(--line)}
+.tab{border-radius:10px}.tab.on{background:var(--gold);border-color:var(--gold);color:#140d02}
+nav a.on{background:rgba(255,200,61,.14);color:var(--gold)}
+.note{border-radius:12px}
+input,textarea,select{border-radius:10px}
+
+@media(max-width:560px){header .top{flex-wrap:wrap;row-gap:8px}#hdrRight{margin-left:auto}#sw{order:3;width:100%;display:grid!important;grid-template-columns:repeat(3,1fr)}#sw a{text-align:center;justify-content:center}}
 </style>
 </head>
 <body>
@@ -444,12 +434,12 @@ const inLiga=()=>{const r=route();return LIGA_ROUTES.includes(r)||(r==='admin'&&
 function setVis(on){S.vis=on;S.isAdmin=on?false:S.realAdmin;S.me=on?null:S.realMe;S.canWrite=on?false:S.realCW;try{localStorage.setItem('elevn_vis',on?'1':'0')}catch(e){}if(on&&route()==='admin')location.hash='#inicio';render();window.scrollTo(0,0)}
 function renderVis(){let b=document.getElementById('visBtn');if(!S.realAdmin){if(b)b.remove();return}if(!b){b=document.createElement('button');b.id='visBtn';b.onclick=()=>setVis(!S.vis);document.body.appendChild(b)}
   b.className=S.vis?'on':'';b.innerHTML=S.vis?'👁️ Viendo como visitante · <u>Salir</u>':'👁️ Ver como visitante'}
-function renderHeader(){renderVis();const c=cfg();const r=route();document.body.classList.toggle('cover',r==='portada');if(r!=='admin')S.lastSec=LIGA_ROUTES.includes(r)?'liga':'red';const lg=inLiga();document.body.classList.toggle('liga',lg);
-  $('#sw').innerHTML=`<a href="#inicio" class="${!lg?'on red':''}">JUGADORES</a><a href="#liga" class="${lg?'on lg':''}"><span class="dk">ELEVN </span>LEAGUE${LOCK()?' 🔒':''}</a>`;
-  const items=lg&&LOCK()?[['inicio','← Volver a Jugadores']]:lg?[['liga','Inicio'],['tabla','Tabla y partidos'],['liga-clubes','Clubes'],...(MK()?[['mercado','Mercado 💸']]:[]),['reglamento','Reglamento']]:[['inicio','Inicio'],['jugadores','Jugadores'],['equipos','Equipos'],['ligas','Ligas'],['ranking','Ranking'],['que-es','¿Cómo funciona?']];
+function renderHeader(){renderVis();const c=cfg();const r=route();document.body.classList.toggle('cover',r==='portada');if(r!=='admin')S.lastSec=LIGA_ROUTES.includes(r)?'liga':'red';const lg=inLiga();const lgs=r==='ligas'||r.startsWith('lg-');document.body.classList.toggle('liga',lg);
+  $('#sw').innerHTML=`<a href="#inicio" class="${!lg&&!lgs?'on red':''}">JUGADORES</a><a href="#liga" class="${lg?'on lg':''}"><span class="dk">ELEVN </span>LEAGUE${LOCK()?' 🔒':''}</a><a href="#ligas" class="${lgs?'on red':''}">LIGAS</a>`;
+  const items=lgs?[['ligas','Todas las ligas']]:lg&&LOCK()?[['inicio','← Volver a Jugadores']]:lg?[['liga','Inicio'],['tabla','Tabla y partidos'],['liga-clubes','Clubes'],...(MK()?[['mercado','Mercado 💸']]:[]),['reglamento','Reglamento']]:[['inicio','Inicio'],['jugadores','Jugadores'],['equipos','Equipos'],['ranking','Ranking'],['que-es','¿Cómo funciona?']];
   if(S.isAdmin)items.push(['admin','⚙️ Admin']);
   const act=h=>r===h||(h==='equipos'&&r.startsWith('club-'))||(h==='ligas'&&r.startsWith('lg-'))||(h==='jugadores'&&r.startsWith('jugador-'));
-  $('#nav').innerHTML=items.map(([h,t])=>`<a href="#${h}" class="${act(h)?'on':''}">${t}</a>`).join('')+(lg?'':`<a href="#registro" class="${r==='registro'?'on':'cta'}">✍️ Crear mi cuenta</a>`);
+  $('#nav').innerHTML=items.map(([h,t])=>`<a href="#${h}" class="${act(h)?'on':''}">${t}</a>`).join('')+(lgs?`<a href="#ligas" class="cta" data-act="regLiga">+ Registrar una liga</a>`:lg?'':`<a href="#registro" class="${r==='registro'?'on':'cta'}">✍️ Crear mi cuenta</a>`);
   const mine=myClubs();const a=actingId();let h='';
   if(lg&&MK()&&!LOCK()){h=`<span class="badge ${c.ventanaAbierta?'open':'closed'}"><span class="dot"></span>${c.ventanaAbierta?'Mercado abierto':'Mercado cerrado'}</span>`;
     if(mine.length)h+=`<select id="actSel" style="width:auto;max-width:200px;padding:6px 9px;font-size:13px">${S.isAdmin?'<option value="">Negociar como…</option>':''}${mine.map(x=>`<option value="${esc(x.id)}" ${x.id===a?'selected':''}>${esc(x.nombre)}</option>`).join('')}</select>`}
