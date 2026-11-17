@@ -14,7 +14,9 @@ service cloud.firestore {
     function cambia() { return request.resource.data.diff(resource.data).affectedKeys(); }
     function duenoJugador(pid) {
       return exists(/databases/$(database)/documents/jugadores/$(pid))
-        && get(/databases/$(database)/documents/jugadores/$(pid)).data.userId == uid();
+        && (get(/databases/$(database)/documents/jugadores/$(pid)).data.get('userId', null) == uid()
+          || (get(/databases/$(database)/documents/jugadores/$(pid)).data.get('userId', null) == null
+              && get(/databases/$(database)/documents/jugadores/$(pid)).data.get('creadoPor', '') == uid()));
     }
     function delegadoClub(cid) {
       return exists(/databases/$(database)/documents/clubes/$(cid))
@@ -36,6 +38,8 @@ service cloud.firestore {
     // ---------- Teléfonos: privados (solo el dueño y el admin) ----------
     match /contactos/{c} {
       allow read, write: if admin() || (signed() && uid() == c);
+      // Teléfono de un jugador creado por un delegado
+      allow create: if signed() && c.matches('p_.*') && nuevo().get('creadoPor', '') == uid();
     }
 
     // ---------- Jugadores ----------
@@ -46,14 +50,28 @@ service cloud.firestore {
         && nuevo().userId == uid()
         && nuevo().estado == 'pendiente'
         && !('baseAm' in nuevo()) && !('baseEl' in nuevo())
+        && nuevo().get('ajusteOvr', 0) == 0)
+        // El delegado crea jugadores sin cuenta para su equipo (quedan pendientes)
+        || (signed()
+        && delegadoClub(nuevo().clubId)
+        && nuevo().get('creadoPor', '') == uid()
+        && nuevo().get('userId', null) == null
+        && nuevo().estado == 'pendiente'
+        && !('baseAm' in nuevo()) && !('baseEl' in nuevo())
         && nuevo().get('ajusteOvr', 0) == 0);
       // Editar su ficha: solo datos personales y trayectoria (que queda en revisión)
       allow update: if admin() || (signed()
-        && resource.data.userId == uid()
+        && (resource.data.get('userId', null) == uid()
+          || (resource.data.get('userId', null) == null && resource.data.get('creadoPor', '') == uid()))
         && cambia().hasOnly(['apodo','numero','instagram','pie','foto','historial','trayPend','clubPend'])
         && (!('clubPend' in cambia()) || nuevo().clubPend == null || (nuevo().clubPend is string && nuevo().clubPend.size() < 60))
         && nuevo().get('trayPend', false) in [true, false]
-        && (!('historial' in cambia()) || nuevo().trayPend == true));
+        && (!('historial' in cambia()) || nuevo().trayPend == true))
+        // El delegado pide sumar a su equipo a un jugador ya registrado (lo aprueba el admin)
+        || (signed()
+        && cambia().hasOnly(['clubPend'])
+        && nuevo().clubPend is string
+        && delegadoClub(nuevo().clubPend));
       allow delete: if admin();
     }
 
