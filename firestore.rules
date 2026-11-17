@@ -94,6 +94,18 @@ service cloud.firestore {
       allow update, delete: if admin();
     }
 
+    // ---------- Ligas externas: cualquiera la registra (pendiente), el admin aprueba, el organizador actualiza la tabla ----------
+    match /ligas/{id} {
+      allow read: if true;
+      allow create: if admin() || (signed()
+        && nuevo().managerId == uid()
+        && nuevo().estado == 'pendiente');
+      allow update: if admin() || (signed()
+        && resource.data.managerId == uid()
+        && cambia().hasOnly(['nombre','logo','instagram','descripcion','temporada','tabla','actualizado']));
+      allow delete: if admin();
+    }
+
     // ---------- Partidos de equipo: los manda el delegado, aprueba el admin ----------
     match /partidosEq/{id} {
       allow read: if true;
