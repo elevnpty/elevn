@@ -170,20 +170,37 @@ h1{font-size:34px}h2{font-size:23px}h3{font-size:19px}
 @media(max-width:560px){.apr{grid-template-columns:1fr}.apr-c{max-width:200px;margin:0 auto}}
 body.cover header,body.cover .foot,body.cover #visBtn{display:none!important}
 body.cover main,body.cover #app{padding:0!important;max-width:none!important}
-.portada{position:relative;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,rgba(255,200,61,.13),transparent 60%),linear-gradient(180deg,#0a1224,#060b17)}
-.portada:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 80px,transparent 80px 160px);pointer-events:none}
-.pt-glow{position:absolute;width:520px;height:520px;border-radius:50%;border:2px solid rgba(255,255,255,.06);top:50%;left:50%;transform:translate(-50%,-62%);pointer-events:none}
-.pt-logo{position:relative;font-family:Anton,Impact,sans-serif;font-size:clamp(84px,22vw,180px);letter-spacing:clamp(6px,2vw,16px);line-height:.95;color:var(--text);text-shadow:0 10px 40px rgba(0,0,0,.5)}
-.pt-logo i{font-style:normal;color:var(--gold)}
-.pt-line{position:relative;width:90px;height:4px;border-radius:4px;background:var(--gold);margin:22px auto 18px}
-.pt-tag{position:relative;font-family:Anton,Impact,sans-serif;font-size:clamp(22px,6vw,40px)!important;letter-spacing:clamp(3px,1.2vw,8px);font-weight:400;color:var(--text);margin:0}
-.pt-btns{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:100%;max-width:560px;margin-top:44px}
-.pt-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:20px 12px;border-radius:18px;border:1.5px solid var(--line);background:rgba(16,26,52,.75);color:var(--text);text-decoration:none;transition:transform .15s,border-color .15s}
-.pt-btn:hover{transform:translateY(-2px);border-color:var(--gold)}
-.pt-btn span{font-size:30px}.pt-btn b{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:22px;letter-spacing:1.5px}.pt-btn small{font-size:12px;color:var(--muted);line-height:1.3}
-.pt-btn.gold{background:var(--gold);border-color:var(--gold);color:#1a1205}.pt-btn.gold small{color:rgba(26,18,5,.75)}
-.pt-btn.lock{opacity:.85}
-@media(max-width:420px){.pt-btns{grid-template-columns:1fr}.pt-btn{padding:16px 12px}.pt-tag{letter-spacing:2px;font-size:24px!important;white-space:nowrap}}
+.portada{position:relative;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:70px 18px;overflow:hidden;background:radial-gradient(ellipse 80% 55% at 50% 38%,rgba(255,200,61,.10),transparent 70%),linear-gradient(180deg,#03060d 0%,#071024 55%,#03060d 100%);isolation:isolate}
+.pt-field{position:absolute;left:-40%;right:-40%;bottom:-6%;height:72%;perspective:520px;pointer-events:none;z-index:-1;-webkit-mask-image:linear-gradient(to top,#000 5%,rgba(0,0,0,.6) 35%,transparent 62%);mask-image:linear-gradient(to top,#000 5%,rgba(0,0,0,.6) 35%,transparent 62%)}
+.pt-lines{position:absolute;inset:0;transform:rotateX(62deg);transform-origin:50% 100%;background:radial-gradient(circle at 50% 22%,transparent 12.2%,rgba(235,245,255,.75) 12.5%,transparent 13%),radial-gradient(circle at 50% 22%,rgba(255,200,61,.9) .5%,transparent .9%),linear-gradient(0deg,transparent calc(22% - 2px),rgba(235,245,255,.7) calc(22% - 2px) 22%,transparent 22%),linear-gradient(90deg,transparent 33%,rgba(235,245,255,.55) 33% 33.3%,transparent 33.3% 66.7%,rgba(235,245,255,.55) 66.7% 67%,transparent 67%),repeating-linear-gradient(0deg,rgba(40,150,80,.30) 0 60px,rgba(20,100,55,.30) 60px 120px);animation:ptRun 6s linear infinite}
+@keyframes ptRun{to{background-position:0 0,0 0,0 0,0 0,0 120px}}
+.pt-beam{position:absolute;top:-20%;width:60%;height:120%;pointer-events:none;z-index:-1;opacity:.55;filter:blur(2px)}
+.pt-beam.l{left:-12%;background:conic-gradient(from 155deg at 0% 0%,transparent 0deg,rgba(150,200,255,.14) 10deg,transparent 22deg)}
+.pt-beam.r{right:-12%;background:conic-gradient(from 183deg at 100% 0%,transparent 0deg,rgba(150,200,255,.14) 12deg,transparent 24deg)}
+.pt-scan{position:absolute;inset:0;pointer-events:none;z-index:-1;background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 1px,transparent 1px 3px)}
+.pt-hud{position:absolute;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px;font-size:11px;letter-spacing:4px;color:rgba(200,215,240,.55);font-weight:600}
+.pt-hud.top{top:22px}.pt-hud.bot{bottom:22px}.pt-hud b{color:var(--gold);font-weight:800}
+.pt-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.pt-core{position:relative;width:100%;max-width:640px;animation:ptIn .9s ease-out both}
+@keyframes ptIn{from{opacity:0;transform:translateY(14px)}}
+.pt-logo{font-family:Anton,Impact,sans-serif;font-size:clamp(88px,24vw,190px);letter-spacing:clamp(6px,2.2vw,18px);line-height:.92;display:inline-flex;margin-right:calc(-1 * clamp(6px,2.2vw,18px))}
+.pt-l{background:linear-gradient(180deg,#ffffff 0%,#dfe7f5 45%,#8796b4 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 8px 30px rgba(0,0,0,.6))}
+.pt-n{background:linear-gradient(180deg,#ffe089 0%,#ffc83d 50%,#c98a12 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(255,200,61,.55))}
+.pt-tag{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:22px;font-size:clamp(10.5px,2.9vw,14px);letter-spacing:clamp(2.5px,1.1vw,6px);line-height:1.7;font-weight:800;color:#f2f5fb}
+.pt-sub{margin-top:10px;font-size:clamp(12px,3.3vw,15px);color:rgba(200,215,240,.6);letter-spacing:.5px}
+.pt-tag i{display:block;width:clamp(22px,8vw,60px);height:1px;background:linear-gradient(90deg,transparent,var(--gold))}.pt-tag i:last-child{transform:scaleX(-1)}
+.pt-btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:46px}
+.pt-btn{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px;text-align:left;text-decoration:none;color:var(--text);background:linear-gradient(135deg,rgba(18,30,58,.85),rgba(8,14,30,.85));border:1px solid rgba(120,150,210,.28);clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);backdrop-filter:blur(6px);transition:transform .15s,border-color .15s,box-shadow .15s}
+.pt-btn:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
+.pt-btn:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 0 28px rgba(255,200,61,.18)}
+.pt-bt small{display:block;font-size:10px;letter-spacing:3px;color:rgba(200,215,240,.6);font-weight:700}
+.pt-bt b{display:block;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(20px,5.2vw,26px);letter-spacing:2px;margin-top:3px}
+.pt-arrow{font-size:22px;color:var(--gold)}
+.pt-btn.main{background:linear-gradient(135deg,#ffd45e,#f2b21f);color:#140d02;border-color:#ffd45e}.pt-btn.main:before{background:#140d02}.pt-btn.main small{color:rgba(20,13,2,.65)}.pt-btn.main .pt-arrow{color:#140d02}
+.pt-btn.off{cursor:not-allowed;opacity:.7;background:repeating-linear-gradient(135deg,rgba(18,30,58,.85) 0 12px,rgba(28,40,70,.85) 12px 24px)}.pt-btn.off:before{background:rgba(200,215,240,.35)}.pt-btn.off:hover{transform:none;border-color:rgba(120,150,210,.28);box-shadow:none}
+.pt-lock{font-size:18px;opacity:.8}
+@media(max-width:480px){.pt-btns{grid-template-columns:1fr;margin-top:34px}.pt-hud{font-size:10px;letter-spacing:3px}.pt-tag{letter-spacing:1.6px;font-size:11.5px;line-height:1.6}.pt-tag i{display:none}}
+@media(prefers-reduced-motion:reduce){.pt-lines,.pt-core{animation:none}}
 @media(max-width:640px){#pgrid{grid-template-columns:1fr!important}}
 @media(max-width:640px){
 #pgrid>div:first-child{max-width:240px;width:100%;margin:0 auto}
@@ -420,12 +437,19 @@ function render(){if(S.realAdmin&&!S._mig&&S.players.some(p=>p.escala!==2)){S._m
   if(LIGA_ROUTES.includes(r)&&!LOCK())html=ligaAdminBar()+html;
   $('#app').innerHTML=html;if(r==='registro')eligCheck()}
 
-function portadaView(){const lk=LOCK();return `<section class="portada"><div class="pt-glow"></div>
-  <div class="pt-logo">ELEV<i>N</i></div>
-  <div class="pt-line"></div>
-  <h1 class="pt-tag">SÉ PARTE DEL FÚTBOL</h1>
-  <div class="pt-btns"><a class="pt-btn gold" href="#inicio"><span>👟</span><b>Jugadores</b><small>Crea tu jugador y gánate tu media</small></a>
-  <a class="pt-btn ${lk?'lock':''}" href="#liga"><span>🏆</span><b>ELEVN League</b><small>${lk?'🔒 Próximamente':'La liga, la tabla y el mercado'}</small></a></div></section>`}
+function portadaView(){const lk=LOCK();const n=S.players.filter(p=>p.estado==='aprobado').length;const nc=activeClubs().length;
+  return `<section class="portada"><div class="pt-beam l"></div><div class="pt-beam r"></div><div class="pt-field"><div class="pt-lines"></div></div><div class="pt-scan"></div>
+  <div class="pt-hud top"><span>PANAMÁ</span><span class="pt-dot"></span><span>TEMPORADA 1</span></div>
+  <div class="pt-core">
+   <div class="pt-logo"><span class="pt-l">ELEV</span><span class="pt-n">N</span></div>
+   <div class="pt-tag"><i></i><span>SÉ PARTE DE LA MEJOR COMUNIDAD<br>DE FÚTBOL AMATEUR DE PANAMÁ</span><i></i></div><div class="pt-sub">Crea tu jugador. Súbele la media. Escribe tu leyenda.</div>
+   <div class="pt-btns">
+    <a class="pt-btn main" href="#inicio"><div class="pt-bt"><small>01 · ENTRAR</small><b>JUGADORES</b></div><span class="pt-arrow">→</span></a>
+    ${lk?`<div class="pt-btn off" title="En construcción"><div class="pt-bt"><small>02 · EN CONSTRUCCIÓN</small><b>ELEVN LEAGUE</b></div><span class="pt-lock">🔒</span></div>`
+        :`<a class="pt-btn" href="#liga"><div class="pt-bt"><small>02 · ${S.isAdmin&&cfg().ligaAbierta!==true?'SOLO ADMIN':'ENTRAR'}</small><b>ELEVN LEAGUE</b></div><span class="pt-arrow">→</span></a>`}
+   </div>
+  </div>
+  <div class="pt-hud bot"><span><b>${n}</b> JUGADORES</span><span class="pt-dot"></span><span><b>${nc}</b> EQUIPOS</span></div></section>`}
 function ligaLocked(){const c=cfg();return `<section class="hero" style="text-align:center;padding:56px 22px"><div style="font-size:54px">🔒</div><span class="badge open" style="margin-top:12px">Próximamente</span>
    <h1 style="margin-top:14px">${esc(c.nombre)}<br><em>Todavía no se abre.</em></h1>
    <p class="muted" style="max-width:560px;margin:14px auto 0;font-size:16px;line-height:1.5">Los clubes van a fichar a los mejores jugadores registrados en ELEVN. <b style="color:var(--text)">Si no tienes tu perfil, no te pueden fichar.</b> Créalo ya y empieza a subir tu media.</p>
