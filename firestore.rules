@@ -1,0 +1,110 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- Quién es quién ----------
+    function signed() { return request.auth != null; }
+    function uid() { return request.auth.uid; }
+    function admin() {
+      return signed()
+        && request.auth.token.email in ['elevnpty@gmail.com']
+        && request.auth.token.email_verified == true;
+    }
+    function nuevo() { return request.resource.data; }
+    function cambia() { return request.resource.data.diff(resource.data).affectedKeys(); }
+    function duenoJugador(pid) {
+      return exists(/databases/$(database)/documents/jugadores/$(pid))
+        && get(/databases/$(database)/documents/jugadores/$(pid)).data.userId == uid();
+    }
+    function delegadoClub(cid) {
+      return exists(/databases/$(database)/documents/clubes/$(cid))
+        && get(/databases/$(database)/documents/clubes/$(cid)).data.managerId == uid();
+    }
+
+    // ---------- Configuración, partidos oficiales, mercado: solo admin ----------
+    match /liga/{doc}      { allow read: if true; allow write: if admin(); }
+    match /partidos/{doc}  { allow read: if true; allow write: if admin(); }
+    match /ofertas/{doc}   { allow read: if true; allow write: if admin(); }
+    match /traspasos/{doc} { allow read: if true; allow write: if admin(); }
+
+    // ---------- Nombre público de cada usuario ----------
+    match /usuarios/{u} {
+      allow read: if true;
+      allow write: if admin() || (signed() && uid() == u);
+    }
+
+    // ---------- Teléfonos: privados (solo el dueño y el admin) ----------
+    match /contactos/{c} {
+      allow read, write: if admin() || (signed() && uid() == c);
+    }
+
+    // ---------- Jugadores ----------
+    match /jugadores/{pid} {
+      allow read: if true;
+      // Registrarse: solo a sí mismo, siempre queda PENDIENTE, sin media ni ajustes
+      allow create: if admin() || (signed()
+        && nuevo().userId == uid()
+        && nuevo().estado == 'pendiente'
+        && !('baseAm' in nuevo()) && !('baseEl' in nuevo())
+        && nuevo().get('ajusteOvr', 0) == 0);
+      // Editar su ficha: solo datos personales y trayectoria (que queda en revisión)
+      allow update: if admin() || (signed()
+        && resource.data.userId == uid()
+        && cambia().hasOnly(['apodo','numero','instagram','pie','foto','historial','trayPend','clubPend'])
+        && (!('clubPend' in cambia()) || nuevo().clubPend == null || (nuevo().clubPend is string && nuevo().clubPend.size() < 60))
+        && nuevo().get('trayPend', false) in [true, false]
+        && (!('historial' in cambia()) || nuevo().trayPend == true));
+      allow delete: if admin();
+    }
+
+    // ---------- Logros: se envían pendientes, solo el admin aprueba ----------
+    match /logros/{id} {
+      allow read: if true;
+      allow create: if admin() || (signed()
+        && duenoJugador(nuevo().playerId)
+        && nuevo().estado == 'pendiente'
+        && nuevo().get('pts', 0) <= 10);
+      allow update, delete: if admin();
+    }
+
+    // ---------- Actividades (partidos individuales, MVP, tarjetas) ----------
+    match /actividades/{id} {
+      allow read: if true;
+      allow create: if admin() || (signed()
+        && duenoJugador(nuevo().playerId)
+        && nuevo().estado == 'pendiente');
+      allow update, delete: if admin();
+    }
+
+    // ---------- Partidos de equipo: los manda el delegado, aprueba el admin ----------
+    match /partidosEq/{id} {
+      allow read: if true;
+      allow create: if admin() || (signed()
+        && delegadoClub(nuevo().clubId)
+        && nuevo().estado == 'pendiente');
+      allow update, delete: if admin();
+    }
+
+    // ---------- Equipos ----------
+    match /clubes/{cid} {
+      allow read: if true;
+      // Registrar equipo: queda PENDIENTE, fuera de la liga
+      allow create: if admin() || (signed()
+        && nuevo().managerId == uid()
+        && nuevo().estado == 'pendiente'
+        && nuevo().enLiga == false
+        && nuevo().get('cuotaPagada', false) == false);
+      // El delegado solo edita la imagen del equipo
+      allow update: if admin() || (signed()
+        && resource.data.managerId == uid()
+        && cambia().hasOnly(['sigla','color','instagram','ligaActual','logo','logoLimpio']));
+      allow delete: if admin();
+    }
+
+    // ---------- Todo lo demás: cerrado ----------
+    match /{col}/{doc} {
+      allow read: if false;
+      allow write: if admin();
+    }
+  }
+}
