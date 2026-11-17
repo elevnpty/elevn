@@ -183,9 +183,8 @@ body.cover main,body.cover #app{padding:0!important;max-width:none!important}
 .pt-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
 .pt-core{position:relative;width:100%;max-width:640px;animation:ptIn .9s ease-out both}
 @keyframes ptIn{from{opacity:0;transform:translateY(14px)}}
-.pt-logo{font-family:Anton,Impact,sans-serif;font-size:clamp(88px,24vw,190px);letter-spacing:clamp(6px,2.2vw,18px);line-height:.92;display:inline-flex;margin-right:calc(-1 * clamp(6px,2.2vw,18px))}
-.pt-l{background:linear-gradient(180deg,#ffffff 0%,#dfe7f5 45%,#8796b4 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 8px 30px rgba(0,0,0,.6))}
-.pt-n{background:linear-gradient(180deg,#ffe089 0%,#ffc83d 50%,#c98a12 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(255,200,61,.55))}
+.pt-logo{font-family:Anton,Impact,sans-serif;font-size:clamp(88px,24vw,190px);letter-spacing:.094em;line-height:.92;display:inline-block;margin-right:-.094em}
+.pt-logo{color:var(--text)}.pt-logo i{font-style:normal;color:var(--gold)}
 .pt-tag{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:22px;font-size:clamp(10.5px,2.9vw,14px);letter-spacing:clamp(2.5px,1.1vw,6px);line-height:1.7;font-weight:800;color:#f2f5fb}
 .pt-sub{margin-top:10px;font-size:clamp(12px,3.3vw,15px);color:rgba(200,215,240,.6);letter-spacing:.5px}
 .pt-tag i{display:block;width:clamp(22px,8vw,60px);height:1px;background:linear-gradient(90deg,transparent,var(--gold))}.pt-tag i:last-child{transform:scaleX(-1)}
@@ -439,10 +438,10 @@ function render(){if(S.realAdmin&&!S._mig&&S.players.some(p=>p.escala!==2)){S._m
 
 function portadaView(){const lk=LOCK();const n=S.players.filter(p=>p.estado==='aprobado').length;const nc=activeClubs().length;
   return `<section class="portada"><div class="pt-beam l"></div><div class="pt-beam r"></div><div class="pt-field"><div class="pt-lines"></div></div><div class="pt-scan"></div>
-  <div class="pt-hud top"><span>PANAMÁ</span><span class="pt-dot"></span><span>TEMPORADA 1</span></div>
+  <div class="pt-hud top"><span>PANAMÁ</span></div>
   <div class="pt-core">
-   <div class="pt-logo"><span class="pt-l">ELEV</span><span class="pt-n">N</span></div>
-   <div class="pt-tag"><i></i><span>SÉ PARTE DE LA MEJOR COMUNIDAD<br>DE FÚTBOL AMATEUR DE PANAMÁ</span><i></i></div><div class="pt-sub">Crea tu jugador. Súbele la media. Escribe tu leyenda.</div>
+   <div class="pt-logo">ELEV<i>N</i></div>
+   <div class="pt-tag"><i></i><span>SÉ PARTE DE LA MEJOR COMUNIDAD<br>DE FÚTBOL AMATEUR</span><i></i></div><div class="pt-sub">Crea tu jugador. Súbele la media. Escribe tu leyenda.</div>
    <div class="pt-btns">
     <a class="pt-btn main" href="#inicio"><div class="pt-bt"><small>01 · ENTRAR</small><b>JUGADORES</b></div><span class="pt-arrow">→</span></a>
     ${lk?`<div class="pt-btn off" title="En construcción"><div class="pt-bt"><small>02 · EN CONSTRUCCIÓN</small><b>ELEVN LEAGUE</b></div><span class="pt-lock">🔒</span></div>`
