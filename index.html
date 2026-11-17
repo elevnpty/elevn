@@ -351,7 +351,7 @@ function cardHTML(p,big){const v=V(p);const t=tier(v.ovr);const c=clubById(p.clu
   const nm=String(p.nombre||'');const fs=(big?1.45:1)*(nm.length>20?14:nm.length>15?16.5:nm.length>11?19:22);
   const r=([k,n])=>`<b>${n}</b><span>${k}</span>`;
   return `<a class="pcard ${big?'big':''}" href="#jugador-${esc(p.id)}" style="--cbg:${t.bg};--cfg:${t.fg};--cbd:${t.bd}">
-   <div class="tp"><div class="lc"><div class="ovr">${v.ovr}</div><div class="ps">${esc(p.pos)}</div>${p.pos2?`<div class="ps" style="opacity:.6;font-size:.75em;margin-top:0">${esc(p.pos2)}</div>`:''}${c?`<div class="ln"></div>${crest(c,big?34:24)}`:''}</div>${okImg(p.foto)?`<img class="ph" src="${p.foto}" alt="">`:`<div class="ph">${esc(initials(p.nombre))}</div>`}</div>
+   <div class="tp"><div class="lc"><div class="ovr">${v.ovr}</div><div class="ps">${esc(p.pos)}</div>${c?`<div class="ln"></div>${crest(c,big?34:24)}`:''}</div>${okImg(p.foto)?`<img class="ph" src="${p.foto}" alt="">`:`<div class="ph">${esc(initials(p.nombre))}</div>`}</div>
    <div class="nm" style="font-size:${fs}px">${esc(nm)}</div>
    <div class="at"><div class="col">${at.slice(0,3).map(r).join('')}</div><div class="sep"></div><div class="col">${at.slice(3).map(r).join('')}</div></div></a>`}
 /* ===== Render ===== */
