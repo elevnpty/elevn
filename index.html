@@ -294,7 +294,7 @@ const puedeEditarJ=p=>!!p&&(S.isAdmin||(p.userId&&p.userId===S.me)||(!p.userId&&
 
 /* ===== Media (OVR) y valor ===== */
 const ACTV={liga:['🏆','Partido de liga o torneo',0.06,1],amistoso:['🤝','Amistoso o birria',0.03,0.5],tarjetas:['🟨','Tarjetas acumuladas',0,0]};
-const PW={gol:0.10,asist:0.05,valla:0.12,vallaPor:0.20,ataj:0.05,penal:0.20,mvp:0.20,amarilla:0,roja:0,golEnc:-0.10,tope:0.50,defBase:1.3};
+const PW={gol:0.10,asist:0.05,valla:0.12,vallaPor:0.20,ataj:0.05,penal:0.20,mvp:0.20,amarilla:0,roja:0,golEnc:-0.02,tope:0.50,defBase:1.3};
 /* Escala ELEVN v2: todos arrancan en 50. Trayectoria (lo que más pesa) + partidos (hasta +15) + logros (hasta +5) */
 const MEDIA0=50,TOPE_P=9,TOPE_L=4;
 const fP=a=>a>=0?TOPE_P*(1-Math.exp(-a/8)):Math.max(-3,a);
