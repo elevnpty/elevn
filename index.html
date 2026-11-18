@@ -495,7 +495,7 @@ const fichajesVentana=id=>S.transfers.filter(t=>t.a===id&&num(t.fecha)>=num(cfg(
 const puedeConfirmar=p=>!!p&&(S.isAdmin||(p.userId&&p.userId===S.me));
 
 /* ===== Carta ===== */
-function cardHTML(p,big){const v=V(p);const t=tier(v.ovr);const c=clubById(p.clubId)||AGENTE;const at=(ATTR[p.pos]||ATTR.MC).map(([k,o])=>[k,Math.max(30,Math.min(99,v.ovr+o))]);
+function cardHTML(p,big){const v=V(p);const t=tier(v.ovr);const c=clubById(p.clubId)||AGENTE;const at=(ATTR[p.pos]||ATTR.MC).map(([k,o])=>[k,Math.max(55,Math.min(99,v.ovr+o))]);
   const nm=String(p.nombre||'');const fs=(big?1.45:1)*(nm.length>20?14:nm.length>15?16.5:nm.length>11?19:22);
   const r=([k,n])=>`<b>${n}</b><span>${k}</span>`;
   return `<a class="pcard ${big?'big':''}" href="#jugador-${esc(p.id)}" style="--cbg:${t.bg};--cfg:${t.fg};--cbd:${t.bd}">
