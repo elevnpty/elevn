@@ -42,6 +42,18 @@ service cloud.firestore {
       allow create: if signed() && c.matches('p_.*') && nuevo().get('creadoPor', '') == uid();
     }
 
+    // ---------- Cédula y talla: privado (dueño del perfil, capitán de su equipo y admin) ----------
+    match /fichas/{pid} {
+      function puede() {
+        return admin() || (signed() && (duenoJugador(pid)
+          || (exists(/databases/$(database)/documents/jugadores/$(pid))
+              && delegadoClub(get(/databases/$(database)/documents/jugadores/$(pid)).data.get('clubId', '')))));
+      }
+      allow read: if puede();
+      allow write: if puede() && nuevo().keys().hasOnly(['cedula', 'talla', 'actualizado'])
+        && nuevo().get('cedula', '') is string && nuevo().get('cedula', '').size() <= 20;
+    }
+
     // ---------- Jugadores ----------
     match /jugadores/{pid} {
       allow read: if true;
