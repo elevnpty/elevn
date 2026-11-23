@@ -648,11 +648,7 @@ function ligasView(){const ap=S.ligas.filter(l=>l.estado==='aprobado').sort((a,b
    if(!l)return `<div id="lgSwipe">${nav('top')}<div class="card sec" style="text-align:center;padding:40px 18px"><div style="font-size:42px">🔎</div><h3 style="margin-top:8px">No se encontraron más torneos activos</h3><p class="muted small" style="margin-top:6px">¿Tu torneo no está? Regístralo y aparece aquí con su tabla.</p><button class="btn gold" data-act="regLiga" style="margin-top:14px">+ Registrar un torneo</button></div>${n?nav('bot'):''}</div>`;
    const box=(ic,t,inner)=>`<div class="card lgc"><div class="lgct"><span>${ic} ${t}</span><small>${esc(l.nombre)}</small></div>${inner}</div>`;
    return `<div id="lgSwipe">${nav('top')}<a href="#lg-${esc(l.id)}" class="lghead sec">${ligaCrest(l,54)}<span style="min-width:0;flex:1"><h3 style="font-size:24px">${esc(l.nombre)}</h3><span class="tiny muted">${esc(LG_NIV[l.nivel]||'')}${l.temporada?' · '+esc(l.temporada):''}</span></span><span class="btn sm">Ver torneo →</span></a>
-   <div class="sec">${box('📊','Posiciones',fullTabla(l))}</div>
-   <div class="sec">${box('⚽','Goleadores',rankTabla(l,'goleadores','⚽',10))}</div>
-   <div class="grid g2 sec">${box('🧤','Porterías en 0',rankTabla(l,'vi','🧤',10))}${box('🧤','Atajadas',rankTabla(l,'at','🧤',10))}</div>
-   <div class="grid g2 sec">${box('🅰️','Asistencias',rankTabla(l,'asistencias','🅰️',10))}${box('⭐','MVP de partido',rankTabla(l,'mvp','⭐',10))}</div>
-   ${nav('bot')}</div>`})()}`}
+   </div>`})()}`}
 function ligaExtView(id){const l=ligaById(id);if(!l||(l.estado!=='aprobado'&&!puedeEditarLiga(l)))return `<div class="card">${emptyBox('❓','No encontramos ese torneo.')}</div>`;const tb=tablaOrden(l);const ed=puedeEditarLiga(l);
   const cids=tb.filter(t=>t.cid).map(t=>t.cid);const jug=S.players.filter(p=>p.estado==='aprobado'&&cids.includes(p.clubId)).sort((a,b)=>V(b).ovr-V(a).ovr);
   return `<a href="#ligas" class="small" style="color:var(--cyan)">← Torneos</a>
